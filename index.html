@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>人生即遍路 ～ 兩人同行</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="四國遍路 德島第1-12番 五天四夜行程・打卡・急難・離線可用">
+<meta name="theme-color" content="#f2ede2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1915" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  :root{
+    --ground:#f2ede2;--surface:#fbf8f1;--surface-2:#f6f1e5;
+    --ink:#26221a;--muted:#6c6455;--hair:#d9cfb9;
+    --accent:#9c3b2e;--accent-soft:#efe0d5;
+    --cost:#566145;--ok:#4a6a4d;--ok-bg:#e6ede0;
+    --jp:#3f5b78;--jp-bg:#e4ebf1;
+    --car:#8a5a1e;--car-bg:#f2e7d4;
+    --alt:#4a6a4d;--alt-bg:#e6ede0;
+    --sos:#a33a2c;--sos-bg:#f4e0da;
+    --bus:#2f6f6b;--bus-bg:#e1ecea;
+    --warn-bg:#f4e8d5;--warn-line:#b06a25;--warn-ink:#7c3a21;
+    --scale:1;color-scheme:light dark;
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --ground:#1b1915;--surface:#252118;--surface-2:#2c2820;
+    --ink:#ece4d4;--muted:#a89e89;--hair:#3b352a;
+    --accent:#e0836a;--accent-soft:#3a2a23;
+    --cost:#a6b686;--ok:#8fb184;--ok-bg:#2b342a;
+    --jp:#9bb6d4;--jp-bg:#26303a;
+    --car:#d6a24e;--car-bg:#352c1d;
+    --alt:#8fb184;--alt-bg:#2b342a;
+    --sos:#d9705c;--sos-bg:#3a2723;
+    --bus:#7fc6bd;--bus-bg:#1f3330;
+    --warn-bg:#39301f;--warn-line:#d6a24e;--warn-ink:#eab896;
+  }}
+  :root[data-theme="dark"]{
+    --ground:#1b1915;--surface:#252118;--surface-2:#2c2820;
+    --ink:#ece4d4;--muted:#a89e89;--hair:#3b352a;
+    --accent:#e0836a;--accent-soft:#3a2a23;
+    --cost:#a6b686;--ok:#8fb184;--ok-bg:#2b342a;
+    --jp:#9bb6d4;--jp-bg:#26303a;
+    --car:#d6a24e;--car-bg:#352c1d;
+    --alt:#8fb184;--alt-bg:#2b342a;
+    --sos:#d9705c;--sos-bg:#3a2723;
+    --bus:#7fc6bd;--bus-bg:#1f3330;
+    --warn-bg:#39301f;--warn-line:#d6a24e;--warn-ink:#eab896;
+  }
+
+  *{box-sizing:border-box}
+  html{font-size:calc(20px*var(--scale));-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"IBM Plex Sans","PingFang TC","Hiragino Sans TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:40rem;margin:0 auto;padding:0 1rem 5rem}
+  h1,h2,h3,h4,h5{font-family:"Zilla Slab","PingFang TC","Microsoft JhengHei",serif}
+  button{touch-action:manipulation}
+
+  header{position:sticky;top:0;z-index:30;
+    background:color-mix(in srgb,var(--ground) 92%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+  .hbar{max-width:40rem;margin:0 auto;display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem}
+  .htitle{font-family:"Zilla Slab","PingFang TC",serif;font-weight:700;font-size:1rem;margin-right:auto;line-height:1.2}
+  .htitle small{display:block;font-family:inherit;font-weight:400;font-size:.7rem;color:var(--muted)}
+  .sizer{display:flex;gap:.35rem}
+  .sizer button{min-width:2.6rem;min-height:2.6rem;border:1px solid var(--hair);border-radius:.5rem;
+    background:var(--surface);color:var(--ink);font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer}
+  .sizer button:active{background:var(--accent-soft)}
+
+  .chips{max-width:40rem;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.15rem 1rem .6rem;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips button{flex:0 0 auto;min-height:2.5rem;display:flex;align-items:center;padding:0 .85rem;
+    border:1px solid var(--hair);border-radius:2rem;background:var(--surface);color:var(--muted);
+    font-family:inherit;text-decoration:none;font-size:.82rem;font-weight:600;white-space:nowrap;cursor:pointer}
+  .chips button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  .countbar{max-width:40rem;margin:0 auto;padding:0 1rem .5rem;font-size:.8rem;color:var(--muted);display:none}
+  .countbar.show{display:block}
+  .countbar b{color:var(--accent)}
+
+  .lede{padding:1.3rem 0 .3rem}
+  .lede h1{font-weight:700;font-size:1.55rem;line-height:1.3;margin:0;text-wrap:balance}
+  .lede .sub{color:var(--muted);font-size:.9rem;margin:.3rem 0 0}
+  .previewtag{display:inline-block;margin-top:.7rem;padding:.15rem .6rem;border:1px dashed var(--warn-line);
+    border-radius:.4rem;color:var(--warn-ink);font-size:.8rem;font-weight:600}
+  .quicklinks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .quicklinks button{min-height:2.7rem;border-radius:.6rem;border:1.5px solid var(--accent);color:var(--accent);
+    background:var(--accent-soft);font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;padding:0 .9rem}
+
+  /* ---- 每日折疊 ---- */
+  details.day{background:var(--surface);border:1px solid var(--hair);border-radius:.9rem;margin-top:1rem;overflow:hidden}
+  details.day>summary{list-style:none;cursor:pointer;display:flex;gap:.8rem;align-items:flex-start;padding:1rem;min-height:3rem}
+  details.day>summary::-webkit-details-marker{display:none}
+  .daynum{font-family:"Zilla Slab",serif;font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--accent);
+    border:1.5px solid var(--accent);border-radius:.4rem;padding:.15rem .45rem;flex:0 0 auto;margin-top:.15rem}
+  .daymain{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+  .date{font-size:.85rem;color:var(--muted);font-weight:600}
+  .dtitle{font-size:1.12rem;font-weight:700;line-height:1.35;text-wrap:balance}
+  .dmeta{font-size:.82rem;color:var(--muted)}
+  .diff{color:var(--accent);letter-spacing:.15em;font-size:.8rem}
+  details.day>summary .chev{margin-left:auto;flex:0 0 auto;color:var(--muted);transition:transform .2s;font-size:1rem;margin-top:.2rem}
+  details.day[open]>summary .chev{transform:rotate(90deg)}
+  .daybody{padding:0 1rem 1.2rem}
+
+  .lodge{background:var(--surface-2);border:1px solid var(--hair);border-radius:.7rem;padding:.85rem .95rem;margin-bottom:0}
+  .lodge .lb{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--muted);margin:0 0 .2rem}
+  .lodge .ln{font-size:1.05rem;font-weight:700;margin:0 0 .25rem;line-height:1.35}
+  .lodge .lm{font-size:.85rem;color:var(--muted);margin:0 0 .55rem}
+  .lodgebtns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+  a.tel{display:inline-flex;align-items:center;gap:.4rem;min-height:2.6rem;padding:0 .9rem;
+    background:var(--accent);color:#fff;text-decoration:none;border-radius:.5rem;font-weight:700;font-size:.9rem}
+  button.lodgebtn{min-height:2.6rem;padding:0 .9rem;border-radius:.5rem;border:1.5px solid var(--hair);
+    background:var(--surface);color:var(--ink);font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer}
+
+  .lodgepanel{display:none;margin-top:.7rem;background:var(--surface);border:1px solid var(--hair);
+    border-radius:.6rem;padding:.85rem .95rem;font-size:.87rem}
+  .lodgepanel.open{display:block}
+  .lodgepanel table{width:100%;border-collapse:collapse}
+  .lodgepanel td{padding:.4rem .3rem;border-top:1px solid var(--hair);vertical-align:top;font-size:.85rem}
+  .lodgepanel tr:first-child td{border-top:none}
+  .lodgepanel td.k{color:var(--muted);width:34%;font-weight:600}
+  .lodgepanel .note2{margin-top:.6rem;font-size:.8rem;color:var(--muted)}
+  .printbtn{margin-top:.7rem;min-height:2.5rem;padding:0 .9rem;border-radius:.5rem;border:1.5px solid var(--accent);
+    background:var(--accent-soft);color:var(--accent);font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer}
+  .maskrow{font-variant-numeric:tabular-nums}
+
+  .daybtns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+  .daybtns button{flex:1 1 auto;min-height:2.7rem;border-radius:.6rem;border:1.5px solid;
+    font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;padding:0 .7rem}
+  .b-jp{border-color:var(--jp);color:var(--jp);background:var(--jp-bg)}
+  .b-map{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .b-sos{border-color:var(--sos);color:var(--sos);background:var(--sos-bg)}
+
+  .panel{display:none;margin-top:.6rem;border-radius:.7rem;padding:.9rem 1rem;font-size:.9rem}
+  .panel.open{display:block}
+  .panel.jp{background:var(--jp-bg);border:1px solid var(--jp)}
+  .panel.map{background:var(--accent-soft);border:1px solid var(--accent)}
+  .panel.sos{background:var(--sos-bg);border:1px solid var(--sos)}
+  .panel h4{margin:.2rem 0 .5rem;font-size:.95rem}
+  .panel h5{margin:.9rem 0 .3rem;font-size:.86rem;color:var(--muted);letter-spacing:.03em}
+  .panel h5:first-of-type{margin-top:.2rem}
+
+  .jpq{padding:.5rem 0;border-top:1px solid color-mix(in srgb,var(--jp) 35%,transparent)}
+  .jpq:first-of-type{border-top:none}
+  .jpq .zh{font-size:.86rem;color:var(--muted)}
+  .jpq .ja{font-size:1rem;font-weight:600}
+  .jpq .ro{font-size:.8rem;color:var(--muted);font-style:italic}
+
+  .maplinks{display:flex;flex-direction:column;gap:.5rem}
+  .maplinks a{min-height:2.5rem;display:flex;align-items:center;gap:.5rem;padding:0 .8rem;
+    background:var(--surface);border:1px solid var(--hair);border-radius:.5rem;
+    text-decoration:none;color:var(--ink);font-weight:600;font-size:.9rem}
+  .offlinebox{margin-top:.8rem;background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:.6rem;padding:.7rem .85rem;font-size:.85rem}
+  .offlinebox b{color:var(--warn-ink)}
+
+  ol.tl{list-style:none;margin:1rem 0 0;padding:0}
+  ol.tl>li{display:flex;gap:.8rem;padding:.85rem 0;border-top:1px solid var(--hair)}
+  ol.tl>li:first-child{border-top:none}
+  .t{flex:0 0 3.4rem;font-weight:700;font-size:1.2rem;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1.45}
+  .sb{min-width:0;flex:1}
+  .act{margin:0;font-size:1rem;font-weight:600;line-height:1.5}
+  .meta{margin:.2rem 0 0;font-size:.83rem;color:var(--muted)}
+  .cost{margin:.2rem 0 0;font-size:.83rem;color:var(--cost);font-weight:600;font-variant-numeric:tabular-nums}
+  .fac{margin:.25rem 0 0;font-size:.82rem;color:var(--muted)}
+  .fac b{color:var(--ink)}
+
+  li.warnrow{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:.6rem;padding:.7rem .8rem!important;margin:.5rem 0}
+  li.warnrow .t{color:var(--warn-ink)}
+  li.warnrow .act{color:var(--warn-ink)}
+  .wtag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.1em;color:var(--warn-ink);margin-bottom:.2rem}
+
+  .rowbtns{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+  .rowbtns button{min-height:2.2rem;border-radius:2rem;border:1.5px solid;background:transparent;
+    font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:0 .7rem}
+  .r-lore{border-color:var(--accent);color:var(--accent)}
+  .r-car{border-color:var(--car);color:var(--car)}
+  .r-alt{border-color:var(--alt);color:var(--alt)}
+  .r-bus{border-color:var(--bus);color:var(--bus)}
+
+  .rowpanel{display:none;margin-top:.5rem;border-radius:.6rem;padding:.75rem .9rem;font-size:.87rem}
+  .rowpanel.open{display:block}
+  .rowpanel.lore{background:var(--accent-soft);border:1px solid var(--accent)}
+  .rowpanel.car{background:var(--car-bg);border:1px solid var(--car)}
+  .rowpanel.alt{background:var(--alt-bg);border:1px solid var(--alt)}
+  .rowpanel.bus{background:var(--bus-bg);border:1px solid var(--bus)}
+  .rowpanel .h{font-weight:700;margin:0 0 .3rem}
+  .rowpanel p{margin:.3rem 0}
+  .rowpanel a.tel{margin-top:.4rem}
+  .rowpanel .jarow{margin:.4rem 0;padding:.4rem .6rem;background:var(--surface);border-radius:.4rem}
+  .rowpanel .jarow .ja{font-weight:600}
+  .rowpanel .jarow .ro{font-size:.78rem;color:var(--muted);font-style:italic}
+
+  .bustable-wrap{overflow-x:auto;margin-top:.5rem;border:1px solid var(--hair);border-radius:.5rem}
+  table.bustable{border-collapse:collapse;width:100%;font-size:.82rem;font-variant-numeric:tabular-nums}
+  table.bustable caption{text-align:left;font-size:.78rem;color:var(--muted);padding:.4rem .5rem;font-weight:600}
+  table.bustable th,table.bustable td{padding:.4rem .55rem;border-top:1px solid var(--hair);white-space:nowrap;text-align:center}
+  table.bustable th{background:var(--surface-2);font-weight:700;color:var(--muted);font-size:.75rem}
+  table.bustable tr:first-child td,table.bustable tr:first-child th{border-top:none}
+  table.bustable td.use{color:var(--accent);font-weight:800;position:relative}
+  table.bustable td.use::after{content:"★";margin-left:.15rem;font-size:.7rem}
+
+  .shop{margin-top:1rem;background:var(--accent-soft);border-radius:.7rem;padding:.85rem .95rem;font-size:.88rem}
+  .shop b{display:block;margin-bottom:.3rem;font-size:.92rem}
+
+  .plans{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
+  .plan{border:1px solid var(--hair);border-radius:.7rem;padding:.8rem .9rem;background:var(--surface-2)}
+  .plan h4{margin:0 0 .4rem;font-size:.95rem}
+  .plan.pick{border-color:var(--ok);border-width:2px}
+  .plan.no{opacity:.8}
+  .plan .tag-pick{color:var(--ok);font-weight:800}
+  .plan .tag-no{color:var(--warn-ink);font-weight:800}
+  .plan ol{margin:.2rem 0 0;padding-left:1.1rem;font-size:.85rem;color:var(--muted)}
+  .plan ol li{margin:.2rem 0}
+
+  section.blk{background:var(--surface);border:1px solid var(--hair);border-radius:.9rem;padding:1.1rem;margin-top:1.2rem;scroll-margin-top:6rem}
+  details.day{scroll-margin-top:6rem}
+  section.blk>h2{font-size:1.25rem;margin:0 0 .7rem}
+  section.blk>p.blkintro{color:var(--muted);font-size:.86rem;margin:-.3rem 0 .8rem}
+  .row2{padding:.7rem 0;border-top:1px solid var(--hair);font-size:.9rem}
+  .row2:first-of-type{border-top:none}
+  .row2 .r-h{font-weight:700;font-size:.98rem}
+  .row2 .r-s{color:var(--muted);font-size:.84rem}
+  .row2 .r-v{color:var(--cost);font-weight:600;font-variant-numeric:tabular-nums}
+
+  .costgroup h3{margin:1rem 0 .2rem;font-size:1rem;color:var(--accent)}
+  .costgroup:first-of-type h3{margin-top:0}
+  ul.costlist{list-style:none;margin:0;padding:0}
+  ul.costlist li{padding:.55rem 0;border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:.15rem;font-size:.88rem}
+  ul.costlist li:first-child{border-top:none}
+  ul.costlist li .ci{font-weight:600}
+  ul.costlist li .ci em{font-style:normal;color:var(--muted);font-size:.78rem;font-weight:600;margin-left:.3rem}
+  ul.costlist li .cv{color:var(--cost);font-weight:700;font-variant-numeric:tabular-nums}
+  ul.costlist li .cn{color:var(--muted);font-size:.8rem}
+  ul.costlist li.sub{border-top:2px solid var(--ink);background:var(--surface-2);margin-top:.2rem;padding:.55rem .5rem;border-radius:0 0 .4rem .4rem}
+  .total{margin-top:1rem;background:var(--accent-soft);border-radius:.7rem;padding:1rem}
+  .total .big{font-size:1.1rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+  .total .sub2{font-size:.85rem;color:var(--muted);margin-top:.3rem}
+
+  ul.plain{margin:.3rem 0 0;padding-left:1.15rem;font-size:.9rem}
+  ul.plain li{margin:.4rem 0}
+  .warnline{color:var(--warn-ink);background:var(--warn-bg);border-left:3px solid var(--warn-line);
+    padding:.5rem .7rem;border-radius:.3rem;margin:.5rem 0;font-size:.86rem}
+  .pack{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+  .pack span{border:1px solid var(--hair);border-radius:2rem;padding:.25rem .7rem;font-size:.83rem;background:var(--surface-2)}
+
+  /* ---- checklist (出發前) ---- */
+  .cklist{list-style:none;margin:.5rem 0 0;padding:0}
+  .cklist li{border-top:1px solid var(--hair);padding:.15rem 0}
+  .cklist li:first-child{border-top:none}
+  .cklist label{display:flex;align-items:flex-start;gap:.6rem;min-height:2.8rem;padding:.5rem 0;cursor:pointer}
+  .cklist input{width:1.2rem;height:1.2rem;margin-top:.2rem;flex:0 0 auto;accent-color:var(--accent)}
+  .cklist .cktext{font-size:.92rem;line-height:1.5}
+  .cklist .cktext b{display:block}
+  .cklist .cktext span{color:var(--muted);font-size:.82rem}
+  .cklist label:has(input:checked) .cktext{color:var(--muted);text-decoration:line-through}
+
+  /* ---- 打卡 ---- */
+  .checkin{background:var(--surface);border:1px solid var(--hair);border-radius:.9rem;padding:1.1rem;margin-top:1.6rem;scroll-margin-top:6rem}
+  .checkin>h2{font-size:1.2rem;margin:0 0 .2rem}
+  .progwrap{margin:.6rem 0 1rem}
+  .progtext{font-size:.85rem;color:var(--muted);margin-bottom:.4rem}
+  .progbar{height:.6rem;border-radius:1rem;background:var(--surface-2);border:1px solid var(--hair);overflow:hidden}
+  .progbar>i{display:block;height:100%;background:var(--accent);border-radius:1rem;transition:width .3s}
+  @media (prefers-reduced-motion:reduce){.progbar>i{transition:none}}
+  .ci-card{border:1px solid var(--hair);border-radius:.7rem;padding:.9rem;background:var(--surface-2);margin-top:.9rem}
+  .ci-card .name{font-weight:700;font-size:1.05rem}
+  .ci-card .oneline{font-size:.82rem;color:var(--muted);margin-top:.15rem}
+  .toggles{display:flex;gap:.5rem;margin:.7rem 0}
+  .toggles label{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;
+    min-height:2.6rem;border:1.5px solid var(--hair);border-radius:.5rem;font-weight:600;font-size:.9rem;cursor:pointer}
+  .toggles input{width:1.15rem;height:1.15rem;accent-color:var(--accent)}
+  .toggles label:has(input:checked){background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .ci-card textarea{width:100%;min-height:3.4rem;border:1.5px solid var(--hair);border-radius:.5rem;
+    background:var(--surface);color:var(--ink);font-family:inherit;font-size:.9rem;padding:.5rem .6rem;resize:vertical}
+  .photobar{display:flex;align-items:center;gap:.6rem;margin-top:.6rem;flex-wrap:wrap}
+  .photobar label{min-height:2.5rem;display:inline-flex;align-items:center;gap:.4rem;padding:0 .9rem;
+    border:1.5px dashed var(--accent);color:var(--accent);border-radius:.5rem;font-weight:700;font-size:.85rem;cursor:pointer}
+  .photobar input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .thumbs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+  .thumbs figure{margin:0;position:relative}
+  .thumbs img{width:5rem;height:5rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--hair)}
+  .thumbs button{position:absolute;top:-.5rem;right:-.5rem;width:1.6rem;height:1.6rem;border-radius:50%;
+    border:none;background:var(--sos);color:#fff;font-weight:700;cursor:pointer;font-size:.8rem;line-height:1}
+  .quote{display:none;margin-top:.8rem;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:.3rem;padding:.8rem .9rem}
+  .quote.open{display:block}
+  .quote .q{font-weight:700;font-size:1rem}
+  .quote .src{font-size:.78rem;color:var(--muted);margin:.2rem 0 .4rem}
+  .quote .note{font-size:.85rem}
+  .storenote{margin-top:1rem;font-size:.78rem;color:var(--muted)}
+  .dbwarn{display:none;margin-top:.8rem;background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:.5rem;padding:.6rem .8rem;font-size:.82rem;color:var(--warn-ink)}
+  .dbwarn.show{display:block}
+
+  /* ---- 急難頁 ---- */
+  .sosgrp{margin-top:1.1rem}
+  .sosgrp:first-of-type{margin-top:0}
+  .sosgrp h3{font-size:1rem;margin:0 0 .4rem;color:var(--sos)}
+  .sosrow{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.5rem 0;border-top:1px solid var(--hair);font-size:.88rem}
+  .sosrow:first-of-type{border-top:none}
+  .sosrow .sname{font-weight:600}
+  .sosrow .ssub{color:var(--muted);font-size:.78rem;display:block}
+  .insurebox{margin-top:.6rem;background:var(--surface-2);border:1px dashed var(--hair);border-radius:.5rem;padding:.7rem .85rem;font-size:.85rem}
+  .insurebox .fillin{color:var(--warn-ink);font-weight:600}
+  .sopstep{counter-reset:sop}
+  .sopstep li{counter-increment:sop;margin:.5rem 0;padding-left:1.7rem;position:relative;font-size:.87rem}
+  .sopstep li::before{content:counter(sop);position:absolute;left:0;top:0;width:1.3rem;height:1.3rem;
+    border-radius:50%;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  /* ---- 回憶 ---- */
+  .memcard{border:1px solid var(--hair);border-radius:.7rem;padding:.9rem;margin-top:.9rem;background:var(--surface-2)}
+  .memcard h4{margin:0 0 .3rem;font-size:1rem}
+  .memcard .mts{font-size:.78rem;color:var(--muted)}
+  .memcard .mnote{margin-top:.4rem;font-size:.9rem}
+  .memcard .mq{margin-top:.5rem;font-size:.82rem;color:var(--accent);font-style:italic}
+  .memcard .mimgs{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+  .memcard .mimgs img{width:6rem;height:6rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--hair)}
+  .memempty{color:var(--muted);font-size:.85rem;font-style:italic}
+  .memactions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+
+  .btn{min-height:2.7rem;padding:0 1rem;border-radius:.6rem;border:1.5px solid var(--accent);
+    background:var(--accent-soft);color:var(--accent);font-family:inherit;font-weight:700;font-size:.88rem;cursor:pointer}
+  .btn.solid{background:var(--accent);color:#fff}
+  .btn.ghost{background:var(--surface);border-color:var(--hair);color:var(--ink)}
+
+  .tip{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:.7rem;padding:.9rem 1rem;margin-top:1.2rem;font-size:.86rem}
+  .tip h3{margin:0 0 .3rem;font-size:1rem;color:var(--warn-ink)}
+  .tip ul{margin:.3rem 0 0;padding-left:1.15rem}
+  .tip li{margin:.35rem 0}
+  section.blk .tip{margin-top:.9rem}
+
+  footer{margin-top:2rem;text-align:center;color:var(--muted);font-size:.78rem;line-height:1.7}
+  a{color:var(--accent)}
+  .mask ~ .full,.full{display:none}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:.3rem}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  /* ---- print: 訂房明細單張 ---- */
+  .printsheet{display:none}
+  @media print{
+    body.print-lodge .wrap>*{display:none!important}
+    body.print-lodge .wrap>.printsheet.active{display:block!important}
+    body.print-lodge .full{display:inline!important}
+    body.print-lodge .mask{display:none!important}
+    body.print-memory header,body.print-memory .lede,body.print-memory .chips,body.print-memory .countbar,
+    body.print-memory details.day,body.print-memory .checkin,body.print-memory section.blk:not(.memoryblk),
+    body.print-memory footer,body.print-memory .memactions{display:none!important}
+    body.print-memory .memoryblk{border:none;padding:0}
+    body.print-memory .memcard{break-inside:avoid;break-after:page;border:1px solid #ccc}
+    .printsheet{background:#fff;color:#000;padding:1rem}
+    .printsheet table{width:100%;border-collapse:collapse}
+    .printsheet td{padding:.4rem .3rem;border-top:1px solid #ccc}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbar">
+    <span class="htitle">人生即遍路 <small>～ 兩人同行</small></span>
+    <div class="sizer" role="group" aria-label="調整字級">
+      <button type="button" id="sMinus" aria-label="縮小字級">A－</button>
+      <button type="button" id="sPlus" aria-label="放大字級">A＋</button>
+    </div>
+  </div>
+  <nav class="chips" aria-label="跳到" id="chips">
+    <button type="button" data-goto="day1">D1</button>
+    <button type="button" data-goto="day2">D2</button>
+    <button type="button" data-goto="day3">D3</button>
+    <button type="button" data-goto="day4">D4</button>
+    <button type="button" data-goto="day5">D5</button>
+    <button type="button" data-goto="checkin">打卡</button>
+    <button type="button" data-goto="memory">回憶</button>
+    <button type="button" data-goto="cost">費用</button>
+    <button type="button" data-goto="before">出發前</button>
+    <button type="button" data-goto="sos">急難</button>
+    <button type="button" data-goto="tips">實務</button>
+  </nav>
+  <div class="countbar" id="countbar"></div>
+</header>
+
+<div class="wrap">
+
+  <div class="lede">
+    <h1>人生即遍路 ～ 兩人同行</h1>
+    <p class="sub">2026.10.30（五）– 11.03（二）・5天4夜・德島 第1番→第12番</p>
+    <p class="sub">字級用右上 A－／A＋ 調・電話號碼點一下可直撥・整支 App 離線可用</p>
+    <span class="previewtag">資料只存這支手機，可放心亂點・回程請盡快「整理成 PDF」</span>
+    <div class="quicklinks">
+      <button type="button" id="btnIcsAll">📅 把全部行程加進手機行事曆</button>
+      <button type="button" id="btnInstallHint">📲 加到主畫面</button>
+    </div>
+  </div>
+
+  <!-- ================= DAY 1 ================= -->
+  <details class="day" id="day1" open>
+    <summary>
+      <span class="daynum">DAY 1</span>
+      <span class="daymain">
+        <span class="date">10/30 週五</span>
+        <span class="dtitle">出發・飛高松・抵第1番門前</span>
+        <span class="dmeta">在外時間 04:00–18:00 ・ 難度 —</span>
+      </span>
+      <span class="chev" aria-hidden="true">▸</span>
+    </summary>
+    <div class="daybody">
+
+      <div class="lodge" id="lodge-N1">
+        <p class="lb">今晚住宿（第 1–2 晚連住）</p>
+        <p class="ln">HOTEL AZ 徳島板野店</p>
+        <p class="lm">Check-in 15:00 ・ Check-out 11/1 10:00 ・ 含夕食＋朝食サービス ・ ✅ 已訂</p>
+        <div class="lodgebtns">
+          <a class="tel" href="tel:+81886722611">☎ 088-672-2611</a>
+          <button type="button" class="lodgebtn" data-lodge="lp-N1">🏨 訂房明細</button>
+        </div>
+        <div class="lodgepanel" id="lp-N1">
+          <table>
+            <tr><td class="k">宿名</td><td>HOTEL AZ 徳島板野店</td></tr>
+            <tr><td class="k">預約編號</td><td class="maskrow"><span class="mask">T3F3****FBA7</span><span class="full">T3F37836FFBA7</span></td></tr>
+            <tr><td class="k">訂房代表人</td><td><span class="mask">Chen Y.</span><span class="full">CHEN YUHSIN</span></td></tr>
+            <tr><td class="k">入住</td><td>2026/10/30（五）・Check-in 15:00</td></tr>
+            <tr><td class="k">退房</td><td>2026/11/01（日）・連住 2 晚</td></tr>
+            <tr><td class="k">房型</td><td>【禁煙】雙床房 × 1 間</td></tr>
+            <tr><td class="k">方案</td><td>【新価格】夕食付きプラン（朝食サービス）</td></tr>
+            <tr><td class="k">付款</td><td>到場支付 ¥24,640（2 名 × 2 晚，含稅）</td></tr>
+            <tr><td class="k">電話</td><td>088-672-2611</td></tr>
+            <tr><td class="k">地址</td><td>〒板野縣板野郡板野町川端字新手崎 27-1</td></tr>
+            <tr><td class="k">取消規定</td><td>2 日前 0%／前日 20%／當日 80%／No-Show 100%</td></tr>
+          </table>
+          <p class="note2">Day 2 回到同一間住，不用 Check-out 再 Check-in。預約時已用設施提問告知台灣旅客、電話 +886-978-752-813。</p>
+          <button type="button" class="printbtn" data-printsheet="ps-N1">🖨 列印這張</button>
+        </div>
+      </div>
+
+      <div class="daybtns">
+        <button type="button" class="b-jp" data-panel="d1-jp">🗣 今日日文例句</button>
+        <button type="button" class="b-map" data-panel="d1-map">🗺 今日地圖</button>
+        <button type="button" class="b-sos" data-panel="d1-sos">🆘 急難</button>
+      </div>
+
+      <div class="panel jp" id="d1-jp">
+        <h4>Day 1 日文例句（點目的地給司機／站員看）</h4>
+        <h5>1-A　高松機場　入境・領行李</h5>
+        <div class="jpq"><div class="zh">觀光，停留5天</div><div class="ja">観光です。5日間の滞在です</div><div class="ro">Kankou desu. Itsukakan no taizai desu</div></div>
+        <div class="jpq"><div class="zh">我的行李還沒出來</div><div class="ja">荷物がまだ出てきません</div><div class="ro">Nimotsu ga mada dete kimasen</div></div>
+        <div class="jpq"><div class="zh">國內線出口在哪裡？</div><div class="ja">国内線の出口はどこですか？</div><div class="ro">Kokunaisen no deguchi wa doko desu ka?</div></div>
+        <h5>1-B　ecbo cloak 行李寄放（機場 1F）</h5>
+        <div class="jpq"><div class="zh">我用 ecbo cloak 預約了行李寄放</div><div class="ja">ecbo cloak で荷物預かりを予約しました</div><div class="ro">ecbo cloak de nimotsu azukari o yoyaku shimashita</div></div>
+        <div class="jpq"><div class="zh">想寄放這兩個行李箱，11月3日下午來取</div><div class="ja">このスーツケースを2つ預けたいです。11月3日の午後に取りに来ます</div><div class="ro">Kono suutsukeesu o futatsu azuketai desu. Juuichi-gatsu mikka no gogo ni tori ni kimasu</div></div>
+        <h5>1-C　機場巴士　高松空港 → 高松駅</h5>
+        <div class="jpq"><div class="zh">往高松車站的巴士站牌在哪裡？</div><div class="ja">高松駅行きのバス乗り場はどこですか？</div><div class="ro">Takamatsu-eki yuki no basu noriba wa doko desu ka?</div></div>
+        <div class="jpq"><div class="zh">可以用 ICOCA 付車資嗎？</div><div class="ja">運賃は ICOCA で払えますか？</div><div class="ro">Unchin wa ICOCA de haraemasu ka?</div></div>
+        <div class="jpq"><div class="zh">到站請告訴我</div><div class="ja">着いたら教えてください</div><div class="ro">Tsuitara oshiete kudasai</div></div>
+        <h5>1-E　買 ICOCA（JR 綠色窗口 みどりの窓口）</h5>
+        <div class="jpq"><div class="zh">我想買一張 ICOCA，請儲值 3000 日圓</div><div class="ja">ICOCA を1枚買いたいです。3000円チャージしてください</div><div class="ro">ICOCA o ichimai kaitai desu. Sanzen-en chaaji shite kudasai</div></div>
+        <h5>1-F　JR 特急うずしお　高松 → 板野（自由席）</h5>
+        <div class="jpq"><div class="zh">請給我特急うずしおの自由席特急券，到板野，兩位</div><div class="ja">特急うずしおの自由席特急券をください。板野まで、二人です</div><div class="ro">Tokkyuu Uzushio no jiyuuseki tokkyuuken o kudasai. Itano made, futari desu</div></div>
+        <div class="jpq"><div class="zh">這班車有停板野嗎？幾號月台？</div><div class="ja">この電車は板野に停まりますか？何番ホームですか？</div><div class="ro">Kono densha wa Itano ni tomarimasu ka? Nanban hoomu desu ka?</div></div>
+        <h5>1-G　板野駅 → HOTEL AZ　寄放行李・Check-in</h5>
+        <div class="jpq"><div class="zh">我有訂房，我姓○○。現在可以先寄放行李嗎？</div><div class="ja">予約しています。○○です。今、荷物を預かってもらえますか？</div><div class="ro">Yoyaku shite imasu. ○○ desu. Ima, nimotsu o azukatte moraemasu ka?</div></div>
+        <div class="jpq"><div class="zh">晚餐從幾點開始？</div><div class="ja">夕食は何時からですか？</div><div class="ro">Yuushoku wa nanji kara desu ka?</div></div>
+        <h5>1-I　計程車　飯店 → 靈山寺（第1番）</h5>
+        <div class="jpq"><div class="zh">請到靈山寺。大概多少錢？</div><div class="ja">霊山寺までお願いします。だいたいいくらですか？</div><div class="ro">Ryouzenji made onegai shimasu. Daitai ikura desu ka?</div></div>
+        <h5>1-J　靈山寺　買遍路用品</h5>
+        <div class="jpq"><div class="zh">第一次走遍路，想買一整套用品（白衣、金剛杖、納経帳、輪袈裟）</div><div class="ja">初めてのお遍路です。用品を一式そろえたいです（白衣、金剛杖、納経帳、輪袈裟）</div><div class="ro">Hajimete no ohenro desu. Youhin o isshiki soroetai desu</div></div>
+        <div class="jpq"><div class="zh">請教我參拜的順序</div><div class="ja">お参りの順番を教えてください</div><div class="ro">Omairi no junban o oshiete kudasai</div></div>
+      </div>
+
+      <div class="panel map" id="d1-map">
+        <h4>Day 1 地點地圖（點了開地圖 App）</h4>
+        <div class="maplinks">
+          <a href="https://www.google.com/maps/search/?api=1&query=高松空港" target="_blank" rel="noopener">🛬 高松空港（TAK）</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=高松駅+香川" target="_blank" rel="noopener">🚉 高松駅</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=板野駅+徳島" target="_blank" rel="noopener">🚉 板野駅</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=HOTEL+AZ+徳島板野店" target="_blank" rel="noopener">🏨 HOTEL AZ 徳島板野店</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=霊山寺+鳴門市" target="_blank" rel="noopener">⛩️ 第1番 靈山寺</a>
+        </div>
+        <div class="offlinebox">
+          <b>離線地圖要先下載（沒網路時上面連結打不開）</b><br>
+          ・Google Maps →「離線地圖」下載<b>德島縣＋香川縣</b>全區<br>
+          ・燒山寺步道另用 <b>YAMAP</b> App 下載「藤井寺→燒山寺」路線（Day 4 用）
+        </div>
+      </div>
+
+      <div class="panel sos" id="d1-sos"></div>
+
+      <ol class="tl">
+        <li><span class="t">04:00</span><div class="sb">
+          <p class="act">家裡出發 → 桃園機場</p>
+          <p class="meta">起飛前 3 小時 ・ 自行安排（早班捷運或計程車）</p></div></li>
+
+        <li><span class="t">05:00</span><div class="sb">
+          <p class="act">桃園機場 Check-in</p>
+          <p class="meta">中華航空 CI 278 ・ 報到／行李託運／出境</p></div></li>
+
+        <li><span class="t">07:00</span><div class="sb">
+          <p class="act">CI 278 起飛　TPE → TAK</p>
+          <p class="meta">飛機 ・ 2h20m</p></div></li>
+
+        <li><span class="t">10:20</span><div class="sb">
+          <p class="act">抵達高松機場 ・ 入境・領行李</p>
+          <p class="meta">入境審查約 30 分</p>
+          <p class="fac"><b>行李：</b>大行李箱 → 機場 1F ecbo cloak 寄放（10/30 → 11/3）</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp1">🔀 備案</button></div>
+          <div class="rowpanel alt" id="d1-rp1">
+            <p class="h">銜接風險：入境＋領行李＋寄 ecbo 要在 11:30 巴士前完成</p>
+            <p>・文化の日連假前的週五，入境可能排較久</p>
+            <p>・出關先衝 2 號巴士站牌；行李無法留到回程寄放（Day5 不經高松駅），只能機場寄</p>
+            <p>・掉了 11:30 這班 → 改搭 12:40／13:05 也還接得上 14:10 うずしお，Check-in 15:00 仍趕得上（15:25 到飯店）</p>
+            <p>・真的很趕 → 機場直接叫計程車到高松駅（約 ¥3,000）</p>
+          </div></div></li>
+
+        <li><span class="t">11:10</span><div class="sb">
+          <p class="act">高松空港 → 高松駅</p>
+          <p class="meta">機場巴士約 45 分 ・ 站牌在國內線航廈出口外 2 號 ・ 可刷 ICOCA</p>
+          <p class="cost">¥1,300／人（2026/10/1 起調漲，行程表舊數字 ¥1,000 已修正）</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp2">🔀 備案</button></div>
+          <div class="rowpanel alt" id="d1-rp2">
+            <p class="h">銜接：機場巴士 → JR 渦潮（うずしお）13:10</p>
+            <p>・搭到 12:00 前的班次都接得上 13:10</p>
+            <p>・12:40／13:05 那班到站後還有 41–47 分鐘，夠在綠色窗口或自動售票機買特急券（3–5 分鐘搞定），可接 14:10</p>
+            <p>・渦潮 1 小時一班（13:10／14:10），最晚 14:10 墊底，當天一定到得了</p>
+          </div></div></li>
+
+        <li><span class="t">12:00</span><div class="sb">
+          <p class="act">高松駅周邊午餐（讚岐烏冬）</p>
+          <p class="meta">抵日第一餐</p>
+          <p class="cost">¥500–900</p>
+          <p class="fac">🏪 <b>設施：</b>高松駅內與駅前有多家讚岐烏冬店＋便利商店（LAWSON／セブン）</p></div></li>
+
+        <li><span class="t">13:00</span><div class="sb">
+          <p class="act">高松駅 → 板野駅</p>
+          <p class="meta">JR 高德線 特急うずしお ・ 直達約 57 分 ・ 13:10 或 14:10 發</p>
+          <p class="cost">¥2,440 自由席（運賃¥1,210＋特急券¥1,230）</p>
+          <p class="fac">⚠ <b>提醒：</b>「自由席特急券」要另外在綠色窗口／售票機買（IC 卡只刷運賃部分）</p></div></li>
+
+        <li><span class="t">14:08</span><div class="sb">
+          <p class="act">板野駅着 → HOTEL AZ 徳島板野店</p>
+          <p class="meta">步行約 15 分 ・ 可先寄放行李</p>
+          <p class="fac">🏪 <b>設施：</b>Marunaka 超市就在板野站旁，可買行動糧</p></div></li>
+
+        <li><span class="t">14:30</span><div class="sb">
+          <p class="act">HOTEL AZ → 靈山寺　散步・環境確認・買遍路用品</p>
+          <p class="meta">計程車約 7 分</p>
+          <p class="cost">¥1,000</p>
+          <div class="rowbtns">
+            <button type="button" class="r-lore" data-rp="d1-lore">🏯 典故</button>
+            <button type="button" class="r-car" data-rp="d1-car">🚕 車行電話</button>
+            <button type="button" class="r-alt" data-rp="d1-rp3">🔀 備案</button>
+          </div>
+          <div class="rowpanel lore" id="d1-lore">
+            <p class="h">第一番　靈山寺（りょうぜんじ）</p>
+            <p style="font-size:.8rem;color:var(--muted)">📍 德島縣鳴門市　🗓 開基：天平年間（729–749）</p>
+            <p><b>典故：</b>相傳行基菩薩奉聖武天皇之勅，為鎮護國家開創此寺。弘法大師在此發願踏上四國巡禮，靈山寺因此被尊為「發心道場」第一番，象徵修行的起點。寺名「靈山」取自釋迦說法的靈鷲山之義。</p>
+            <p><b>特色：</b>境內保有多國佛教文化融合特色，入口矗立印度風格多寶塔。本尊釋迦如來，每年大量遍路者來「打第一番」，在此取得白衣、金剛杖、納經帳等用品，正式展開八十八所巡禮。</p>
+          </div>
+          <div class="rowpanel car" id="d1-car">
+            <p class="h">計程車　飯店 → 第1番 靈山寺（約7分・約¥1,000）</p>
+            <p>門前招不到車就打：</p>
+            <a class="tel" href="tel:+81886548811">☎ 德島第一交通 088-654-8811（通用）</a>
+            <div class="jarow"><div class="ja">タクシーを一台呼んでください。</div><div class="ro">Takushii o ichidai yonde kudasai.（請幫我叫一台計程車）</div></div>
+            <div class="jarow"><div class="ja">霊山寺までお願いします。だいたいいくらですか？</div><div class="ro">Ryouzenji made onegai shimasu. Daitai ikura desu ka?（到靈山寺，大概多少錢）</div></div>
+            <div class="jarow"><div class="ja">領収書をお願いします。</div><div class="ro">Ryoushuusho o onegai shimasu.（請給我收據）</div></div>
+            <p style="font-size:.8rem;color:var(--muted)">鄉間計程車常只收現金，備好日幣零錢。</p>
+          </div>
+          <div class="rowpanel alt" id="d1-rp3">
+            <p class="h">靈山寺賣店／納経所 17:00 關門</p>
+            <p>・若今天 delay 到傍晚才 Check-in，來不及買遍路用品</p>
+            <p>・沒關係：Day 2 早上 07:30 本來就在第1番，改那時買即可（只會佔用 Day 2 一點時間）</p>
+          </div></div></li>
+
+        <li><span class="t">18:00</span><div class="sb">
+          <p class="act">HOTEL AZ 晚餐（含夕食付・朝食サービス）</p>
+          <p class="meta">出發前再跟櫃檯確認開飯時間</p></div></li>
+      </ol>
+    </div>
+  </details>
+
+  <!-- ================= DAY 2 ================= -->
+  <details class="day" id="day2">
+    <summary>
+      <span class="daynum">DAY 2</span>
+      <span class="daymain">
+        <span class="date">10/31 週六</span>
+        <span class="dtitle">第1番～第5番・購入遍路用品</span>
+        <span class="dmeta">步行約13km ・ 難度 <span class="diff">●●●○○</span></span>
+      </span>
+      <span class="chev" aria-hidden="true">▸</span>
+    </summary>
+    <div class="daybody">
+
+      <div class="lodge">
+        <p class="lb">今晚住宿（延續昨晚，同一間）</p>
+        <p class="ln">HOTEL AZ 徳島板野店</p>
+        <p class="lm">不用再 Check-in，行李已在房內 ・ 含夕食＋朝食サービス</p>
+        <div class="lodgebtns">
+          <a class="tel" href="tel:+81886722611">☎ 088-672-2611</a>
+          <button type="button" class="lodgebtn" data-lodge="lp-N1">🏨 訂房明細（同 Day1）</button>
+        </div>
+      </div>
+
+      <div class="daybtns">
+        <button type="button" class="b-jp" data-panel="d2-jp">🗣 今日日文例句</button>
+        <button type="button" class="b-map" data-panel="d2-map">🗺 今日地圖</button>
+        <button type="button" class="b-sos" data-panel="d2-sos">🆘 急難</button>
+      </div>
+
+      <div class="panel jp" id="d2-jp">
+        <h4>Day 2 日文例句</h4>
+        <h5>2-A　各寺之間問路</h5>
+        <div class="jpq"><div class="zh">請問第○番○○寺怎麼走？</div><div class="ja">第○番○○寺はどう行きますか？</div><div class="ro">Dai-○ban ○○ji wa dou ikimasu ka?</div></div>
+        <div class="jpq"><div class="zh">遍路道是這邊嗎？</div><div class="ja">遍路道はこちらですか？</div><div class="ro">Henromichi wa kochira desu ka?</div></div>
+        <h5>2-B　便利商店午餐（金泉寺周邊）</h5>
+        <div class="jpq"><div class="zh">這附近有便利商店嗎？</div><div class="ja">この近くにコンビニはありますか？</div><div class="ro">Kono chikaku ni konbini wa arimasu ka?</div></div>
+        <div class="jpq"><div class="zh">（店員問要加熱嗎）麻煩加熱</div><div class="ja">温めますか？ → お願いします</div><div class="ro">Atatamemasu ka? → Onegai shimasu</div></div>
+        <h5>2-C　鍛冶屋原線巴士　板野駅南 → 大日寺口</h5>
+        <div class="jpq"><div class="zh">這班車有到大日寺口嗎？</div><div class="ja">このバスは大日寺口に行きますか？</div><div class="ro">Kono basu wa Dainichijiguchi ni ikimasu ka?</div></div>
+        <div class="jpq"><div class="zh">到大日寺口請告訴我</div><div class="ja">大日寺口で教えてください</div><div class="ro">Dainichijiguchi de oshiete kudasai</div></div>
+        <div class="jpq"><div class="zh">車資多少？可以用 ICOCA 嗎？</div><div class="ja">運賃はいくらですか？ICOCA は使えますか？</div><div class="ro">Unchin wa ikura desu ka? ICOCA wa tsukaemasu ka?</div></div>
+        <h5>2-D　大日寺・地藏寺　參拜</h5>
+        <div class="jpq"><div class="zh">納經所在哪裡？</div><div class="ja">納経所はどこですか？</div><div class="ro">Noukyoujo wa doko desu ka?</div></div>
+        <h5>2-E　28號 鍛冶屋原線巴士　羅漢 → 板野南</h5>
+        <div class="jpq"><div class="zh">「羅漢」的巴士站在哪裡？</div><div class="ja">「羅漢」のバス停はどこですか？</div><div class="ro">"Rakan" no basutei wa doko desu ka?</div></div>
+        <div class="jpq"><div class="zh">這班有到板野（南）嗎？</div><div class="ja">このバスは板野（南）に行きますか？</div><div class="ro">Kono basu wa Itano (minami) ni ikimasu ka?</div></div>
+        <h5>2-F　回飯店・晚餐・購物（Day3 用）</h5>
+        <div class="jpq"><div class="zh">有 2 公升的水嗎？</div><div class="ja">2リットルの水はありますか？</div><div class="ro">Ni-rittoru no mizu wa arimasu ka?</div></div>
+        <div class="jpq"><div class="zh">痠痛貼布放在哪一區？</div><div class="ja">湿布はどこにありますか？</div><div class="ro">Shippu wa doko ni arimasu ka?</div></div>
+      </div>
+
+      <div class="panel map" id="d2-map">
+        <h4>Day 2 地點地圖</h4>
+        <div class="maplinks">
+          <a href="https://www.google.com/maps/search/?api=1&query=極楽寺+鳴門市" target="_blank" rel="noopener">⛩️ 第2番 極樂寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=金泉寺+板野町" target="_blank" rel="noopener">⛩️ 第3番 金泉寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=大日寺+板野町" target="_blank" rel="noopener">⛩️ 第4番 大日寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=地蔵寺+板野町" target="_blank" rel="noopener">⛩️ 第5番 地藏寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=板野駅南+バス停" target="_blank" rel="noopener">🚌 板野駅南 站牌</a>
+        </div>
+        <div class="offlinebox"><b>離線地圖已下載了嗎？</b> 沒網路時上面連結打不開，出發前務必先下載德島＋香川全區。</div>
+      </div>
+
+      <div class="panel sos" id="d2-sos"></div>
+
+      <ol class="tl">
+        <li><span class="t">07:00</span><div class="sb">
+          <p class="act">免費早餐・備好行動糧出發</p></div></li>
+
+        <li><span class="t">07:30</span><div class="sb">
+          <p class="act">第1番 靈山寺　正式參拜</p>
+          <p class="meta">步行約1h10m／計程車約7分</p>
+          <p class="fac">參拜完成後，到下方「打卡進度」勾選第1番，會跳出「同行二人」名言</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore1">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d2-lore1">
+            <p class="h">第一番　靈山寺（りょうぜんじ）</p>
+            <p>典故與昨日相同：弘法大師在此發願踏上四國巡禮，被尊為「發心道場」第一番。今天是正式參拜的開始。</p>
+          </div></div></li>
+
+        <li><span class="t">09:00</span><div class="sb">
+          <p class="act">第1番 → 第2番 極樂寺</p>
+          <p class="meta">步行 1.2km・約20分</p></div></li>
+
+        <li><span class="t">09:20</span><div class="sb">
+          <p class="act">第2番 極樂寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore2">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d2-lore2">
+            <p class="h">第二番　極樂寺（ごくらくじ）</p>
+            <p><b>典故：</b>相傳行基菩薩雕刻阿彌陀如來像，弘法大師後來駐錫此地修行，並以長生の水加持，使此地成為延命長壽的靈場。傳說大師親植一株「長命杉」，樹齡已逾千年。</p>
+            <p><b>特色：</b>境內「長命杉」樹圍約8公尺，被指定為天然紀念物，信眾相信摸觸可得延年益壽之效。本尊阿彌陀如來，環境清幽。</p>
+          </div></div></li>
+
+        <li><span class="t">09:55</span><div class="sb">
+          <p class="act">第2番 → 第3番 金泉寺</p>
+          <p class="meta">步行 2.8km・約40分</p></div></li>
+
+        <li><span class="t">10:40</span><div class="sb">
+          <p class="act">第3番 金泉寺 參拜</p>
+          <p class="meta">約30分</p>
+          <p class="cost">行動糧 ¥1,000</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore3">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d2-lore3">
+            <p class="h">第三番　金泉寺（こんせんじ）</p>
+            <p><b>典故：</b>行基菩薩掘出黃金湧水而建此寺，故名「金泉寺」。弘法大師巡禮時逢大旱，以錫杖插地祈願，湧出清泉解村民倒懸之苦，此泉稱「獨鈷水」，至今仍湧流不息。</p>
+            <p><b>特色：</b>境內「獨鈷水」水質清澈甘甜，遍路者多汲取供養或飲用。傳說以此水洗眼可治眼疾。另有「鏡池」，傳說照鏡可預知壽命長短。</p>
+          </div></div></li>
+
+        <li><span class="t">11:15</span><div class="sb">
+          <p class="act">午餐（金泉寺周邊便利商店或行動糧）→ 步行到板野駅南巴士站</p>
+          <p class="meta">約15分抵站牌</p>
+          <p class="cost">¥500–900</p></div></li>
+
+        <li><span class="t">11:29</span><div class="sb">
+          <p class="act">板野駅南 → 大日寺口　巴士</p>
+          <p class="meta">鍛冶屋原線 47/48号（不動経由）・約11分</p>
+          <p class="cost">¥260</p>
+          <div class="rowbtns"><button type="button" class="r-bus" data-rp="d2-bus1">🚌 時刻表</button></div>
+          <div class="rowpanel bus" id="d2-bus1">
+            <p class="h">鍛冶屋原線 47/48号（不動経由・下り）　板野駅南 → 大日寺口</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ</caption>
+              <tr><th>板野駅南 發</th><th>大日寺口 着</th></tr>
+              <tr><td>08:36</td><td>08:43</td></tr><tr><td>09:29</td><td>09:40</td></tr>
+              <tr><td>11:04</td><td>11:15</td></tr><tr><td>12:04</td><td>12:15</td></tr>
+              <tr><td>14:22</td><td>14:29</td></tr><tr><td>16:19</td><td>16:26</td></tr>
+              <tr><td>18:26</td><td>18:33</td></tr><tr><td>19:21</td><td>19:28</td></tr>
+            </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（10/31 用這個）</caption>
+              <tr><th>板野駅南 發</th><th>大日寺口 着</th></tr>
+              <tr><td>09:31</td><td>09:42</td></tr>
+              <tr class="hl"><td class="use">11:29</td><td class="use">11:36</td></tr>
+              <tr><td>12:04</td><td>12:15</td></tr><tr><td>14:04</td><td>14:15</td></tr>
+              <tr><td>15:49</td><td>16:00</td></tr><tr><td>17:49</td><td>17:56</td></tr>
+              <tr><td>19:19</td><td>19:26</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--muted)">上車先抽整理券，下車看螢幕號碼付現／刷ICOCA。✅ 已查證週六確實有班次。</p>
+          </div></div></li>
+
+        <li><span class="t">11:40</span><div class="sb">
+          <p class="act">大日寺口 → 第4番 大日寺</p>
+          <p class="meta">步行約10分</p></div></li>
+
+        <li><span class="t">11:50</span><div class="sb">
+          <p class="act">第4番 大日寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore4">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d2-lore4">
+            <p class="h">第四番　大日寺（だいにちじ）</p>
+            <p><b>典故：</b>弘法大師在此地修行時感得大日如來之靈示，雕刻大日如來像並安置於此，遂開創此寺。相傳大師在此修習密教最高法門「大日如來法」，寺名由此而來。</p>
+            <p><b>特色：</b>本尊大日如來為弘法大師親刻，是四國靈場中少數以大日如來為本尊之寺院。境內有三十三觀音石佛排列，遍路者可在此一次完成等效於西國巡禮之功德。</p>
+          </div></div></li>
+
+        <li><span class="t">12:20</span><div class="sb">
+          <p class="act">第4番 → 第5番 地藏寺</p>
+          <p class="meta">步行約30分</p></div></li>
+
+        <li><span class="t">12:50</span><div class="sb">
+          <p class="act">第5番 地藏寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns">
+            <button type="button" class="r-lore" data-rp="d2-lore5">🏯 典故</button>
+            <button type="button" class="r-alt" data-rp="d2-rp1">🔀 備案</button>
+          </div>
+          <div class="rowpanel lore" id="d2-lore5">
+            <p class="h">第五番　地藏寺（じぞうじ）</p>
+            <p><b>典故：</b>弘法大師於此地刻造勝軍地藏菩薩，並開眼供養。相傳此地藏菩薩具有守護旅人、增長智慧之神力，特別保佑學業進步及考試合格，自古即為學子祈願之所。</p>
+            <p><b>特色：</b>本尊勝軍地藏菩薩（秘佛）具學業成就、旅途平安之靈驗。境內奧之院有「五百羅漢堂」，安置五百尊各具表情的羅漢像，傳說必能找到與自己或親人相似之像，是重要文化財。</p>
+          </div>
+          <div class="rowpanel alt" id="d2-rp1">
+            <p class="h">第5番納経所 17:00 關門</p>
+            <p>・若前段大幅 delay，趕不上御朱印，中段可改叫計程車搶時間</p>
+            <p>・真的來不及就放棄該印，或 Day3 早上順路補（差不多順路）</p>
+          </div></div></li>
+
+        <li><span class="t">13:20</span><div class="sb">
+          <p class="act">自由時間・返回板野周邊採買（今晚 Day3 用）</p>
+          <p class="meta">下午到 16:21 巴士前約 3 小時空檔，可休息、逛 Marunaka</p></div></li>
+
+        <li><span class="t">16:21</span><div class="sb">
+          <p class="act">羅漢 → 板野駅南　巴士</p>
+          <p class="meta">鍛冶屋原線 28号（住吉経由）・約6分</p>
+          <p class="cost">¥340</p>
+          <div class="rowbtns"><button type="button" class="r-bus" data-rp="d2-bus2">🚌 時刻表</button></div>
+          <div class="rowpanel bus" id="d2-bus2">
+            <p class="h">鍛冶屋原線 28号（住吉経由・上り）　羅漢 → 板野駅南</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ</caption>
+              <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
+              <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:41</td><td>06:47</td></tr>
+              <tr><td>07:46</td><td>07:52</td></tr><tr><td>10:01</td><td>10:07</td></tr>
+              <tr><td>13:01</td><td>13:07</td></tr><tr><td>15:21</td><td>15:27</td></tr>
+              <tr><td>16:21</td><td>16:27</td></tr><tr><td>17:51</td><td>17:57</td></tr>
+            </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（10/31 用這個）</caption>
+              <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
+              <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:56</td><td>07:02</td></tr>
+              <tr><td>08:26</td><td>08:32</td></tr><tr><td>10:31</td><td>10:37</td></tr>
+              <tr><td>13:21</td><td>13:27</td></tr>
+              <tr class="hl"><td class="use">16:21</td><td class="use">16:27</td></tr>
+              <tr><td>18:21</td><td>18:27</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--muted)">替代：計程車約15分 ¥1,500。回飯店晚一點沒關係，HOTEL AZ 無門禁、晚餐時間彈性。</p>
+          </div></div></li>
+
+        <li><span class="t">16:35</span><div class="sb">
+          <p class="act">板野駅南 → HOTEL AZ</p>
+          <p class="meta">步行約15分</p></div></li>
+
+        <li><span class="t">18:00</span><div class="sb">
+          <p class="act">晚餐（HOTEL AZ 含）</p>
+          <p class="meta">出發前再確認時間</p></div></li>
+      </ol>
+
+      <div class="shop">
+        <b>🛒 今晚採買（Day 3 用）</b>
+        行動糧補充 ・ 水 2L×2人（明日長距無補給段）・ 痠痛貼布（膝・小腿 睡前貼）・ 確認護膝・登山杖
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= DAY 3 ================= -->
+  <details class="day" id="day3">
+    <summary>
+      <span class="daynum">DAY 3</span>
+      <span class="daymain">
+        <span class="date">11/1 週日</span>
+        <span class="dtitle">第6番～第10番・切幡寺333段石階</span>
+        <span class="dmeta">步行約16km ・ 難度 <span class="diff">●●●●○</span></span>
+      </span>
+      <span class="chev" aria-hidden="true">▸</span>
+    </summary>
+    <div class="daybody">
+
+      <div class="lodge" id="lodge-N3">
+        <p class="lb">今晚住宿</p>
+        <p class="ln">溫泉山 安樂寺 藥師之里（宿坊）</p>
+        <p class="lm">可入住 14:00–18:00・最終入住 18:00 ・ 含早晚餐＋溫泉 ・ ✅ 已線上付清</p>
+        <div class="lodgebtns">
+          <a class="tel" href="tel:+81886942046">☎ 088-694-2046</a>
+          <button type="button" class="lodgebtn" data-lodge="lp-N3">🏨 訂房明細</button>
+        </div>
+        <div class="lodgepanel" id="lp-N3">
+          <table>
+            <tr><td class="k">宿名</td><td>溫泉山 安樂寺 藥師之里（四國靈場第六番札所 宿坊）</td></tr>
+            <tr><td class="k">預約編號</td><td class="maskrow"><span class="mask">8UAC****</span><span class="full">8UACAARP</span></td></tr>
+            <tr><td class="k">訂房代表人</td><td><span class="mask">Chen Y.</span><span class="full">Chen Yuchun</span></td></tr>
+            <tr><td class="k">入住</td><td>2026/11/01・可入住 14:00–18:00・<b>最終入住 18:00，會遲到務必電話聯繫</b></td></tr>
+            <tr><td class="k">退房</td><td>09:00 ・ 門禁 21:00（之後盡量勿進出）</td></tr>
+            <tr><td class="k">房型</td><td>【講堂】雙床房（附整體衛浴）× 1 間</td></tr>
+            <tr><td class="k">方案</td><td>限事前付款【附兩餐】約400年歷史</td></tr>
+            <tr><td class="k">餐食</td><td>含早晚餐 ・ 晚餐 18:00／早餐 07:00，請提前到食堂</td></tr>
+            <tr><td class="k">付款</td><td>✅ 已線上刷卡付清 ¥22,000（¥11,000×2名，含稅・服務費）</td></tr>
+            <tr><td class="k">電話</td><td>088-694-2046</td></tr>
+            <tr><td class="k">地址</td><td>〒771-1311 德島縣板野郡上板町引野字寺之西北 8</td></tr>
+            <tr><td class="k">取消規定</td><td>3–1天前 50%／當天 100%／未聯繫(No-Show) 100%</td></tr>
+          </table>
+          <p class="note2">早課（朝勤）：本堂 06:00 或 06:30 開始，誦經＋法話，自由參加，想參加請入住時（18:00前）先問。館內有商店、自動販賣機、投幣洗衣機（洗劑¥200～、烘乾¥100）。變更／取消走預約系統原信網址。</p>
+          <button type="button" class="printbtn" data-printsheet="ps-N3">🖨 列印這張</button>
+        </div>
+      </div>
+
+      <div class="daybtns">
+        <button type="button" class="b-jp" data-panel="d3-jp">🗣 今日日文例句</button>
+        <button type="button" class="b-map" data-panel="d3-map">🗺 今日地圖</button>
+        <button type="button" class="b-sos" data-panel="d3-sos">🆘 急難</button>
+      </div>
+
+      <div class="panel jp" id="d3-jp">
+        <h4>Day 3 日文例句</h4>
+        <h5>3-A　巴士 HOTEL AZ 附近 → 東原（28號 鍛冶屋原線）</h5>
+        <div class="jpq"><div class="zh">這班有到「東原」嗎？</div><div class="ja">このバスは「東原」に行きますか？</div><div class="ro">Kono basu wa "Higashibara" ni ikimasu ka?</div></div>
+        <div class="jpq"><div class="zh">我要在東原下車</div><div class="ja">東原で降ります</div><div class="ro">Higashibara de orimasu</div></div>
+        <h5>3-B　計程車　第7番 → 第8番熊谷寺（現場叫車）</h5>
+        <div class="jpq"><div class="zh">這附近可以叫到計程車嗎？</div><div class="ja">この近くでタクシーを呼べますか？</div><div class="ro">Kono chikaku de takushii o yobemasu ka?</div></div>
+        <div class="jpq"><div class="zh">可以幫我打電話叫計程車嗎？</div><div class="ja">タクシーを呼んでもらえますか？</div><div class="ro">Takushii o yonde moraemasu ka?</div></div>
+        <div class="jpq"><div class="zh">請到熊谷寺（第8番）</div><div class="ja">熊谷寺までお願いします</div><div class="ro">Kumadaniji made onegai shimasu</div></div>
+        <h5>3-C　切幡寺　333段石階・下山計程車</h5>
+        <div class="jpq"><div class="zh">石階入口在哪裡？</div><div class="ja">石段の入口はどこですか？</div><div class="ro">Ishidan no iriguchi wa doko desu ka?</div></div>
+        <div class="jpq"><div class="zh">我想叫計程車回安樂寺</div><div class="ja">安楽寺までタクシーをお願いします</div><div class="ro">Anrakuji made takushii o onegai shimasu</div></div>
+        <h5>3-D　安樂寺 宿坊　Check-in・溫泉・晚課</h5>
+        <div class="jpq"><div class="zh">我有訂今晚的宿坊，我姓○○</div><div class="ja">今晩の宿坊を予約した○○です</div><div class="ro">Konban no shukubou o yoyaku shita ○○ desu</div></div>
+        <div class="jpq"><div class="zh">溫泉可以泡到幾點？</div><div class="ja">温泉は何時まで入れますか？</div><div class="ro">Onsen wa nanji made hairemasu ka?</div></div>
+        <div class="jpq"><div class="zh">我想參加晚課（19:00）</div><div class="ja">19時のお勤めに参加したいです</div><div class="ro">Juuku-ji no otsutome ni sanka shitai desu</div></div>
+        <h5>3-E　跟宿坊確認明天（燒山寺日）</h5>
+        <div class="jpq"><div class="zh">明天想 6:30 出發，早餐可以做成便當嗎？</div><div class="ja">明日は6時半に出発したいです。朝食をお弁当にできますか？</div><div class="ro">Ashita wa rokuji-han ni shuppatsu shitai desu. Choushoku o obentou ni dekimasu ka?</div></div>
+        <div class="jpq"><div class="zh">明天早上想叫計程車到藤井寺，可以幫忙打電話嗎？</div><div class="ja">明日の朝、藤井寺までタクシーをお願いしたいです。電話してもらえますか？</div><div class="ro">Ashita no asa, Fujiidera made takushii o onegai shitai desu. Denwa shite moraemasu ka?</div></div>
+        <div class="jpq"><div class="zh">早上 7 點，兩位</div><div class="ja">朝7時、二人です</div><div class="ro">Asa shichiji, futari desu</div></div>
+      </div>
+
+      <div class="panel map" id="d3-map">
+        <h4>Day 3 地點地圖</h4>
+        <div class="maplinks">
+          <a href="https://www.google.com/maps/search/?api=1&query=安楽寺+上板町" target="_blank" rel="noopener">⛩️ 第6番 安樂寺（今晚住宿）</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=十楽寺+阿波市" target="_blank" rel="noopener">⛩️ 第7番 十樂寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=熊谷寺+阿波市" target="_blank" rel="noopener">⛩️ 第8番 熊谷寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=法輪寺+阿波市" target="_blank" rel="noopener">⛩️ 第9番 法輪寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=切幡寺+阿波市" target="_blank" rel="noopener">⛩️ 第10番 切幡寺</a>
+        </div>
+        <div class="offlinebox"><b>離線地圖已下載了嗎？</b> 明天燒山寺全程無訊號，今天先確認德島＋香川離線地圖與 YAMAP 路線都下載好。</div>
+      </div>
+
+      <div class="panel sos" id="d3-sos"></div>
+
+      <ol class="tl">
+        <li class="warnrow"><span class="t">08:15</span><div class="sb">
+          <span class="wtag">⚠ 首班車，務必準時</span>
+          <p class="act">站在板野駅南巴士站牌</p>
+          <p class="meta">土日祝首班 08:19，錯過要等到 10:32（→東原10:44），整天行程會壓縮</p></div></li>
+
+        <li><span class="t">08:19</span><div class="sb">
+          <p class="act">板野駅南 → 東原　巴士</p>
+          <p class="meta">鍛冶屋原線 28号（住吉経由）・約12分</p>
+          <p class="cost">¥480</p>
+          <div class="rowbtns"><button type="button" class="r-bus" data-rp="d3-bus1">🚌 時刻表</button></div>
+          <div class="rowpanel bus" id="d3-bus1">
+            <p class="h">鍛冶屋原線 28号（住吉経由・下り）　板野駅南 → 東原</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ</caption>
+              <tr><th>板野駅南 發</th><th>東原 着</th></tr>
+              <tr><td>07:53</td><td>08:05</td></tr><tr><td>08:31</td><td>08:43</td></tr>
+              <tr><td>10:32</td><td>10:44</td></tr><tr><td>13:02</td><td>13:14</td></tr>
+              <tr><td>17:02</td><td>17:14</td></tr><tr><td>18:07</td><td>18:19</td></tr>
+            </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（11/1 用這個）</caption>
+              <tr><th>板野駅南 發</th><th>東原 着</th></tr>
+              <tr class="hl"><td class="use">08:19</td><td class="use">08:31</td></tr>
+              <tr><td>10:32</td><td>10:44</td></tr><tr><td>13:02</td><td>13:14</td></tr>
+              <tr><td>17:02</td><td>17:14</td></tr><tr><td>19:02</td><td>19:14</td></tr>
+            </table></div>
+          </div></div></li>
+
+        <li><span class="t">08:50</span><div class="sb">
+          <p class="act">第6番 安樂寺 參拜</p>
+          <p class="meta">約30分</p>
+          <p class="fac">★ 今晚就住在這裡</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore6">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d3-lore6">
+            <p class="h">第六番　安樂寺（あんらくじ）</p>
+            <p><b>典故：</b>相傳弘法大師在此修行時湧出溫泉，大師以此溫泉為病苦之人療治身心，並刻造藥師如來像供奉，祈求眾生離苦得樂，遂以「安樂」為寺名。</p>
+            <p><b>特色：</b>設有溫泉宿坊，是四國靈場中少數可沐浴溫泉、住宿修行的寺院。本尊藥師如來守護健康，境內另有多寶塔等重要建築，春天梅花與桃花盛開。</p>
+          </div></div></li>
+
+        <li><span class="t">09:50</span><div class="sb">
+          <p class="act">第6番 → 第7番 十樂寺</p>
+          <p class="meta">步行 0.9km・約12分</p></div></li>
+
+        <li><span class="t">10:10</span><div class="sb">
+          <p class="act">第7番 十樂寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore7">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d3-lore7">
+            <p class="h">第七番　十樂寺（じゅうらくじ）</p>
+            <p><b>典故：</b>弘法大師在此修行，誦念阿彌陀經，感悟極樂淨土之十種安樂，遂開創此寺，命名「十樂寺」。</p>
+            <p><b>特色：</b>本尊阿彌陀如來。境內「愛染堂」供奉愛染明王，是祈求良緣、戀愛成就的靈場。山門造型獨特，鮮豔朱紅色彩令人印象深刻。</p>
+          </div></div></li>
+
+        <li class="warnrow"><span class="t">10:40</span><div class="sb">
+          <span class="wtag">⚠ 體力評估點・三問法則</span>
+          <p class="act">第7番 → 第8番 熊谷寺</p>
+          <p class="meta">計程車 4.3km・約12分</p>
+          <p class="cost">¥1,500</p>
+          <p class="fac">問自己三件事：① 已過11:00？ ② 膝蓋不舒服？ ③ 下雨？ — 任一個「是」→ 跳過8、9番，直接7→10番切幡寺，把腿留給明天燒山寺。三個都「否」→ 叫車去8番，到8番再用同樣三問決定9番。</p>
+          <div class="rowbtns">
+            <button type="button" class="r-car" data-rp="d3-car78">🚕 車行電話</button>
+            <button type="button" class="r-alt" data-rp="d3-rp1">🔀 備案</button>
+          </div>
+          <div class="rowpanel car" id="d3-car78">
+            <p class="h">計程車　第7番 → 第8番熊谷寺（約12分・約¥1,500）</p>
+            <a class="tel" href="tel:+81886548811">☎ 德島第一交通 088-654-8811（通用）</a>
+            <a class="tel" href="tel:+81883242345" style="margin-top:.4rem">☎ 鴨島タクシー 0883-24-2345（近切幡寺・藤井寺）</a>
+            <div class="jarow"><div class="ja">熊谷寺までお願いします。</div><div class="ro">Kumadaniji made onegai shimasu.（請到熊谷寺）</div></div>
+            <div class="jarow"><div class="ja">どのくらい待ちますか？</div><div class="ro">Dono kurai machimasu ka?（要等多久）</div></div>
+          </div>
+          <div class="rowpanel alt" id="d3-rp1">
+            <p class="h">不會講日文怎麼叫車</p>
+            <p>・這一帶（阿波市／上板町）不是山區，白天臨時打電話叫車 10–30 分內會到</p>
+            <p>・請該寺納経所人員幫忙打電話，或用 Google 翻譯語音</p>
+            <p>・想更保險：昨晚可請 HOTEL AZ 櫃檯代打，訂了不搭提早1–2小時取消，鄉下遍路計程車不收費</p>
+          </div></div></li>
+
+        <li><span class="t">12:00</span><div class="sb">
+          <p class="act">第8番 熊谷寺 參拜・午餐行動糧（境內）</p>
+          <p class="meta">約50分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore8">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d3-lore8">
+            <p class="h">第八番　熊谷寺（くまだにじ）</p>
+            <p><b>典故：</b>相傳弘法大師在此山中修行時，一頭熊引導大師前往靈地，大師感悟此乃神明示現，遂雕刻千手觀音菩薩開創此寺，以「熊谷」為名記此奇遇。</p>
+            <p><b>特色：</b>擁有德島縣最大的多寶塔（縣指定文化財）。本尊千手觀音菩薩法力廣大。山門（仁王門）位於山腰，是四國靈場中規模最大的山門之一。</p>
+          </div></div></li>
+
+        <li><span class="t">12:55</span><div class="sb">
+          <p class="act">第8番 → 第9番 法輪寺</p>
+          <p class="meta">步行 2.4km・約35分</p>
+          <p class="fac">替代：計程車約10分 ¥1,200</p></div></li>
+
+        <li><span class="t">13:35</span><div class="sb">
+          <p class="act">第9番 法輪寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore9">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d3-lore9">
+            <p class="h">第九番　法輪寺（ほうりんじ）</p>
+            <p><b>典故：</b>弘法大師修行此地時，釋迦如來示現，轉動法輪，大師以此為感，雕刻涅槃釋迦像並開山。寺名「法輪」取佛陀初轉法輪、宣說佛法之意。</p>
+            <p><b>特色：</b>本尊涅槃釋迦如來（寢姿釋迦）為臥佛造型，在四國靈場中極為罕見。境內「足摩り」（撫足）習俗，信眾撫摸釋迦如來之足部，祈求腿腳健康、旅途平安。</p>
+          </div></div></li>
+
+        <li><span class="t">14:10</span><div class="sb">
+          <p class="act">第9番 → 第10番 切幡寺</p>
+          <p class="meta">步行 3.9km・約1小時</p>
+          <p class="fac">替代：計程車約10分 ¥1,200</p></div></li>
+
+        <li><span class="t">15:15</span><div class="sb">
+          <p class="act">第10番 切幡寺・333段石階上山</p>
+          <p class="meta">步行上山 石階約25分</p>
+          <p class="fac">護膝・登山杖必須</p></div></li>
+
+        <li><span class="t">15:45</span><div class="sb">
+          <p class="act">切幡寺 參拜</p><p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore10">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d3-lore10">
+            <p class="h">第十番　切幡寺（きりはたじ）</p>
+            <p><b>典故：</b>相傳弘法大師行腳至此，向一位少女乞布縫補袈裟，少女慷慨將織布用麻布全部奉上。大師感其誠心，以神力將少女化為千手觀音菩薩，並於此地建立伽藍。</p>
+            <p><b>特色：</b>本尊千手觀音菩薩即化現自那位善良少女。境內333段石階通往本堂，兩重塔（重要文化財）建築精美，是境內代表性文化遺產。</p>
+          </div></div></li>
+
+        <li class="warnrow"><span class="t">16:20</span><div class="sb">
+          <span class="wtag">⚠ 強烈建議計程車・務必預約</span>
+          <p class="act">切幡寺下山 → 安樂寺 宿坊</p>
+          <p class="meta">下山15分 ＋ 計程車約20分</p>
+          <p class="cost">¥1,500</p>
+          <div class="rowbtns">
+            <button type="button" class="r-car" data-rp="d3-car10">🚕 車行電話</button>
+            <button type="button" class="r-alt" data-rp="d3-rp2">🔀 備案</button>
+          </div>
+          <div class="rowpanel car" id="d3-car10">
+            <p class="h">計程車　切幡寺 → 安樂寺宿坊（約20分・約¥1,500）</p>
+            <a class="tel" href="tel:+81883242345">☎ 鴨島タクシー 0883-24-2345</a>
+            <a class="tel" href="tel:+81886548811" style="margin-top:.4rem">☎ 德島第一交通 088-654-8811</a>
+            <div class="jarow"><div class="ja">安楽寺までタクシーをお願いします。</div><div class="ro">Anrakuji made takushii o onegai shimasu.（請叫車回安樂寺）</div></div>
+          </div>
+          <div class="rowpanel alt" id="d3-rp2">
+            <p class="h">★必預約：333階下山後叫不到車</p>
+            <p>・下山後摸黑走4km回宿坊，膝蓋負擔極大，不建議</p>
+            <p>・Day2 晚上請 HOTEL AZ 櫃檯代打，時間抓「16:15 頃 切幡寺」，下山前提早30分再call一次確認</p>
+          </div></div></li>
+
+        <li><span class="t">17:00</span><div class="sb">
+          <p class="act">Check-in 安樂寺宿坊・溫泉入浴</p></div></li>
+
+        <li><span class="t">18:00</span><div class="sb">
+          <p class="act">晚餐（含兩食）</p>
+          <p class="meta">時間訂房時確認，遲到請電話聯繫（見 🆘 急難頁）</p></div></li>
+      </ol>
+
+      <div class="shop">
+        <b>🛒 今晚採買（Day 4 燒山寺用・最重要）</b>
+        水 2L×2人（山中無補給）・行動糧 高熱量×3食份・確認 offline 地圖已下載・確認頭燈・電池・痠痛貼布貼膝・小腿後就寢
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= DAY 4 ================= -->
+  <details class="day" id="day4">
+    <summary>
+      <span class="daynum">DAY 4</span>
+      <span class="daymain">
+        <span class="date">11/2 週一</span>
+        <span class="dtitle">第11番＋第12番 燒山寺【最難關】</span>
+        <span class="dmeta">步行約12km＋爬升640m ・ 難度 <span class="diff">●●●●●</span></span>
+      </span>
+      <span class="chev" aria-hidden="true">▸</span>
+    </summary>
+    <div class="daybody">
+
+      <div class="offlinebox" style="margin-top:0">
+        <b>📴 今天全程無訊號路段最長，出發前再次確認：</b><br>
+        ・Google Maps 離線地圖（德島＋香川全區）已下載<br>
+        ・YAMAP App「藤井寺→燒山寺」路線已下載<br>
+        ・手機電量／行動電源已充飽
+      </div>
+
+      <div class="lodge" id="lodge-N4">
+        <p class="lb">今晚住宿</p>
+        <p class="ln">神山溫泉ホテル 四季の里 いやしの湯</p>
+        <p class="lm">入住約 15:00–16:00 ・ 含早晚餐＋天然溫泉 ・ ✅ 已確認</p>
+        <div class="lodgebtns">
+          <a class="tel" href="tel:+81886761117">☎ 088-676-1117</a>
+          <button type="button" class="lodgebtn" data-lodge="lp-N4">🏨 訂房明細</button>
+        </div>
+        <div class="lodgepanel" id="lp-N4">
+          <table>
+            <tr><td class="k">宿名</td><td>神山溫泉ホテル四季の里 いやしの湯</td></tr>
+            <tr><td class="k">預約編號</td><td class="maskrow"><span class="mask">A003****455</span><span class="full">A0032489455</span></td></tr>
+            <tr><td class="k">訂房代表人</td><td><span class="mask">Kate C.</span><span class="full">kate chen</span></td></tr>
+            <tr><td class="k">入住</td><td>2026/11/02（一）・預約填19:00（實際預計15:00–16:00到）</td></tr>
+            <tr><td class="k">退房</td><td>翌日退房（行程抓10:00）</td></tr>
+            <tr><td class="k">房型</td><td>洋室 8 號房 × 1 間・禁煙</td></tr>
+            <tr><td class="k">方案</td><td>神山の恵みプラン（含朝食＋夕食）</td></tr>
+            <tr><td class="k">餐食</td><td>含早晚餐 ・ 早餐07:30／晚餐18:00（已確認）</td></tr>
+            <tr><td class="k">付款</td><td>予約金不要・現場付款 ¥37,620（¥18,810×2名，含稅）</td></tr>
+            <tr><td class="k">電話</td><td>088-676-1117</td></tr>
+            <tr><td class="k">地址</td><td>〒771-3310 德島縣名西郡神山町</td></tr>
+            <tr><td class="k">取消規定</td><td>當日100%／前日～3日前50%／4～7日前20%（🟡截圖文字小，請核實）</td></tr>
+          </table>
+          <p class="note2">溫泉：天然溫泉 15:00～翌09:30。變更／取消走預約系統網址。</p>
+          <button type="button" class="printbtn" data-printsheet="ps-N4">🖨 列印這張</button>
+        </div>
+      </div>
+
+      <div class="daybtns">
+        <button type="button" class="b-jp" data-panel="d4-jp">🗣 今日日文例句</button>
+        <button type="button" class="b-map" data-panel="d4-map">🗺 今日地圖</button>
+        <button type="button" class="b-sos" data-panel="d4-sos">🆘 急難</button>
+      </div>
+
+      <div class="panel jp" id="d4-jp">
+        <h4>Day 4 日文例句</h4>
+        <h5>4-A　出發前（宿坊）</h5>
+        <div class="jpq"><div class="zh">謝謝招待，我要出發了</div><div class="ja">お世話になりました。出発します</div><div class="ro">Osewa ni narimashita. Shuppatsu shimasu</div></div>
+        <h5>4-B　計程車電話預約／上車</h5>
+        <div class="jpq"><div class="zh">從安楽寺到藤井寺，兩位</div><div class="ja">安楽寺から藤井寺まで、二人です</div><div class="ro">Anrakuji kara Fujiidera made, futari desu</div></div>
+        <div class="jpq"><div class="zh">請到藤井寺的登山口</div><div class="ja">藤井寺の登山口までお願いします</div><div class="ro">Fujiidera no tozanguchi made onegai shimasu</div></div>
+        <h5>4-C　藤井寺・登山口確認</h5>
+        <div class="jpq"><div class="zh">燒山寺的登山口在哪裡？</div><div class="ja">焼山寺の登山口はどこですか？</div><div class="ro">Shousanji no tozanguchi wa doko desu ka?</div></div>
+        <div class="jpq"><div class="zh">山路有危險的地方嗎？</div><div class="ja">山道で危ない所はありますか？</div><div class="ro">Yamamichi de abunai tokoro wa arimasu ka?</div></div>
+        <h5>4-D　登山途中</h5>
+        <div class="jpq"><div class="zh">這條路是往燒山寺嗎？</div><div class="ja">この道は焼山寺へ行きますか？</div><div class="ro">Kono michi wa Shousanji e ikimasu ka?</div></div>
+        <div class="jpq"><div class="zh">到山頂還要多久？</div><div class="ja">頂上まであとどのくらいですか？</div><div class="ro">Choujou made ato dono kurai desu ka?</div></div>
+        <div class="jpq"><div class="zh">辛苦了（山中打招呼）</div><div class="ja">お疲れさまです</div><div class="ro">Otsukaresama desu</div></div>
+        <h5>4-E　燒山寺　抵達・下山計程車（必須）</h5>
+        <div class="jpq"><div class="zh">我想叫計程車到神山溫泉「四季の里」</div><div class="ja">神山温泉の「四季の里」までタクシーをお願いします</div><div class="ro">Kamiyama onsen no "Shiki-no-sato" made takushii o onegai shimasu</div></div>
+        <div class="jpq"><div class="zh">這裡收得到手機訊號嗎？</div><div class="ja">ここは電波が入りますか？</div><div class="ro">Koko wa denpa ga hairimasu ka?</div></div>
+        <h5>4-F　四季の里　Check-in</h5>
+        <div class="jpq"><div class="zh">我有訂房，我姓○○</div><div class="ja">予約している○○です</div><div class="ro">Yoyaku shite iru ○○ desu</div></div>
+      </div>
+
+      <div class="panel map" id="d4-map">
+        <h4>Day 4 地點地圖</h4>
+        <div class="maplinks">
+          <a href="https://www.google.com/maps/search/?api=1&query=藤井寺+吉野川市" target="_blank" rel="noopener">⛩️ 第11番 藤井寺（登山口）</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=焼山寺+神山町" target="_blank" rel="noopener">⛩️ 第12番 燒山寺</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=神山温泉+四季の里" target="_blank" rel="noopener">🏨 神山溫泉ホテル四季の里</a>
+        </div>
+        <div class="offlinebox">
+          <b>今天務必離線可用</b><br>
+          ・Google Maps →「離線地圖」德島＋香川全區<br>
+          ・YAMAP App 另外下載「藤井寺→燒山寺」步道路線（比 Google Maps 精準）<br>
+          ・08:30–14:00 山中完全無訊號，上面連結會全部打不開
+        </div>
+      </div>
+
+      <div class="panel sos" id="d4-sos"></div>
+
+      <ol class="tl">
+        <li class="warnrow"><span class="t">06:30</span><div class="sb">
+          <span class="wtag">⚠ 宿坊配合・前一晚已請櫃檯安排</span>
+          <p class="act">早朝便當・07:00 出發</p></div></li>
+
+        <li class="warnrow"><span class="t">07:00</span><div class="sb">
+          <span class="wtag">⚠ 務必前一晚預約</span>
+          <p class="act">安樂寺宿坊 → 第11番 藤井寺</p>
+          <p class="meta">計程車 約18km・約30分（無路線巴士）</p>
+          <p class="cost">¥6,000</p>
+          <div class="rowbtns">
+            <button type="button" class="r-car" data-rp="d4-car1">🚕 車行電話</button>
+            <button type="button" class="r-alt" data-rp="d4-rp1">🔀 備案</button>
+          </div>
+          <div class="rowpanel car" id="d4-car1">
+            <p class="h">計程車　安樂寺 → 藤井寺（約30分・約¥6,000）</p>
+            <a class="tel" href="tel:+81886942106">☎ 松島タクシー 088-694-2106</a>
+            <a class="tel" href="tel:+81883242345" style="margin-top:.4rem">☎ 鴨島タクシー 0883-24-2345</a>
+            <a class="tel" href="tel:+81886548811" style="margin-top:.4rem">☎ 德島第一交通 088-654-8811</a>
+            <div class="jarow"><div class="ja">明日の朝7時にタクシーを予約したいです。</div><div class="ro">Ashita no asa shichiji ni takushii o yoyaku shitai desu.（想預約明早7點的計程車）</div></div>
+            <div class="jarow"><div class="ja">藤井寺の登山口までお願いします。</div><div class="ro">Fujiidera no tozanguchi made onegai shimasu.（請到藤井寺登山口）</div></div>
+          </div>
+          <div class="rowpanel alt" id="d4-rp1">
+            <p class="h">★必預約：沒訂到車＝整個燒山寺計畫崩</p>
+            <p>・11/1 晚上在宿坊打3家都確認：松島 088-694-2106／鴨島 0883-24-2345／德島第一 088-654-8811</p>
+            <p>・請宿坊人員用日語幫訂，這是每天都在做的事</p>
+          </div></div></li>
+
+        <li><span class="t">08:00</span><div class="sb">
+          <p class="act">第11番 藤井寺 參拜（燒山寺登山口）</p>
+          <p class="meta">約30分</p>
+          <p class="fac">🚻 最後補水點：把水壺補到全滿，山中無水源</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore11">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d4-lore11">
+            <p class="h">第十一番　藤井寺（ふじいでら）</p>
+            <p><b>典故：</b>弘法大師在此地以一夜之功刻造藥師如來像，並在寺院四周種植藤花，祈願眾生消除病苦。每逢春日藤花盛開，因而得名「藤井寺」。</p>
+            <p><b>特色：</b>境內藤棚規模宏大，本尊藥師如來守護眾生健康。此寺是前往第十二番燒山寺「遍路最大難所」之登山起點，遍路者在此整備身心，準備迎接最艱難的山路考驗。</p>
+          </div></div></li>
+
+        <li class="warnrow"><span class="t">08:30</span><div class="sb">
+          <span class="wtag">⚠ 護膝・登山杖 2支必須</span>
+          <p class="act">藤井寺 → 燒山寺 上山開始</p>
+          <p class="meta">全程步行 12km・爬升640m</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d4-rp2">🔀 備案</button></div>
+          <div class="rowpanel alt" id="d4-rp2">
+            <p class="h">體調不良／天候驟變備案</p>
+            <p>・宿坊當晚先查天氣，預報雨或風強就改走：計程車產業道路 藤井寺→燒山寺 約40分 ¥4,000</p>
+            <p>・折返點：11:00 沒到中繼庵（柳水庵）就折返</p>
+          </div></div></li>
+
+        <li class="warnrow"><span class="t">08:30<br>–14:00</span><div class="sb">
+          <span class="wtag">⚠ 手機完全無訊號</span>
+          <p class="act">杉木林道・無補給點</p>
+          <p class="meta">全程約5–6小時</p>
+          <p class="fac">必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</p>
+          <p class="fac"><b>安全約定：</b>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」。兩人絕不分開。</p></div></li>
+
+        <li><span class="t">14:00</span><div class="sb">
+          <p class="act">第12番 燒山寺 抵達・參拜（標高700m）</p>
+          <p class="meta">約30分</p>
+          <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore12">🏯 典故</button></div>
+          <div class="rowpanel lore" id="d4-lore12">
+            <p class="h">第十二番　燒山寺（しょうさんじ）</p>
+            <p><b>典故：</b>弘法大師在此深山修行時，以燒木（護摩木）燃燒修「燒供」（火供護摩），驅除妨礙修行的惡鬼，淨化山林，感得虛空藏菩薩示現。大師以此靈地開山，稱為「燒山」，此後成為考驗修行者意志的靈山。</p>
+            <p><b>特色：</b>四國八十八箇所中著名的「遍路最大難所」，從藤井寺至此需翻越陡峭山路約12公里。本尊虛空藏菩薩賜予無限智慧與福德。海拔約700公尺，晴天可眺望吉野川平原，視野開闊。修行艱辛後抵達，令人感受極大的成就感。</p>
+          </div></div></li>
+
+        <li class="warnrow"><span class="t">14:30</span><div class="sb">
+          <span class="wtag">⚠ 下山務必搭計程車・務必前一晚預約</span>
+          <p class="act">燒山寺 → 神山溫泉 下山</p>
+          <p class="meta">計程車 7km・約25分</p>
+          <p class="cost">¥3,500</p>
+          <div class="rowbtns">
+            <button type="button" class="r-car" data-rp="d4-car2">🚕 車行電話</button>
+            <button type="button" class="r-alt" data-rp="d4-rp3">🔀 備案</button>
+          </div>
+          <div class="rowpanel car" id="d4-car2">
+            <p class="h">計程車　燒山寺 → 神山溫泉四季の里（約25分・約¥3,500）</p>
+            <a class="tel" href="tel:+81886760345">☎ 寄井観光タクシー 088-676-0345</a>
+            <a class="tel" href="tel:+81886780224" style="margin-top:.4rem">☎ つばめ観光タクシー 088-678-0224</a>
+            <a class="tel" href="tel:+81886770137" style="margin-top:.4rem">☎ 川又タクシー 088-677-0137</a>
+            <div class="jarow"><div class="ja">神山温泉の「四季の里」までタクシーをお願いします。</div><div class="ro">Kamiyama onsen no "Shiki-no-sato" made takushii o onegai shimasu.</div></div>
+          </div>
+          <div class="rowpanel alt" id="d4-rp3">
+            <p class="h">★必預約：沒車就得走7km下山（下降480m）＋天黑，膝蓋受傷風險極高</p>
+            <p>・11/1 晚上在宿坊訂：寄井観光 088-676-0345／つばめ 088-678-0224／川又 088-677-0137</p>
+            <p>・出寺前可借燒山寺寺務所市話再 call 一次確認</p>
+          </div></div></li>
+
+        <li><span class="t">15:00</span><div class="sb">
+          <p class="act">神山溫泉ホテル四季の里 Check-in・溫泉入浴</p>
+          <p class="meta">約16:00到達 ・ 溫泉 15:00～翌09:30</p></div></li>
+
+        <li><span class="t">18:00</span><div class="sb">
+          <p class="act">晚餐（含兩食）</p>
+          <p class="meta">✅ 18:00～20:00 已確認</p></div></li>
+      </ol>
+    </div>
+  </details>
+
+  <!-- ================= DAY 5 ================= -->
+  <details class="day" id="day5">
+    <summary>
+      <span class="daynum">DAY 5</span>
+      <span class="daymain">
+        <span class="date">11/3 週二・文化の日</span>
+        <span class="dtitle">神山散策・返程高松・回台北</span>
+        <span class="dmeta">輕鬆步行 ・ 難度 —</span>
+      </span>
+      <span class="chev" aria-hidden="true">▸</span>
+    </summary>
+    <div class="daybody">
+
+      <div class="lodge">
+        <p class="lb">今晚</p>
+        <p class="ln">回台北！CI 179</p>
+        <p class="lm">TAK 18:55 → TPE 21:05</p>
+      </div>
+
+      <div class="daybtns">
+        <button type="button" class="b-jp" data-panel="d5-jp">🗣 今日日文例句</button>
+        <button type="button" class="b-map" data-panel="d5-map">🗺 今日地圖</button>
+        <button type="button" class="b-sos" data-panel="d5-sos">🆘 急難</button>
+      </div>
+
+      <div class="panel jp" id="d5-jp">
+        <h4>Day 5 日文例句</h4>
+        <h5>5-A　退房</h5>
+        <div class="jpq"><div class="zh">我要退房</div><div class="ja">チェックアウトをお願いします</div><div class="ro">Chekku-auto o onegai shimasu</div></div>
+        <h5>5-B　巴士　神山溫泉前 → 德島（62號 佐那河內線）</h5>
+        <div class="jpq"><div class="zh">12點36分的62號巴士停這裡嗎？</div><div class="ja">12時36分の62番のバスはここに停まりますか？</div><div class="ro">Juuniji sanjuuroppun no rokujuuniban no basu wa koko ni tomarimasu ka?</div></div>
+        <div class="jpq"><div class="zh">今天是假日，這班有開嗎？</div><div class="ja">今日は祝日ですが、このバスは運行していますか？</div><div class="ro">Kyou wa shukujitsu desu ga, kono basu wa unkou shite imasu ka?</div></div>
+        <div class="jpq"><div class="zh">我要在「八百屋」下車</div><div class="ja">「八百屋」で降ります</div><div class="ro">"Yaoya" de orimasu</div></div>
+        <h5>5-D　JR 特急うずしお18號　德島 → 栗林（自由席）</h5>
+        <div class="jpq"><div class="zh">到栗林，兩位，自由席特急券</div><div class="ja">栗林まで、二人、自由席特急券をください</div><div class="ro">Ritsurin made, futari, jiyuuseki tokkyuuken o kudasai</div></div>
+        <div class="jpq"><div class="zh">這班停栗林嗎？</div><div class="ja">この電車は栗林に停まりますか？</div><div class="ro">Kono densha wa Ritsurin ni tomarimasu ka?</div></div>
+        <h5>5-E　栗林駅 → 栗林公園前 → 機場大巴</h5>
+        <div class="jpq"><div class="zh">往高松機場的機場巴士站牌在哪裡？</div><div class="ja">高松空港行きのリムジンバス乗り場はどこですか？</div><div class="ro">Takamatsu-kuukou yuki no rimujin basu noriba wa doko desu ka?</div></div>
+        <h5>5-F　高松空港　取 ecbo cloak 行李・報到</h5>
+        <div class="jpq"><div class="zh">我來取寄放的行李</div><div class="ja">預けた荷物を取りに来ました</div><div class="ro">Azuketa nimotsu o tori ni kimashita</div></div>
+        <div class="jpq"><div class="zh">我要辦到台北的登機手續</div><div class="ja">台北行きのチェックインをお願いします</div><div class="ro">Taipei yuki no chekku-in o onegai shimasu</div></div>
+      </div>
+
+      <div class="panel map" id="d5-map">
+        <h4>Day 5 地點地圖</h4>
+        <div class="maplinks">
+          <a href="https://www.google.com/maps/search/?api=1&query=神山温泉前+バス停" target="_blank" rel="noopener">🚌 神山溫泉前 站牌</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=徳島駅" target="_blank" rel="noopener">🚉 德島駅</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=栗林駅+高松市" target="_blank" rel="noopener">🚉 栗林駅</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=高松空港" target="_blank" rel="noopener">🛫 高松空港</a>
+        </div>
+      </div>
+
+      <div class="panel sos" id="d5-sos"></div>
+
+      <ol class="tl">
+        <li><span class="t">08:30</span><div class="sb">
+          <p class="act">早餐（含兩食）</p>
+          <p class="meta">✅ 07:30～09:00 已確認</p></div></li>
+
+        <li><span class="t">10:00</span><div class="sb">
+          <p class="act">退房</p>
+          <p class="meta">退房後有約 2.5h 空檔，可在神山町散步或再泡一次溫泉</p></div></li>
+
+        <li class="warnrow"><span class="t">12:20</span><div class="sb">
+          <span class="wtag">⚠ 假日班表・全程零緩衝・務必12:20前到站</span>
+          <p class="act">神山溫泉前 → 八百屋町</p>
+          <p class="meta">德島市 佐那河內線 62號 ・ 12:36發 → 13:27着</p>
+          <p class="cost">¥1,200</p>
+          <p class="fac">八百屋町下車 → 步行6分 → 德島駅</p>
+          <div class="rowbtns">
+            <button type="button" class="r-bus" data-rp="d5-bus1">🚌 時刻表</button>
+            <button type="button" class="r-alt" data-rp="d5-rp1">🔀 備案</button>
+          </div>
+          <div class="rowpanel bus" id="d5-bus1">
+            <p class="h">佐那河內線 62号（上り→德島方向）　神山温泉前 → 八百屋町 → 徳島駅前</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ</caption>
+              <tr><th>神山温泉前</th><th>八百屋町</th><th>徳島駅前</th></tr>
+              <tr><td>06:20</td><td>07:07</td><td>07:11</td></tr>
+              <tr><td>07:03</td><td>07:58</td><td>08:12</td></tr>
+              <tr><td>09:16</td><td>10:07</td><td>10:14</td></tr>
+              <tr><td>12:36</td><td>13:27</td><td>13:34</td></tr>
+              <tr><td>16:21</td><td>17:12</td><td>17:19</td></tr>
+            </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（11/3 用這個・方案B主案）</caption>
+              <tr><th>神山温泉前</th><th>八百屋町</th><th>徳島駅前</th></tr>
+              <tr><td>06:51</td><td>07:42</td><td>07:46</td></tr>
+              <tr><td>09:16</td><td>10:07</td><td>10:14</td></tr>
+              <tr class="hl"><td class="use">12:36</td><td class="use">13:27</td><td class="use">13:34</td></tr>
+              <tr><td>16:21</td><td>17:12</td><td>17:19</td></tr>
+            </table></div>
+            <p class="h" style="margin-top:.7rem">神山線 56号（上り→德島方向）　神山温泉前 → 元町 → 徳島駅前（方案A提早出發用）</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（11/3）</caption>
+              <tr><th>神山温泉前</th><th>元町</th><th>徳島駅前</th></tr>
+              <tr class="hl"><td class="use">11:16</td><td class="use">12:12</td><td class="use">12:20</td></tr>
+              <tr><td>15:16</td><td>16:12</td><td>16:20</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ 原方案C「12:46神山線」只有平日才有，11/3 土日祝不存在，已刪除不採用。方案A「11:16」行程表舊標「假日不開」是錯的，土日祝確實有這班。</p>
+          </div>
+          <div class="rowpanel alt" id="d5-rp1">
+            <p class="h">錯過 12:36 怎麼辦（唯一備案：計程車）</p>
+            <p>・下一班公車 15:16 到德島 16:20，趕不上 16:55 報到截止，不能等</p>
+            <p>・叫計程車：神山溫泉→德島駅 約40–50分・¥8,000–10,000</p>
+            <a class="tel" href="tel:+81886548811">☎ 德島第一交通 088-654-8811</a>
+            <a class="tel" href="tel:+81886760345" style="margin-top:.4rem">☎ 寄井観光タクシー 088-676-0345</a>
+            <p style="font-size:.8rem;color:var(--muted)">更保險做法：出發前一晚請四季の里代訂「神山溫泉→德島駅」計程車 11:30 左右發，公車準時來再取消（不收費）。</p>
+          </div></div></li>
+
+        <li><span class="t">13:33</span><div class="sb">
+          <p class="act">德島駅周邊午餐（自理）</p>
+          <p class="meta">步行 ・ 駅周邊</p>
+          <p class="cost">¥800–1,200</p></div></li>
+
+        <li><span class="t">14:24</span><div class="sb">
+          <p class="act">德島駅 → 栗林駅</p>
+          <p class="meta">JR特急 うずしお18號 ・ 約60分</p>
+          <p class="cost">¥2,640 自由席</p></div></li>
+
+        <li class="warnrow"><span class="t">15:41</span><div class="sb">
+          <span class="wtag">⚠ 栗林駅→站牌只有約2分鐘緩衝</span>
+          <p class="act">栗林公園前 → 高松空港</p>
+          <p class="meta">琴電機場大巴 ・ 約28分</p>
+          <p class="cost">¥900</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d5-rp2">🔀 備案</button></div>
+          <div class="rowpanel alt" id="d5-rp2">
+            <p class="h">うずしお 誤點就掉這班大巴怎麼辦</p>
+            <p>① 改主線：うずしお 坐到「高松駅」不要在栗林下，從高松駅搭機場利木津巴士（班次密、約45分・¥1,000）</p>
+            <p>② 栗林駅→站牌 改叫計程車（約5分・¥800）</p>
+            <p>③ 栗林→高松空港 直接計程車（¥3,500–4,500）</p>
+          </div></div></li>
+
+        <li><span class="t">16:09</span><div class="sb">
+          <p class="act">高松空港抵達・取 ecbo cloak 行李</p>
+          <p class="meta">起飛前約2h46m ・ 出境手續・機場輕食</p>
+          <p class="fac">當天早上可先在 ecbo cloak APP 按「當日取件」通知店家備妥</p></div></li>
+
+        <li class="warnrow"><span class="t">16:55</span><div class="sb">
+          <span class="wtag">⚠ 報到截止・當天最後一班飛機</span>
+          <p class="act">CI 179 Check-in 截止（起飛前2小時）</p></div></li>
+
+        <li><span class="t">18:55</span><div class="sb">
+          <p class="act">CI 179 起飛 TAK → TPE</p>
+          <p class="meta">飛機 ・ 3h10m ・ 21:05 抵達台北・お疲れさまでした！</p></div></li>
+      </ol>
+
+      <div class="plans">
+        <div class="plan pick">
+          <h4>方案 B　<span class="tag-pick">★ 主案</span></h4>
+          <ol>
+            <li>12:36 神山溫泉前 ・ 62號佐那河內線</li>
+            <li>13:27 八百屋車站 ・ 步行6分</li>
+            <li>14:24 德島車站 ・ 渦潮18特急 ¥2,640自由</li>
+            <li>15:39 栗林公園前 ・ 機場大巴 ¥900</li>
+            <li>16:09 高松機場</li>
+          </ol>
+        </div>
+        <div class="plan">
+          <h4>方案 A（提早出發備案）</h4>
+          <ol>
+            <li>11:16 神山溫泉前 ・ 神山線56號 ¥1,200</li>
+            <li>12:12 元町下車 ・ 步行5分</li>
+            <li>12:24 德島車站 ・ 渦潮14特急 ¥2,640自由</li>
+            <li>13:41 栗林公園前 ・ 機場大巴 ¥900</li>
+            <li>14:09 高松機場（比主案早2小時到，最保險）</li>
+          </ol>
+        </div>
+        <div class="plan no">
+          <h4>錯過 12:36 的唯一備案</h4>
+          <ol>
+            <li>叫計程車：神山溫泉→德島駅 約40–50分 ¥8,000–10,000</li>
+            <li>下一班公車 15:16 到德島 16:20，已趕不上 16:55 報到截止</li>
+            <li>車行：德島第一交通 088-654-8811 ／ 寄井観光 088-676-0345</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </details>
+
+
+
+  <!-- ================= 打卡進度 ================= -->
+  <div class="checkin" id="checkin">
+    <h2>打卡進度</h2>
+    <div class="progwrap">
+      <div class="progtext" id="progtext">0 / 12 間</div>
+      <div class="progbar"><i id="progbar" style="width:0%"></i></div>
+    </div>
+    <div id="ci-cards"></div>
+    <p class="storenote">💾 打勾／筆記存在這支手機（localStorage）；照片存在這支手機（IndexedDB）。都<b>不會上傳</b>、也不會同步到別的裝置。私密瀏覽模式或不支援的瀏覽器會停用照片功能，改用手機相簿拍就好。回程請盡快到「回憶」頁整理成 PDF。</p>
+    <p class="dbwarn" id="dbwarn">⚠ 這支手機的瀏覽器不支援照片本機儲存（IndexedDB），已停用「＋加照片」。請改用手機相簿拍照，勾選與筆記仍會正常保存。</p>
+  </div>
+
+  <!-- ================= 回憶 ================= -->
+  <section class="blk memoryblk" id="memory">
+    <h2>旅遊回憶</h2>
+    <p class="blkintro">把 12 間的打卡（參拜／納経、筆記、當時的名言、照片）排成相片書版面。資料只在這支手機，<b>回國請儘快匯出 PDF</b>。</p>
+    <div id="memory-cards"></div>
+    <div class="memactions">
+      <button type="button" class="btn solid" id="btnMemoryPdf">🖨 整理成 PDF</button>
+      <button type="button" class="btn" id="btnMemoryCopy">📋 複製全部文字</button>
+    </div>
+    <p class="storenote">「整理成 PDF」會開啟手機的列印畫面，選「儲存為 PDF」即可存成永久檔案。「複製全部文字」把所有筆記＋名言複製到剪貼簿，回國後可貼給 Claude 做精緻版回憶簿。</p>
+  </section>
+
+
+  <!-- ================= 費用頁 ================= -->
+  <section class="blk" id="cost">
+    <h2>費用概算（一人／兩人・不含機票）</h2>
+    <p class="blkintro">住宿為確定金額，交通與飲食為估計。機場巴士車資已按 2026/10/1 起的新價 ¥1,300 更新（行程表舊數字 ¥1,000 已修正）。</p>
+
+    <div class="costgroup">
+      <h3>交通</h3>
+      <ul class="costlist">
+        <li><span class="ci">機場巴士 高松空港→高松駅 <em>Day1</em></span><span class="cv">¥1,300 ／ ¥2,600</span><span class="cn">琴電・ICOCA可・2026/10/1起漲價</span></li>
+        <li><span class="ci">JR うずしお 高松→板野 自由席 <em>Day1</em></span><span class="cv">¥2,440 ／ ¥4,880</span><span class="cn">運賃¥1,210＋特急¥1,230</span></li>
+        <li><span class="ci">計程車 板野→靈山寺 <em>Day1</em></span><span class="cv">¥500 ／ ¥1,000</span></li>
+        <li><span class="ci">路線巴士 板野駅南→大日寺口 <em>Day2</em></span><span class="cv">¥260 ／ ¥520</span><span class="cn">鍛冶屋原線47/48号</span></li>
+        <li><span class="ci">路線巴士 羅漢→板野駅南 <em>Day2</em></span><span class="cv">¥340 ／ ¥680</span><span class="cn">鍛冶屋原線28号</span></li>
+        <li><span class="ci">路線巴士 板野駅南→東原 <em>Day3</em></span><span class="cv">¥480 ／ ¥960</span><span class="cn">28號鍛冶屋原線</span></li>
+        <li><span class="ci">計程車 第7→8番 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
+        <li><span class="ci">計程車 切幡寺→安樂寺 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
+        <li><span class="ci">計程車 安樂寺→藤井寺 <em>Day4</em></span><span class="cv">¥3,000 ／ ¥6,000</span></li>
+        <li><span class="ci">計程車 燒山寺→神山温泉 <em>Day4</em></span><span class="cv">¥1,750 ／ ¥3,500</span></li>
+        <li><span class="ci">路線巴士 神山温泉前→德島駅 <em>Day5</em></span><span class="cv">¥1,200 ／ ¥2,400</span><span class="cn">佐那河內線62號</span></li>
+        <li><span class="ci">JR うずしお 德島→栗林 自由席 <em>Day5</em></span><span class="cv">¥2,640 ／ ¥5,280</span></li>
+        <li><span class="ci">琴電大巴 栗林公園前→空港 <em>Day5</em></span><span class="cv">¥900 ／ ¥1,800</span></li>
+        <li class="sub"><span class="ci">交通小計</span><span class="cv">¥16,310–16,720 ／ ¥32,620–33,440</span></li>
+      </ul>
+    </div>
+
+    <div class="costgroup">
+      <h3>住宿</h3>
+      <ul class="costlist">
+        <li><span class="ci">HOTEL AZ 徳島板野店 N1+N2 <em>10/30–31・2晚</em></span><span class="cv">¥12,320 ／ ¥24,640</span><span class="cn">✓已訂・夕食付＋朝食・到場付款</span></li>
+        <li><span class="ci">安樂寺 宿坊 N3 <em>11/1</em></span><span class="cv">¥11,000 ／ ¥22,000</span><span class="cn">✓已訂・已線上付清・含兩食・溫泉</span></li>
+        <li><span class="ci">神山溫泉ホテル四季の里 N4 <em>11/2</em></span><span class="cv">¥18,810 ／ ¥37,620</span><span class="cn">✓已訂・到場付款・含兩食・天然溫泉</span></li>
+        <li class="sub"><span class="ci">住宿小計</span><span class="cv">¥42,130 ／ ¥84,260</span></li>
+      </ul>
+    </div>
+
+    <div class="costgroup">
+      <h3>飲食・自費</h3>
+      <ul class="costlist">
+        <li><span class="ci">Day1 高松駅讚岐烏冬午餐</span><span class="cv">¥500–900 ／ ¥1,000–1,800</span></li>
+        <li><span class="ci">Day2 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
+        <li><span class="ci">Day3 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
+        <li><span class="ci">Day4 燒山寺登山 行動糧×3食＋2L水</span><span class="cv">¥1,000–1,500 ／ ¥2,000–3,000</span><span class="cn">山中無補給</span></li>
+        <li><span class="ci">Day5 德島駅午餐</span><span class="cv">¥800–1,200 ／ ¥1,600–2,400</span></li>
+        <li><span class="ci">Day5 機場輕食</span><span class="cv">¥500–1,500 ／ ¥1,000–3,000</span></li>
+        <li class="sub"><span class="ci">飲食小計</span><span class="cv">¥3,800–7,100 ／ ¥7,600–14,200</span></li>
+      </ul>
+    </div>
+
+    <div class="costgroup">
+      <h3>其他</h3>
+      <ul class="costlist">
+        <li><span class="ci">遍路用品 第1番購入</span><span class="cv">¥4,000–6,000 ／ ¥8,000–12,000</span><span class="cn">白衣・金剛杖・納経帳・輪袈裟</span></li>
+        <li><span class="ci">御朱印 12寺</span><span class="cv">¥3,600–6,000 ／ ¥7,200–12,000</span><span class="cn">¥300–500／寺</span></li>
+        <li><span class="ci">ecbo cloak 行李寄放</span><span class="cv">¥1,600–2,000 ／ ¥3,200–4,000</span><span class="cn">高松機場 10/30→11/3</span></li>
+        <li><span class="ci">ICOCA 押金（可退）</span><span class="cv">¥500 ／ ¥1,000</span><span class="cn">Mobile Suica 可省</span></li>
+        <li class="sub"><span class="ci">其他小計</span><span class="cv">¥9,700–14,500 ／ ¥19,400–29,000</span></li>
+      </ul>
+    </div>
+
+    <div class="total">
+      <div>總計（地面費用・不含機票）</div>
+      <div class="big">一人 ¥71,940–80,450 ／ 兩人 ¥143,880–160,900</div>
+      <div class="sub2">住宿已確定 ¥84,260（2人）・建議現金每人約 ¥80,000（宿坊、納経帳、御朱印、鄉下計程車多半只收現金）</div>
+    </div>
+
+    <div class="row2" style="margin-top:1rem">
+      <div class="r-h">與「住宿總覽」對照</div>
+      <div class="r-s">此頁與 Day1–4 各晚住宿卡數字一致；若有出入以此頁為準，訂房明細以列印版（含完整取消規定）為準。</div>
+    </div>
+  </section>
+
+
+  <!-- ================= 出發前確認 ================= -->
+  <section class="blk" id="before">
+    <h2>出發前確認清單</h2>
+    <p class="blkintro">勾了會記住（存這支手機），下次打開還在。</p>
+    <ul class="cklist" id="cklist"></ul>
+  </section>
+
+  <section class="blk" id="offlinemap">
+    <h2>📴 離線地圖下載清單</h2>
+    <ul class="plain">
+      <li>Google Maps → 個人檔案 →「離線地圖」→ 下載<b>德島縣＋香川縣</b>全區（涵蓋全部行程範圍）</li>
+      <li>燒山寺步道另用 <b>YAMAP</b> App 下載「藤井寺→燒山寺」路線，比 Google Maps 步道更精準</li>
+      <li>Day 4（11/2）08:30–14:00 山中完全無手機訊號，上面的 Google Maps 連結那時全部打不開，務必<b>出發前</b>就下載好</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="pack">
+    <h2>打包清單</h2>
+    <div class="pack">
+      <span>長袖排汗上衣</span><span>外套</span><span>運動褲</span><span>輕便雨衣</span>
+      <span>運動鞋</span><span>登山包</span><span>墨鏡</span><span>凡士林</span>
+      <span>口罩</span><span>帽子</span><span>睡衣（長袖長褲）</span><span>護膝</span>
+      <span>登山杖 ×2</span><span>頭燈＋電池</span><span>痠痛貼布</span>
+    </div>
+    <p class="r-s" style="margin-top:.7rem;color:var(--muted);font-size:.85rem">氣溫 11–16°C（燒山寺標高700m更冷，可能下雨，洋蔥式＋雨具）。不寄行李，全程背登山包；大行李箱放高松機場1F ecbo cloak（10/30→11/3）。</p>
+  </section>
+
+  <section class="blk" id="confirmcall">
+    <h2>訂房再確認（出發前3天各打一通）</h2>
+    <div class="row2"><div class="r-h">HOTEL AZ 徳島板野店 ・ <a href="tel:+81886722611">☎ 088-672-2611</a></div>
+      <div class="r-s">確認 10/30 15:00 Check-in、夕食付＋朝食サービス時間、到場付款</div></div>
+    <div class="row2"><div class="r-h">溫泉山 安樂寺 宿坊 ・ <a href="tel:+81886942046">☎ 088-694-2046</a></div>
+      <div class="r-s">確認 11/1 最終入住18:00、晚餐18:00早餐07:00、可否參加晨課、隔天06:30早朝便當＋07:00計程車代訂</div></div>
+    <div class="row2"><div class="r-h">神山溫泉ホテル四季の里 ・ <a href="tel:+81886761117">☎ 088-676-1117</a></div>
+      <div class="r-s">確認 11/2 入住時間、早餐07:30／晚餐18:00、11/3退房時間</div></div>
+  </section>
+
+
+  <!-- ================= 急難頁 ================= -->
+  <section class="blk" id="sos">
+    <h2>🆘 急難</h2>
+    <div id="sos-core">
+
+      <div class="sosgrp">
+        <h3>日本當地</h3>
+        <div class="sosrow"><span class="sname">警察</span><a class="tel" href="tel:110">110</a></div>
+        <div class="sosrow"><span class="sname">消防・救護車</span><a class="tel" href="tel:119">119</a></div>
+        <div class="sosrow"><span class="sname">JNTO 訪日旅客諮詢熱線<span class="ssub">24小時・中文可</span></span><a class="tel" href="tel:+81503816-2787">050-3816-2787</a></div>
+      </div>
+
+      <div class="sosgrp">
+        <h3>台灣（駐大阪辦事處・轄德島／香川）</h3>
+        <div class="sosrow"><span class="sname">辦事處緊急聯絡電話<span class="ssub">日本境內直撥・24h急難專用</span></span><a class="tel" href="tel:09087944568">090-8794-4568</a></div>
+        <div class="sosrow"><span class="sname">辦事處一般電話<span class="ssub">上班時間・行政洽詢</span></span><a class="tel" href="tel:+81662278623">(81-6)6227-8623</a></div>
+        <div class="sosrow"><span class="sname">旅外國人急難救助全球免付費專線<span class="ssub">從日本撥：001或0033 + 010-800-0885-0885</span></span><a class="tel" href="tel:0108000885088500885">800-0885-0885</a></div>
+        <div class="sosrow"><span class="sname">外交部緊急聯絡中心<span class="ssub">供國內親友撥打</span></span><a class="tel" href="tel:0800085095">0800-085-095</a></div>
+        <p style="font-size:.78rem;color:var(--warn-ink);margin-top:.4rem">🟡 以上號碼查詢自外交部領事事務局／駐大阪辦事處官網，查詢日期 2026-08-28，出發前建議再上網核對一次最新公告。</p>
+      </div>
+
+      <div class="sosgrp">
+        <h3>旅平險／不便險</h3>
+        <div class="insurebox">
+          <p><span class="fillin">投保後請自行填入：</span>保險公司＿＿＿・保單號碼＿＿＿・24h海外急難救助專線＿＿＿・承保期間 10/30–11/03</p>
+          <p style="margin-top:.4rem;color:var(--muted)">建議：出發前在台灣線上投保「旅平險＋不便險」（富邦／新安東京海上），最晚起飛前1小時可保。落地後想追加保障可用 SafetyWing（英文、無等待期）。燒山寺屬海拔700m有清楚指標的一般山道健行，各家都不需加購探險/極限登山附約，但民間搜救費用多半除外。</p>
+        </div>
+        <p style="font-weight:700;margin-top:.8rem;margin-bottom:.2rem">出險 SOP（實支實付型）</p>
+        <ol class="sopstep">
+          <li>先就醫，當場自費結清</li>
+          <li>跟醫院要「收據明細」＋「診斷書（Medical Report）」，英文或日文皆可</li>
+          <li>事故若涉班機／行李 → 跟航空公司拿 PIR 報告</li>
+          <li>收據、診斷書<b>正本</b>收好，回台後線上／紙本送保險公司</li>
+          <li>台灣產險約 7–14 個工作天入帳</li>
+        </ol>
+      </div>
+
+      <div class="sosgrp">
+        <h3>住宿電話</h3>
+        <div class="sosrow"><span class="sname">HOTEL AZ 徳島板野店<span class="ssub">N1・N2</span></span><a class="tel" href="tel:+81886722611">088-672-2611</a></div>
+        <div class="sosrow"><span class="sname">溫泉山 安樂寺 宿坊<span class="ssub">N3</span></span><a class="tel" href="tel:+81886942046">088-694-2046</a></div>
+        <div class="sosrow"><span class="sname">神山溫泉ホテル四季の里<span class="ssub">N4</span></span><a class="tel" href="tel:+81886761117">088-676-1117</a></div>
+      </div>
+
+      <div class="sosgrp">
+        <h3>計程車行電話</h3>
+        <div class="sosrow"><span class="sname">德島第一交通<span class="ssub">通用・各天招不到車</span></span><a class="tel" href="tel:+81886548811">088-654-8811</a></div>
+        <div class="sosrow"><span class="sname">松島タクシー<span class="ssub">安樂寺→藤井寺</span></span><a class="tel" href="tel:+81886942106">088-694-2106</a></div>
+        <div class="sosrow"><span class="sname">鴨島タクシー<span class="ssub">安樂寺→藤井寺・近切幡寺</span></span><a class="tel" href="tel:+81883242345">0883-24-2345</a></div>
+        <div class="sosrow"><span class="sname">寄井観光タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886760345">088-676-0345</a></div>
+        <div class="sosrow"><span class="sname">つばめ観光タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886780224">088-678-0224</a></div>
+        <div class="sosrow"><span class="sname">川又タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886770137">088-677-0137</a></div>
+      </div>
+
+      <div class="sosgrp">
+        <h3>燒山寺安全約定（Day 4）</h3>
+        <ul class="plain">
+          <li>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」</li>
+          <li>11:00 未到中繼庵（柳水庵）就折返，不硬撐</li>
+          <li>必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</li>
+          <li><b>兩人絕不分開</b></li>
+        </ul>
+      </div>
+
+      <div class="sosgrp">
+        <h3>家人緊急聯絡人</h3>
+        <p style="color:var(--muted);font-size:.85rem">依決定：<b>不放網頁</b>，寫在隨身紙本，兩人各帶一份。</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= 實務提示 ================= -->
+  <section class="blk" id="tips">
+    <h2>實務提示</h2>
+    <div class="tip" style="margin-top:0">
+      <h3>🌤 天氣</h3>
+      <ul>
+        <li>10/30–11/3 德島秋季平地約 11–16°C</li>
+        <li>燒山寺標高700m，明顯更冷、可能下雨 → 洋蔥式穿法＋雨具必備</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>💴 現金</h3>
+      <ul>
+        <li>宿坊／納経／御朱印／鄉下計程車多半只收現金，每人備 ¥80,000 日幣（台灣先換好）</li>
+        <li>ICOCA 儲值 ¥5,000 以上，涵蓋琴電機場巴士＋徳島バス全路線（含神山線・鍛冶屋原線）＋JR四国高德線閘門</li>
+        <li>JR うずしお 特急自由席的「自由席特急券」IC 卡刷不到，要另外在綠色窗口或售票機買</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🔋 手機電力</h3>
+      <ul>
+        <li>導航＋拍照很耗電，每人行動電源 10000mAh 以上</li>
+        <li>燒山寺段（08:30–14:00）可開飛航模式省電，反正也無訊號</li>
+        <li>頭燈務必帶備用電池</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🙏 遍路禮儀</h3>
+      <ul>
+        <li>山門前一禮再進入，離開時回頭再一禮</li>
+        <li>參拜先合掌一禮，本堂＋大師堂各投納札、點燭上香</li>
+        <li>寺內輕聲，不喧嘩，尊重其他遍路者與信眾</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ================= 訂房明細 列印單張（平時隱藏，僅列印時顯示指定一張） ================= -->
+  <div class="printsheet" id="ps-N1">
+    <h2>HOTEL AZ 徳島板野店 訂房明細</h2>
+    <table>
+      <tr><td>預約編號</td><td>T3F37836FFBA7</td></tr>
+      <tr><td>訂房代表人</td><td>CHEN YUHSIN</td></tr>
+      <tr><td>入住</td><td>2026/10/30（五）・Check-in 15:00</td></tr>
+      <tr><td>退房</td><td>2026/11/01（日）・連住2晚</td></tr>
+      <tr><td>房型</td><td>【禁煙】雙床房 × 1 間</td></tr>
+      <tr><td>方案</td><td>【新価格】夕食付きプラン（朝食サービス）</td></tr>
+      <tr><td>付款</td><td>到場支付 ¥24,640（2名×2晚，含稅）</td></tr>
+      <tr><td>電話</td><td>088-672-2611</td></tr>
+      <tr><td>地址</td><td>〒板野縣板野郡板野町川端字新手崎27-1</td></tr>
+      <tr><td>取消規定</td><td>2日前0%／前日20%／當日80%／No-Show 100%</td></tr>
+    </table>
+    <p style="margin-top:1rem;font-size:.8rem">此頁含個人資料，僅供本人列印隨身攜帶，請勿轉發或公開。</p>
+  </div>
+
+  <div class="printsheet" id="ps-N3">
+    <h2>溫泉山 安樂寺 藥師之里 訂房明細</h2>
+    <table>
+      <tr><td>預約編號</td><td>8UACAARP</td></tr>
+      <tr><td>訂房代表人</td><td>Chen Yuchun</td></tr>
+      <tr><td>入住</td><td>2026/11/01・可入住14:00–18:00・最終入住18:00</td></tr>
+      <tr><td>退房</td><td>09:00・門禁21:00</td></tr>
+      <tr><td>房型</td><td>【講堂】雙床房（附整體衛浴）× 1 間</td></tr>
+      <tr><td>方案</td><td>限事前付款【附兩餐】</td></tr>
+      <tr><td>餐食</td><td>晚餐18:00／早餐07:00</td></tr>
+      <tr><td>付款</td><td>✅已線上刷卡付清 ¥22,000</td></tr>
+      <tr><td>電話</td><td>088-694-2046</td></tr>
+      <tr><td>地址</td><td>〒771-1311 德島縣板野郡上板町引野字寺之西北8</td></tr>
+      <tr><td>取消規定</td><td>3–1天前50%／當天100%／No-Show 100%</td></tr>
+    </table>
+    <p style="margin-top:1rem;font-size:.8rem">此頁含個人資料，僅供本人列印隨身攜帶，請勿轉發或公開。宿坊要求入住時攜帶紙本。</p>
+  </div>
+
+  <div class="printsheet" id="ps-N4">
+    <h2>神山溫泉ホテル四季の里 訂房明細</h2>
+    <table>
+      <tr><td>預約編號</td><td>A0032489455</td></tr>
+      <tr><td>訂房代表人</td><td>kate chen</td></tr>
+      <tr><td>入住</td><td>2026/11/02（一）・預計15:00–16:00到</td></tr>
+      <tr><td>退房</td><td>翌日退房（行程抓10:00）</td></tr>
+      <tr><td>房型</td><td>洋室8號房 × 1 間・禁煙</td></tr>
+      <tr><td>方案</td><td>神山の恵みプラン（含朝食＋夕食）</td></tr>
+      <tr><td>餐食</td><td>早餐07:30／晚餐18:00</td></tr>
+      <tr><td>付款</td><td>現場付款 ¥37,620</td></tr>
+      <tr><td>電話</td><td>088-676-1117</td></tr>
+      <tr><td>地址</td><td>〒771-3310 德島縣名西郡神山町</td></tr>
+      <tr><td>取消規定</td><td>當日100%／前日～3日前50%／4～7日前20%</td></tr>
+    </table>
+    <p style="margin-top:1rem;font-size:.8rem">此頁含個人資料，僅供本人列印隨身攜帶，請勿轉發或公開。</p>
+  </div>
+
+  <footer>
+    人生即遍路 ～ 兩人同行 ・ 建置 2026-08-28<br>
+    行程／備案／例句／典故／名言 皆取自隨行資料夾內既有檔案・僅供本次旅程使用<br>
+    <span id="swstatus"></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var root=document.documentElement;
+
+/* =========================================================
+   1. 字級
+========================================================= */
+var SK="henro-scale",scale=1;
+try{var s=parseFloat(localStorage.getItem(SK));if(s>=0.9&&s<=1.8)scale=s;}catch(e){}
+function applyScale(){root.style.setProperty("--scale",String(scale));try{localStorage.setItem(SK,String(scale));}catch(e){}}
+applyScale();
+document.getElementById("sPlus").onclick=function(){scale=Math.min(1.8,Math.round((scale+0.1)*10)/10);applyScale();};
+document.getElementById("sMinus").onclick=function(){scale=Math.max(0.9,Math.round((scale-0.1)*10)/10);applyScale();};
+
+/* =========================================================
+   2. 展開面板（委派事件：daybtns／rowbtns／lodge／printsheet）
+========================================================= */
+document.addEventListener("click",function(ev){
+  var b=ev.target.closest("button");
+  if(!b)return;
+  if(b.dataset.panel){var p=document.getElementById(b.dataset.panel);if(p)p.classList.toggle("open");return;}
+  if(b.dataset.rp){var p2=document.getElementById(b.dataset.rp);if(p2)p2.classList.toggle("open");return;}
+  if(b.dataset.lodge){var p3=document.getElementById(b.dataset.lodge);if(p3)p3.classList.toggle("open");return;}
+  if(b.dataset.printsheet){printLodge(b.dataset.printsheet);return;}
+  if(b.dataset.goto){gotoSection(b.dataset.goto);return;}
+});
+
+function gotoSection(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  if(el.tagName==="DETAILS")el.open=true;
+  el.scrollIntoView({behavior:(matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"),block:"start"});
+  document.querySelectorAll(".chips button").forEach(function(c){c.classList.toggle("on",c.dataset.goto===id);});
+}
+
+/* 捲動時同步高亮頁籤 */
+(function(){
+  var chipBtns=Array.prototype.slice.call(document.querySelectorAll(".chips button"));
+  var targets=chipBtns.map(function(c){return document.getElementById(c.dataset.goto);}).filter(Boolean);
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting)return;
+        var id=en.target.id;
+        chipBtns.forEach(function(c){c.classList.toggle("on",c.dataset.goto===id);});
+      });
+    },{rootMargin:"-40% 0px -50% 0px",threshold:0});
+    targets.forEach(function(t){io.observe(t);});
+  }
+})();
+
+/* =========================================================
+   3. 列印：訂房明細單張 ／ 回憶 PDF
+========================================================= */
+function printLodge(sheetId){
+  document.querySelectorAll(".printsheet").forEach(function(s){s.classList.remove("active");});
+  var sheet=document.getElementById(sheetId);
+  if(sheet)sheet.classList.add("active");
+  document.body.classList.add("print-lodge");
+  window.print();
+}
+window.addEventListener("afterprint",function(){
+  document.body.classList.remove("print-lodge");
+  document.body.classList.remove("print-memory");
+});
+
+/* =========================================================
+   4. 打卡：12 間寺廟 + 名言
+========================================================= */
+var TEMPLES=[
+  {n:1,name:"靈山寺",kana:"りょうぜんじ",day:2,one:"遍路之旅的起點。大師在此發願踏上四國巡禮。"},
+  {n:2,name:"極樂寺",kana:"ごくらくじ",day:2,one:"長命杉與阿彌陀如來，延命長壽的靈場。"},
+  {n:3,name:"金泉寺",kana:"こんせんじ",day:2,one:"大師錫杖插地湧出的「獨鈷水」，至今不息。"},
+  {n:4,name:"大日寺",kana:"だいにちじ",day:2,one:"大師親刻大日如來，境內三十三觀音石佛。"},
+  {n:5,name:"地藏寺",kana:"じぞうじ",day:2,one:"五百羅漢堂，據說能找到與親人相似的一尊。"},
+  {n:6,name:"安樂寺",kana:"あんらくじ",day:3,one:"溫泉宿坊，今晚就住這裡，藥師如來守護健康。"},
+  {n:7,name:"十樂寺",kana:"じゅうらくじ",day:3,one:"愛染堂祈良緣，山門朱紅色令人印象深刻。"},
+  {n:8,name:"熊谷寺",kana:"くまだにじ",day:3,one:"德島縣最大多寶塔，千手觀音法力廣大。"},
+  {n:9,name:"法輪寺",kana:"ほうりんじ",day:3,one:"臥佛涅槃釋迦像，撫足祈求腿腳健康。"},
+  {n:10,name:"切幡寺",kana:"きりはたじ",day:3,one:"333 段石階，織女獻布化為千手觀音的傳說。"},
+  {n:11,name:"藤井寺",kana:"ふじいでら",day:4,one:"燒山寺登山口，大師親植藤花，準備最艱難的路。"},
+  {n:12,name:"燒山寺",kana:"しょうさんじ",day:4,one:"遍路最大難所，海拔700m，抵達即是最大成就。"}
+];
+var QUOTES=[
+  {q:"同行二人。（兩人同行，從不孤單。）",src:"出處：四國遍路傳承　主題：遍路・慈悲同行",
+   note:"四國遍路最核心的精神。無論走到哪裡，弘法大師永遠與遍路者同行、永不離棄。白衣背面就寫這四字，象徵大師的永恆陪伴。"},
+  {q:"虛空能容萬物，心亦包容宇宙。",src:"出處：《秘蔵宝鑰》　主題：心性・佛性",
+   note:"心的本質如虛空般無限廣大，能容納一切萬物。密教認為人心本具佛性，與宇宙同體，修行即是開顯此清淨廣大之本心。"},
+  {q:"佛法遙かにあらず、心中にして即ち近し。",src:"出處：《般若心經秘鍵》　主題：即身成佛・修行",
+   note:"真理不在遙遠彼岸，就在每個人當下的心中。修行不必捨近求遠，只需向內觀照自心。"},
+  {q:"三密加持すれば速疾に顕る。",src:"出處：《即身成佛義》　主題：三密・即身成佛",
+   note:"身、口、意三密與本尊相應，當下即能體驗覺悟之境，不必等待來世，此即「即身成佛」之要義。"},
+  {q:"惟一心之源海、六塵非所染。",src:"出處：《性靈集》　主題：清淨心・煩惱",
+   note:"以大海比喻清淨之心，外物如波浪雖起伏，海底始終不動。修行之要在於保持心源的清明，不被外境所動搖。"},
+  {q:"聞即信解、信解即修行。",src:"出處：空海語錄　主題：聞法・信仰",
+   note:"真正的聽聞不只是耳根接觸，而是讓佛法進入內心、產生轉化。聽聞與修行並非兩事，真正理解佛法即已開始修行。"},
+  {q:"色即是空，空即是色。",src:"出處：《般若波羅蜜多心經》　主題：色空不二・般若智慧",
+   note:"有形的事物本質上是空的（無常、無自性）；而「空」並非虛無，正是一切現象得以生起的根本。色空相即不二，破除執有與執空兩種極端。"},
+  {q:"心無罣礙，無罣礙故，無有恐怖，遠離顛倒夢想，究竟涅槃。",src:"出處：《般若波羅蜜多心經》　主題：無罣礙・解脫涅槃",
+   note:"當心不再被任何事物所罣礙，恐懼與執著自然消失，遠離一切顛倒錯誤的觀念，最終到達涅槃的究竟解脫。常被用來鼓勵放下執著。"},
+  {q:"不生不滅，不垢不淨，不增不減。",src:"出處：《般若波羅蜜多心經》　主題：空性・絕對實相",
+   note:"空性既不會生起也不會消滅，既不染污也不清淨，既不增加也不減少。超越一切二元對立的概念，指向語言無法完全表達的絕對實相。"},
+  {q:"揭諦揭諦，波羅揭諦，波羅僧揭諦，菩提薩婆訶。",src:"出處：《般若波羅蜜多心經》真言　主題：真言・度彼岸",
+   note:"意為「去吧！去吧！到彼岸去！大眾一同到彼岸去！覺悟成就！」象徵修行者從生死苦海此岸，度越到解脫涅槃的彼岸。"},
+  {q:"凡所有相，皆是虛妄。若見諸相非相，則見如來。",src:"出處：《金剛般若波羅蜜經》第五分　主題：破相・見如來",
+   note:"一切可見的現象與形相，都不是永恆真實的，只是暫時的顯現。若能不執著於這些外相，就能見到如來的真實本性。"},
+  {q:"應無所住，而生其心。",src:"出處：《金剛般若波羅蜜經》第十分　主題：無住生心",
+   note:"心不執著、不停留於任何一處，讓清淨覺悟之心自然生起。放下一切執著，讓心自由流動而不被繫縛——這是修行最深的智慧。"}
+];
+/* temple n(1-12) -> QUOTES index：第1番固定「同行二人」(index0)，其餘依序 */
+function quoteForTemple(n){return QUOTES[n-1]||QUOTES[QUOTES.length-1];}
+
+var ciRoot=document.getElementById("ci-cards");
+TEMPLES.forEach(function(tp){
+  var card=document.createElement("div");
+  card.className="ci-card";
+  card.innerHTML=
+    '<div class="name">第 '+tp.n+' 番　'+tp.name+'（'+tp.kana+'）</div>'+
+    '<div class="oneline">'+tp.one+'　・　Day '+tp.day+'</div>'+
+    '<div class="toggles">'+
+      '<label><input type="checkbox" class="c-sanpai" data-n="'+tp.n+'"> 參拜 ✓</label>'+
+      '<label><input type="checkbox" class="c-nokyo" data-n="'+tp.n+'"> 納経 ✓</label>'+
+    '</div>'+
+    '<textarea class="c-note" data-n="'+tp.n+'" placeholder="寫一句心得…"></textarea>'+
+    '<div class="photobar">'+
+      '<label for="c-photo-'+tp.n+'">＋ 加照片</label>'+
+      '<input type="file" id="c-photo-'+tp.n+'" class="c-photo" data-n="'+tp.n+'" accept="image/*" multiple>'+
+      '<span style="font-size:.8rem;color:var(--muted)">每間最多 2 張</span>'+
+    '</div>'+
+    '<div class="thumbs" id="c-thumbs-'+tp.n+'"></div>'+
+    '<div class="quote" id="c-quote-'+tp.n+'"><div class="q"></div><div class="src"></div><div class="note"></div></div>';
+  ciRoot.appendChild(card);
+});
+
+var CK="henro-checkin-v1";
+var ciState={};
+try{var raw=localStorage.getItem(CK);if(raw)ciState=JSON.parse(raw)||{};}catch(e){}
+function getSt(n){if(!ciState[n])ciState[n]={sanpai:false,nokyo:false,note:""};return ciState[n];}
+function saveCi(){try{localStorage.setItem(CK,JSON.stringify(ciState));}catch(e){}}
+
+function renderProg(){
+  var done=TEMPLES.filter(function(tp){return getSt(tp.n).sanpai;}).length;
+  document.getElementById("progtext").textContent=done+" / 12 間";
+  document.getElementById("progbar").style.width=(done/12*100)+"%";
+}
+function renderQuote(n){
+  var box=document.getElementById("c-quote-"+n);
+  if(!box)return;
+  if(getSt(n).sanpai){
+    var qq=quoteForTemple(n);
+    box.querySelector(".q").textContent=qq.q;
+    box.querySelector(".src").textContent=qq.src;
+    box.querySelector(".note").textContent=qq.note;
+    box.classList.add("open");
+  }else{
+    box.classList.remove("open");
+  }
+}
+/* 初始還原 */
+TEMPLES.forEach(function(tp){
+  var st=getSt(tp.n);
+  var cs=document.querySelector('.c-sanpai[data-n="'+tp.n+'"]');
+  var cn=document.querySelector('.c-nokyo[data-n="'+tp.n+'"]');
+  var ct=document.querySelector('.c-note[data-n="'+tp.n+'"]');
+  if(cs)cs.checked=!!st.sanpai;
+  if(cn)cn.checked=!!st.nokyo;
+  if(ct)ct.value=st.note||"";
+  renderQuote(tp.n);
+});
+renderProg();
+
+ciRoot.addEventListener("change",function(ev){
+  var t=ev.target;
+  if(t.classList.contains("c-sanpai")){
+    var n=t.dataset.n;getSt(n).sanpai=t.checked;saveCi();renderProg();renderQuote(n);
+  }else if(t.classList.contains("c-nokyo")){
+    var n2=t.dataset.n;getSt(n2).nokyo=t.checked;saveCi();
+  }
+});
+ciRoot.addEventListener("input",function(ev){
+  var t=ev.target;
+  if(t.classList.contains("c-note")){getSt(t.dataset.n).note=t.value;saveCi();}
+});
+
+/* ---- 照片：IndexedDB ---- */
+var db=null,DBOK=true;
+try{
+  var req=indexedDB.open("henro-photos",1);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore("p",{keyPath:"id"});};
+  req.onsuccess=function(e){db=e.target.result;loadAllPhotos();};
+  req.onerror=function(){DBOK=false;document.getElementById("dbwarn").classList.add("show");};
+}catch(e){DBOK=false;document.getElementById("dbwarn").classList.add("show");}
+
+var photosByTemple={};
+function txStore(mode){return db.transaction("p",mode).objectStore("p");}
+function loadAllPhotos(){
+  if(!db)return;
+  var cur=txStore("readonly").openCursor();
+  cur.onsuccess=function(e){
+    var c=e.target.result;
+    if(c){
+      var m=String(c.value.id).match(/^t(\d+)-/);
+      if(m){var n=m[1];(photosByTemple[n]=photosByTemple[n]||[]).push(c.value);}
+      c.continue();
+    }else{
+      Object.keys(photosByTemple).forEach(function(n){renderThumbs(n);});
+      if(typeof renderMemory==="function")renderMemory();
+    }
+  };
+  cur.onerror=function(){DBOK=false;document.getElementById("dbwarn").classList.add("show");};
+}
+function renderThumbs(n){
+  var box=document.getElementById("c-thumbs-"+n);
+  if(!box)return;
+  box.innerHTML="";
+  (photosByTemple[n]||[]).forEach(function(p){
+    var fig=document.createElement("figure");
+    var img=document.createElement("img");img.src=p.data;img.alt="第"+n+"番打卡照片";
+    var del=document.createElement("button");del.type="button";del.textContent="✕";del.setAttribute("aria-label","刪除照片");
+    del.onclick=function(){
+      if(db)txStore("readwrite").delete(p.id);
+      photosByTemple[n]=(photosByTemple[n]||[]).filter(function(x){return x.id!==p.id;});
+      renderThumbs(n);
+      if(typeof renderMemory==="function")renderMemory();
+    };
+    fig.appendChild(img);fig.appendChild(del);box.appendChild(fig);
+  });
+}
+function compress(file,cb){
+  var r=new FileReader();
+  r.onload=function(){
+    var im=new Image();
+    im.onload=function(){
+      var max=1400,w=im.width,h=im.height;
+      if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}
+      var cv=document.createElement("canvas");cv.width=w;cv.height=h;
+      cv.getContext("2d").drawImage(im,0,0,w,h);
+      cb(cv.toDataURL("image/jpeg",0.8));
+    };
+    im.onerror=function(){cb(null);};
+    im.src=r.result;
+  };
+  r.onerror=function(){cb(null);};
+  r.readAsDataURL(file);
+}
+ciRoot.addEventListener("change",function(ev){
+  var t=ev.target;
+  if(!t.classList.contains("c-photo"))return;
+  var n=t.dataset.n;
+  if(!DBOK||!db){alert("這支手機的瀏覽器不支援照片本機儲存（IndexedDB），請改用手機相簿拍照。");t.value="";return;}
+  var existing=(photosByTemple[n]||[]).length;
+  var room=Math.max(0,2-existing);
+  var files=Array.prototype.slice.call(t.files).slice(0,room);
+  files.forEach(function(f){
+    compress(f,function(data){
+      if(!data)return;
+      var rec={id:"t"+n+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),data:data};
+      try{txStore("readwrite").put(rec);}catch(e){}
+      (photosByTemple[n]=photosByTemple[n]||[]).push(rec);
+      renderThumbs(n);
+      if(typeof renderMemory==="function")renderMemory();
+    });
+  });
+  t.value="";
+});
+
+/* =========================================================
+   5. .ics 行事曆匯出
+========================================================= */
+function pad2(x){return (x<10?"0":"")+x;}
+function icsDate(y,mo,d,h,mi){return y+pad2(mo)+pad2(d)+"T"+pad2(h)+pad2(mi)+"00";}
+function icsEscape(s){return String(s).replace(/[\\;,]/g,function(c){return "\\"+c;}).replace(/\n/g,"\\n");}
+
+/* EVENTS: [年,月,日,時,分,持續分鐘,標題,說明,是否為截止型(額外-15分提醒)] */
+var EVENTS=[
+  [2026,10,30,4,0,20,"家裡出發→桃園機場","起飛前3小時",0],
+  [2026,10,30,5,0,120,"CI278 報到","中華航空 CI278 桃園→高松",0],
+  [2026,10,30,7,0,140,"CI278 起飛 TPE→TAK","",0],
+  [2026,10,30,10,20,50,"抵達高松機場・入境領行李","大行李箱送 ecbo cloak 寄放",0],
+  [2026,10,30,11,10,45,"高松空港→高松駅 機場巴士","¥1,300／人",0],
+  [2026,10,30,13,0,60,"高松駅→板野駅 JR特急うずしお","¥2,440自由席",0],
+  [2026,10,30,14,30,60,"HOTEL AZ→靈山寺 買遍路用品","",0],
+  [2026,10,30,18,0,60,"HOTEL AZ 晚餐","夕食付プラン",0],
+  [2026,10,31,7,30,30,"第1番 靈山寺 參拜","",0],
+  [2026,10,31,9,20,30,"第2番 極樂寺 參拜","",0],
+  [2026,10,31,10,40,30,"第3番 金泉寺 參拜","",0],
+  [2026,10,31,11,29,15,"板野駅南→大日寺口 巴士","鍛冶屋原線47/48号",0],
+  [2026,10,31,14,0,30,"第4番 大日寺 參拜","",0],
+  [2026,10,31,15,10,30,"第5番 地藏寺 參拜","納経所17:00關門",1],
+  [2026,10,31,16,21,10,"羅漢→板野駅南 巴士","鍛冶屋原線28号回程",0],
+  [2026,10,31,18,0,60,"HOTEL AZ 晚餐","",0],
+  [2026,11,1,8,19,15,"板野駅南→東原 巴士","鍛冶屋原線28号 土日祝首班",1],
+  [2026,11,1,8,50,30,"第6番 安樂寺 參拜","今晚住宿地",0],
+  [2026,11,1,10,10,30,"第7番 十樂寺 參拜","",0],
+  [2026,11,1,12,0,50,"第8番 熊谷寺 參拜","視體力機動放棄8、9番",0],
+  [2026,11,1,13,35,30,"第9番 法輪寺 參拜","",0],
+  [2026,11,1,15,45,30,"第10番 切幡寺 參拜","333段石階",0],
+  [2026,11,1,16,15,0,"計程車 切幡寺→安樂寺宿坊","前一晚需預約",1],
+  [2026,11,1,17,0,0,"Check-in 安樂寺宿坊","最終入住18:00",1],
+  [2026,11,1,18,0,60,"安樂寺宿坊 晚餐","",0],
+  [2026,11,2,6,30,30,"早朝便當・準備出發","前一晚請宿坊代訂計程車",0],
+  [2026,11,2,7,0,60,"計程車 安樂寺→藤井寺","約¥6,000",1],
+  [2026,11,2,8,0,30,"第11番 藤井寺 參拜","燒山寺登山口",0],
+  [2026,11,2,8,30,330,"藤井寺→燒山寺 徒步登山","12km・爬升640m・全程無訊號",0],
+  [2026,11,2,14,0,30,"第12番 燒山寺 抵達參拜","海拔700m",0],
+  [2026,11,2,14,30,30,"計程車 燒山寺→神山溫泉","下山務必搭車",1],
+  [2026,11,2,15,0,60,"Check-in 四季の里","",0],
+  [2026,11,2,18,0,60,"四季の里 晚餐","",0],
+  [2026,11,3,10,0,0,"四季の里 退房","",1],
+  [2026,11,3,12,36,60,"神山溫泉前→德島駅 巴士","佐那河內線62号・務必12:20前到站",1],
+  [2026,11,3,14,24,60,"德島駅→栗林駅 JR特急うずしお18号","¥2,640自由席",0],
+  [2026,11,3,15,41,30,"栗林公園前→高松空港 機場大巴","¥900",0],
+  [2026,11,3,16,55,0,"CI179 報到截止","起飛前2小時，硬底線",1],
+  [2026,11,3,18,55,190,"CI179 起飛 TAK→TPE","21:05抵台北",0]
+];
+
+function buildICS(){
+  var lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//henro-app//zh-Hant//EN","CALSCALE:GREGORIAN"];
+  EVENTS.forEach(function(ev,i){
+    var y=ev[0],mo=ev[1],d=ev[2],h=ev[3],mi=ev[4],dur=ev[5],title=ev[6],desc=ev[7],deadline=ev[8];
+    var startD=new Date(y,mo-1,d,h,mi,0);
+    var endD=new Date(startD.getTime()+Math.max(dur,5)*60000);
+    lines.push("BEGIN:VEVENT");
+    lines.push("UID:henro-"+i+"-20260828@local");
+    lines.push("DTSTART:"+icsDate(y,mo,d,h,mi));
+    lines.push("DTEND:"+icsDate(endD.getFullYear(),endD.getMonth()+1,endD.getDate(),endD.getHours(),endD.getMinutes()));
+    lines.push("SUMMARY:"+icsEscape(title));
+    if(desc)lines.push("DESCRIPTION:"+icsEscape(desc));
+    lines.push("BEGIN:VALARM");
+    lines.push("ACTION:DISPLAY");
+    lines.push("DESCRIPTION:"+icsEscape(title));
+    lines.push("TRIGGER:-PT5M");
+    lines.push("END:VALARM");
+    if(deadline){
+      lines.push("BEGIN:VALARM");
+      lines.push("ACTION:DISPLAY");
+      lines.push("DESCRIPTION:"+icsEscape("15分後截止／需完成："+title));
+      lines.push("TRIGGER:-PT15M");
+      lines.push("END:VALARM");
+    }
+    lines.push("END:VEVENT");
+  });
+  lines.push("END:VCALENDAR");
+  return lines.join("\r\n");
+}
+document.getElementById("btnIcsAll").onclick=function(){
+  try{
+    var blob=new Blob([buildICS()],{type:"text/calendar;charset=utf-8"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url;a.download="henro-2026.ics";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},4000);
+  }catch(e){alert("匯出失敗，請改用「分享」把這個網址傳給自己在電腦上開。");}
+};
+document.getElementById("btnInstallHint").onclick=function(){
+  alert("加到主畫面：\niPhone Safari → 下方「分享」圖示 → 加入主畫面\nAndroid Chrome → 右上角選單 → 加到主畫面 / 安裝應用程式");
+};
+
+/* =========================================================
+   6. 下一段倒數（僅網頁開著時有效）
+========================================================= */
+(function(){
+  var bar=document.getElementById("countbar");
+  function tick(){
+    var now=new Date();
+    var next=null;
+    for(var i=0;i<EVENTS.length;i++){
+      var ev=EVENTS[i];
+      var t=new Date(ev[0],ev[1]-1,ev[2],ev[3],ev[4],0);
+      if(t>now){next=t;bar.innerHTML="下一段：<b>"+ev[6]+"</b>・還有 "+Math.max(1,Math.round((t-now)/60000))+" 分";break;}
+    }
+    if(next && (next-now)<24*3600000){bar.classList.add("show");}else{bar.classList.remove("show");}
+  }
+  tick();setInterval(tick,30000);
+})();
+
+/* =========================================================
+   6b. 出發前確認清單（checkbox + localStorage）
+========================================================= */
+var CKLIST=[
+  ["passport","護照效期","確認護照有效期超過回國日6個月（2027/05以後）"],
+  ["vjw","Visit Japan Web","出發前在 vjw-lp.digital.go.jp 登錄入境資訊（入國審查＋稅關申告），到日本掃QR code過關"],
+  ["insurance","旅平險＋不便險","出發前在台灣投保（富邦／新安東京海上），最晚起飛前1小時可保"],
+  ["ecbo","ecbo cloak APP 預約","出發前兩週預約高松機場寄物（10/30→11/3）"],
+  ["offlinemap","離線地圖下載","Google Maps 德島＋香川全區＋YAMAP 燒山寺路線"],
+  ["icoca","ICOCA／Mobile Suica","準備好IC卡，或先在Apple Wallet設定好Mobile Suica"],
+  ["reconfirm","訂房再確認","出發前3天打電話確認3家住宿（見「出發前」頁電話清單）"],
+  ["packing","打包清單","對照「出發前」頁打包清單逐項確認"],
+  ["cash","現金","每人¥80,000日幣現金，台灣先換好"]
+];
+(function(){
+  var ul=document.getElementById("cklist");
+  var CKKEY="henro-cklist-v1";
+  var st={};
+  try{var raw=localStorage.getItem(CKKEY);if(raw)st=JSON.parse(raw)||{};}catch(e){}
+  CKLIST.forEach(function(item){
+    var li=document.createElement("li");
+    li.innerHTML='<label><input type="checkbox" data-k="'+item[0]+'"><span class="cktext"><b>'+item[1]+'</b><span>'+item[2]+'</span></span></label>';
+    var cb=li.querySelector("input");
+    cb.checked=!!st[item[0]];
+    cb.onchange=function(){st[item[0]]=cb.checked;try{localStorage.setItem(CKKEY,JSON.stringify(st));}catch(e){}};
+    ul.appendChild(li);
+  });
+})();
+
+/* =========================================================
+   6c. 把急難內容同步複製進每天的 🆘 面板
+========================================================= */
+(function(){
+  var core=document.getElementById("sos-core");
+  if(!core)return;
+  var html=core.innerHTML+'<p style="margin-top:.9rem"><button type="button" class="btn ghost" data-goto="sos">查看完整急難頁 →</button></p>';
+  ["d1-sos","d2-sos","d3-sos","d4-sos","d5-sos"].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.innerHTML='<h4>🆘 急難（與「急難」頁內容相同）</h4>'+html;
+  });
+})();
+
+/* =========================================================
+   6d. 回憶頁：讀出打卡資料排版成相片書
+========================================================= */
+function renderMemory(){
+  var box=document.getElementById("memory-cards");
+  if(!box)return;
+  box.innerHTML="";
+  var any=false;
+  TEMPLES.forEach(function(tp){
+    var st=getSt(tp.n);
+    var photos=photosByTemple[tp.n]||[];
+    if(!st.sanpai && !st.nokyo && !st.note && photos.length===0)return;
+    any=true;
+    var qq=st.sanpai?quoteForTemple(tp.n):null;
+    var card=document.createElement("div");
+    card.className="memcard";
+    card.innerHTML=
+      '<h4>第 '+tp.n+' 番　'+tp.name+'</h4>'+
+      '<div class="mts">'+(st.sanpai?"參拜 ✓":"")+(st.sanpai&&st.nokyo?"　":"")+(st.nokyo?"納経 ✓":"")+'</div>'+
+      (st.note?'<div class="mnote">'+escHtml(st.note)+'</div>':'')+
+      (qq?'<div class="mq">「'+escHtml(qq.q)+'」</div>':'')+
+      '<div class="mimgs">'+photos.map(function(p){return '<img src="'+p.data+'" alt="第'+tp.n+'番照片">';}).join("")+'</div>';
+    box.appendChild(card);
+  });
+  if(!any){
+    box.innerHTML='<p class="memempty">還沒有打卡紀錄。走到寺廟時到「打卡進度」勾選參拜／納経，這裡就會自動生成回憶頁。</p>';
+  }
+}
+function escHtml(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+renderMemory();
+ciRoot.addEventListener("change",renderMemory);
+ciRoot.addEventListener("input",renderMemory);
+
+document.getElementById("btnMemoryPdf").onclick=function(){
+  renderMemory();
+  window.henroPrintMemory();
+};
+document.getElementById("btnMemoryCopy").onclick=function(){
+  var lines=["人生即遍路 ～ 兩人同行　旅遊回憶　"+new Date().toLocaleDateString("zh-TW")];
+  TEMPLES.forEach(function(tp){
+    var st=getSt(tp.n);
+    if(!st.sanpai && !st.nokyo && !st.note)return;
+    lines.push("");
+    lines.push("第"+tp.n+"番 "+tp.name);
+    lines.push((st.sanpai?"參拜✓ ":"")+(st.nokyo?"納経✓":""));
+    if(st.note)lines.push("筆記："+st.note);
+    if(st.sanpai){var qq=quoteForTemple(tp.n);lines.push("名言："+qq.q+"（"+qq.src+"）");}
+  });
+  var text=lines.join("\n");
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){alert("已複製全部文字，可貼給 Claude 做回憶簿。");}).catch(function(){fallbackCopy(text);});
+  }else{fallbackCopy(text);}
+};
+function fallbackCopy(text){
+  try{
+    var ta=document.createElement("textarea");
+    ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
+    document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);
+    alert("已複製全部文字，可貼給 Claude 做回憶簿。");
+  }catch(e){alert("複製失敗，請手動選取文字複製。");}
+}
+
+/* =========================================================
+   7. Service Worker 註冊
+========================================================= */
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("sw.js").then(function(){
+      document.getElementById("swstatus").textContent="離線功能已就緒";
+    }).catch(function(){
+      document.getElementById("swstatus").textContent="";
+    });
+  });
+}
+
+window.henroPrintMemory=function(){
+  document.body.classList.add("print-memory");
+  window.print();
+};
+window.henroGoto=gotoSection;
+
+})();
+</script>
+</body>
+</html>
