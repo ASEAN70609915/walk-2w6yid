@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>人生即遍路 ～ 兩人同行</title>
+<title>人生即遍路 同行二人</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="四國遍路 德島第1-12番 五天四夜行程・打卡・急難・離線可用">
@@ -150,7 +150,19 @@
   .jpq{padding:.5rem 0;border-top:1px solid color-mix(in srgb,var(--jp) 35%,transparent)}
   .jpq:first-of-type{border-top:none}
   .jpq .zh{font-size:.86rem;color:var(--muted)}
-  .jpq .ja{font-size:1rem;font-weight:600}
+  .jpq .ja{font-size:1rem;font-weight:600;display:inline}
+  .btn-speak{display:inline-block;margin-left:.4rem;padding:0 .3rem;border:none;background:none;font-size:1rem;cursor:pointer;vertical-align:middle;opacity:.6;transition:opacity .2s}
+  .btn-speak:hover,.btn-speak:active{opacity:1}
+  .btn-speak.speaking{opacity:1;animation:pulse .8s infinite alternate}
+  @keyframes pulse{from{transform:scale(1)}to{transform:scale(1.2)}}
+  .alarm{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;padding:.5rem .7rem;margin-top:.3rem;font-size:.88rem}
+  .alarm b{color:var(--accent)}
+  .checkpoint{background:color-mix(in srgb,var(--warn-ink) 12%,transparent);border-radius:8px;padding:.5rem .7rem;margin-top:.3rem;font-size:.88rem}
+  .checkpoint b{color:var(--warn-ink)}
+  .tt-tbl{width:100%;font-size:.78rem;border-collapse:collapse;white-space:nowrap}
+  .tt-tbl th{background:var(--accent);color:#fff;padding:.3rem .4rem;font-weight:600}
+  .tt-tbl td{padding:.3rem .4rem;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+  .tt-tbl .rec{background:color-mix(in srgb,var(--accent) 12%,transparent);font-weight:600}
   .jpq .ro{font-size:.8rem;color:var(--muted);font-style:italic}
 
   .maplinks{display:flex;flex-direction:column;gap:.5rem}
@@ -363,24 +375,24 @@
 
 <header>
   <div class="hbar">
-    <span class="htitle">人生即遍路 <small>～ 兩人同行</small></span>
+    <span class="htitle">人生即遍路 <small>同行二人</small></span>
     <div class="sizer" role="group" aria-label="調整字級">
       <button type="button" id="sMinus" aria-label="縮小字級">A－</button>
       <button type="button" id="sPlus" aria-label="放大字級">A＋</button>
     </div>
   </div>
   <nav class="chips" aria-label="跳到" id="chips">
+    <button type="button" data-goto="before">出發前</button>
     <button type="button" data-goto="day1">D1</button>
     <button type="button" data-goto="day2">D2</button>
     <button type="button" data-goto="day3">D3</button>
     <button type="button" data-goto="day4">D4</button>
     <button type="button" data-goto="day5">D5</button>
     <button type="button" data-goto="checkin">打卡</button>
-    <button type="button" data-goto="memory">回憶</button>
-    <button type="button" data-goto="cost">費用</button>
-    <button type="button" data-goto="before">出發前</button>
-    <button type="button" data-goto="sos">急難</button>
     <button type="button" data-goto="tips">實務</button>
+    <button type="button" data-goto="sos">急難</button>
+    <button type="button" data-goto="cost">費用</button>
+    <button type="button" data-goto="memory">回憶</button>
   </nav>
   <div class="countbar" id="countbar"></div>
 </header>
@@ -388,7 +400,7 @@
 <div class="wrap">
 
   <div class="lede">
-    <h1>人生即遍路 ～ 兩人同行</h1>
+    <h1>人生即遍路 同行二人</h1>
     <p class="sub">2026.10.30（五）– 11.03（二）・5天4夜・德島 第1番→第12番</p>
     <p class="sub">字級用右上 A－／A＋ 調・電話號碼點一下可直撥・整支 App 離線可用</p>
     <span class="previewtag">資料只存這支手機，可放心亂點・回程請盡快「整理成 PDF」</span>
@@ -397,6 +409,63 @@
       <button type="button" id="btnInstallHint">📲 加到主畫面</button>
     </div>
   </div>
+
+  <!-- ================= 出發前確認 ================= -->
+  <section class="blk" id="before">
+    <h2>出發前確認清單</h2>
+    <p class="blkintro">勾了會記住（存這支手機），下次打開還在。</p>
+    <ul class="cklist" id="cklist"></ul>
+  </section>
+
+  <section class="blk" id="recapps">
+    <h2>推薦下載 App</h2>
+    <ul class="plain">
+      <li><b>Google Maps</b> — 離線地圖必備，出發前下載德島＋香川全區</li>
+      <li><b>YAMAP</b> — 登山地圖 App，下載「藤井寺→燒山寺」路線（比 Google Maps 山路更精準）</li>
+      <li><b>tenki.jp</b>（日本気象協会）— 日本天氣預報，可查每小時降雨機率＋氣溫，出發前幾天開始追蹤德島天氣</li>
+      <li><b>Google 翻譯</b> — 可離線日文翻譯（先下載日文離線包），拍照翻譯菜單或路標很方便</li>
+      <li><b>VoiceTra</b>（NICT）— 免費日文語音翻譯，對著手機說中文會講出日文，在餐廳或計程車上溝通用</li>
+      <li><b>ecbo cloak</b> — 行李寄放預約 App，高松機場 1F 寄放處用這個預約</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="offlinemap">
+    <h2>📴 離線地圖下載清單</h2>
+    <ul class="plain">
+      <li>Google Maps → 個人檔案 →「離線地圖」→ 下載<b>德島縣＋香川縣</b>全區（涵蓋全部行程範圍）</li>
+      <li>燒山寺步道另用 <b>YAMAP</b> App 下載「藤井寺→燒山寺」路線，比 Google Maps 步道更精準</li>
+      <li>Day 4（11/2）08:30–14:00 山中完全無手機訊號，上面的 Google Maps 連結那時全部打不開，務必<b>出發前</b>就下載好</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="pack">
+    <h2>打包清單</h2>
+    <div class="pack">
+      <span>長袖排汗上衣</span><span>外套</span><span>運動褲</span><span>輕便雨衣</span>
+      <span>運動鞋</span><span>登山包</span><span>墨鏡</span><span>凡士林</span>
+      <span>口罩</span><span>帽子</span><span>睡衣（長袖長褲）</span><span>護膝</span>
+      <span>登山杖 ×2</span><span>頭燈＋電池</span><span>痠痛貼布</span>
+      <span>盥洗用具</span><span>小毛巾</span><span>行動電源</span><span>充電器</span>
+      <span>透氣膠帶</span><span>OK繃</span><span>防曬乳</span><span>護唇膏</span>
+      <span>塑膠袋（裝濕衣物）</span><span>零錢包（公車/自販機）</span><span>耳塞＋眼罩</span>
+    </div>
+    <h3 style="margin-top:.8rem;font-size:.95rem">藥品</h3>
+    <div class="pack">
+      <span>胃藥</span><span>止痛藥</span><span>感冒藥</span><span>止瀉藥</span>
+      <span>暈車藥</span><span>蚊蟲藥膏</span><span>生理食鹽水（洗眼）</span>
+    </div>
+    <p class="r-s" style="margin-top:.7rem;color:var(--muted);font-size:.85rem">氣溫 11–16°C（燒山寺標高700m更冷，可能下雨，洋蔥式＋雨具）。不寄行李，全程背登山包；大行李箱放高松機場1F ecbo cloak（10/30→11/3）。</p>
+  </section>
+
+  <section class="blk" id="confirmcall">
+    <h2>訂房再確認（出發前3天各打一通）</h2>
+    <div class="row2"><div class="r-h">HOTEL AZ 徳島板野店 ・ <a href="tel:+81886722611">☎ 088-672-2611</a></div>
+      <div class="r-s">確認 10/30 15:00 Check-in、夕食付＋朝食サービス時間、到場付款</div></div>
+    <div class="row2"><div class="r-h">溫泉山 安樂寺 宿坊 ・ <a href="tel:+81886942046">☎ 088-694-2046</a></div>
+      <div class="r-s">確認 11/1 最終入住18:00、晚餐18:00早餐07:00、可否參加晨課、隔天06:30早朝便當＋07:00計程車代訂</div></div>
+    <div class="row2"><div class="r-h">神山溫泉ホテル四季の里 ・ <a href="tel:+81886761117">☎ 088-676-1117</a></div>
+      <div class="r-s">確認 11/2 入住時間、早餐07:30／晚餐18:00、11/3退房時間</div></div>
+  </section>
 
   <!-- ================= DAY 1 ================= -->
   <details class="day" id="day1" open>
@@ -520,12 +589,27 @@
           <p class="act">高松空港 → 高松駅</p>
           <p class="meta">機場巴士約 45 分 ・ 站牌在國內線航廈出口外 2 號 ・ 可刷 ICOCA</p>
           <p class="cost">¥1,300／人（2026/10/1 起調漲，行程表舊數字 ¥1,000 已修正）</p>
-          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp2">🔀 備案</button></div>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp2">🔀 備案</button><button type="button" class="r-alt" data-rp="d1-rp-tt">🕐 時刻表</button></div>
           <div class="rowpanel alt" id="d1-rp2">
             <p class="h">銜接：機場巴士 → JR 渦潮（うずしお）13:10</p>
             <p>・搭到 12:00 前的班次都接得上 13:10</p>
             <p>・12:40／13:05 那班到站後還有 41–47 分鐘，夠在綠色窗口或自動售票機買特急券（3–5 分鐘搞定），可接 14:10</p>
             <p>・渦潮 1 小時一班（13:10／14:10），最晚 14:10 墊底，當天一定到得了</p>
+          </div>
+          <div class="rowpanel alt" id="d1-rp-tt">
+            <p class="h">高松機場 → 高松駅 → 板野駅 時刻表</p>
+            <div style="overflow-x:auto">
+            <table class="tt-tbl">
+              <thead><tr><th>機場巴士發</th><th>抵高松駅</th><th>轉乘</th><th>特急車次</th><th>高松駅發</th><th>抵板野駅</th><th>備註</th></tr></thead>
+              <tbody>
+                <tr class="rec"><td>11:00</td><td>11:50</td><td>80分</td><td>うずしお 15號</td><td>13:10</td><td>14:01</td><td>可在高松駅前吃午餐</td></tr>
+                <tr><td>11:30</td><td>12:20</td><td>50分</td><td>うずしお 15號</td><td>13:10</td><td>14:01</td><td>轉乘標準舒適</td></tr>
+                <tr><td>13:20</td><td>14:05</td><td>65分</td><td>うずしお 19號</td><td>15:10</td><td>16:01</td><td>下午班次</td></tr>
+                <tr><td>15:15</td><td>16:00</td><td>70分</td><td>うずしお 23號</td><td>17:10</td><td>18:01</td><td>傍晚班次</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <p style="font-size:.78rem;color:var(--muted);margin-top:.4rem">巴士 ¥1,300、特急自由席 ¥2,440（運賃¥950＋特急券¥1,490）。步行剪票口約 2-3 分。</p>
           </div></div></li>
 
         <li><span class="t">12:00</span><div class="sb">
@@ -557,7 +641,8 @@
           <div class="rowpanel lore" id="d1-lore">
             <p class="h">第一番　靈山寺（りょうぜんじ）</p>
             <p style="font-size:.8rem;color:var(--muted)">📍 德島縣鳴門市　🗓 開基：天平年間（729–749）</p>
-            <p><b>典故：</b>相傳行基菩薩奉聖武天皇之勅，為鎮護國家開創此寺。弘法大師在此發願踏上四國巡禮，靈山寺因此被尊為「發心道場」第一番，象徵修行的起點。寺名「靈山」取自釋迦說法的靈鷲山之義。</p>
+            <p><b>典故：</b>聖武天皇勅願、行基菩薩開創。弘仁6年（815）弘法大師在此修法37天，感見釋迦於靈鷲山說法之景，遂命名「竺和山・靈山寺」，定為四國八十八箇所第一番「發願之寺」。</p>
+            <p><b>看點：</b>多寶塔（近600年）、緣結觀音、明治之庭。</p>
             <p><b>特色：</b>境內保有多國佛教文化融合特色，入口矗立印度風格多寶塔。本尊釋迦如來，每年大量遍路者來「打第一番」，在此取得白衣、金剛杖、納經帳等用品，正式展開八十八所巡禮。</p>
           </div>
           <div class="rowpanel car" id="d1-car">
@@ -578,6 +663,9 @@
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">HOTEL AZ 晚餐（含夕食付・朝食サービス）</p>
           <p class="meta">出發前再跟櫃檯確認開飯時間</p></div></li>
+
+        <li><span class="t">21:00</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 2 要 07:00 出發參拜第1番靈山寺。早餐 06:30。</div></div></li>
       </ol>
     </div>
   </details>
@@ -670,7 +758,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore2">🏯 典故</button></div>
           <div class="rowpanel lore" id="d2-lore2">
             <p class="h">第二番　極樂寺（ごくらくじ）</p>
-            <p><b>典故：</b>相傳行基菩薩雕刻阿彌陀如來像，弘法大師後來駐錫此地修行，並以長生の水加持，使此地成為延命長壽的靈場。傳說大師親植一株「長命杉」，樹齡已逾千年。</p>
+            <p><b>典故：</b>行基菩薩開基。弘仁6年弘法大師誦《阿彌陀經》21日，結願日阿彌陀如來現身，大師遂彫刻本尊。傳其光芒遠照鳴門海面妨礙漁民，故築小山遮光，山號「日照山」由此而來。</p>
+            <p><b>看點：</b>長命杉（大師親植、樹齡約1200年）、安產大師、佛足石。</p>
             <p><b>特色：</b>境內「長命杉」樹圍約8公尺，被指定為天然紀念物，信眾相信摸觸可得延年益壽之效。本尊阿彌陀如來，環境清幽。</p>
           </div></div></li>
 
@@ -685,7 +774,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore3">🏯 典故</button></div>
           <div class="rowpanel lore" id="d2-lore3">
             <p class="h">第三番　金泉寺（こんせんじ）</p>
-            <p><b>典故：</b>行基菩薩掘出黃金湧水而建此寺，故名「金泉寺」。弘法大師巡禮時逢大旱，以錫杖插地祈願，湧出清泉解村民倒懸之苦，此泉稱「獨鈷水」，至今仍湧流不息。</p>
+            <p><b>典故：</b>聖武天皇勅願、行基菩薩建寺，原名「金光明寺」。弘法大師巡教時見村民苦於乾旱，於此掘井湧出靈水，被稱為「黃金之井」，遂改名「金泉寺」。龜山天皇曾駐留此寺，長慶天皇御陵亦在本堂後方。</p>
+            <p><b>看點：</b>弁慶之力石（源平典故）、慈母觀音子安大師。</p>
             <p><b>特色：</b>境內「獨鈷水」水質清澈甘甜，遍路者多汲取供養或飲用。傳說以此水洗眼可治眼疾。另有「鏡池」，傳說照鏡可預知壽命長短。</p>
           </div></div></li>
 
@@ -730,7 +820,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore4">🏯 典故</button></div>
           <div class="rowpanel lore" id="d2-lore4">
             <p class="h">第四番　大日寺（だいにちじ）</p>
-            <p><b>典故：</b>弘法大師在此地修行時感得大日如來之靈示，雕刻大日如來像並安置於此，遂開創此寺。相傳大師在此修習密教最高法門「大日如來法」，寺名由此而來。</p>
+            <p><b>典故：</b>弘仁6年弘法大師於此感得大日如來，一刀三禮彫造約5.5公分本尊像。地處三面環山之「黑谷」，俗稱「黑谷寺」，山號「黑巖山」。經德島藩蜂須賀家歷代修復方有今日規模。</p>
+            <p><b>看點：</b>大日堂（1649年・和禪折衷式）、鐘樓門、西國三十三觀音像。</p>
             <p><b>特色：</b>本尊大日如來為弘法大師親刻，是四國靈場中少數以大日如來為本尊之寺院。境內有三十三觀音石佛排列，遍路者可在此一次完成等效於西國巡禮之功德。</p>
           </div></div></li>
 
@@ -746,7 +837,8 @@
           </div>
           <div class="rowpanel lore" id="d2-lore5">
             <p class="h">第五番　地藏寺（じぞうじ）</p>
-            <p><b>典故：</b>弘法大師於此地刻造勝軍地藏菩薩，並開眼供養。相傳此地藏菩薩具有守護旅人、增長智慧之神力，特別保佑學業進步及考試合格，自古即為學子祈願之所。</p>
+            <p><b>典故：</b>嵯峨天皇勅願，弘仁12年弘法大師開創，親彫勝軍地藏菩薩為本尊。後以靈木刻延命地藏像，將原像納入胎內。因勝軍地藏信仰，源賴朝、蜂須賀家等武將多有寄進，全盛時擁末寺約300間。</p>
+            <p><b>看點：</b>五百羅漢（現存約200尊，門票¥300）、水琴窟、800年大銀杏。</p>
             <p><b>特色：</b>本尊勝軍地藏菩薩（秘佛）具學業成就、旅途平安之靈驗。境內奧之院有「五百羅漢堂」，安置五百尊各具表情的羅漢像，傳說必能找到與自己或親人相似之像，是重要文化財。</p>
           </div>
           <div class="rowpanel alt" id="d2-rp1">
@@ -793,6 +885,9 @@
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（HOTEL AZ 含）</p>
           <p class="meta">出發前再確認時間</p></div></li>
+
+        <li><span class="t">21:00</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 05:30</b> — 明天 Day 3 走安樂寺→切幡寺（約20km），06:30 出發。早餐先在超市買好。</div></div></li>
       </ol>
 
       <div class="shop">
@@ -921,7 +1016,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore6">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore6">
             <p class="h">第六番　安樂寺（あんらくじ）</p>
-            <p><b>典故：</b>相傳弘法大師在此修行時湧出溫泉，大師以此溫泉為病苦之人療治身心，並刻造藥師如來像供奉，祈求眾生離苦得樂，遂以「安樂」為寺名。</p>
+            <p><b>典故：</b>弘法大師曾在此傳授溫泉湯治之利益，故山號「溫泉山」（大師堂前至今仍湧溫泉）。桃山時代蜂須賀家政將此寺定為「驛路寺」，設置遍路宿泊、茶湯接待，宿坊已有400年歷史。</p>
+            <p><b>看點：</b>多寶塔（極彩色佛畫＋御砂踏）、逆松（大師厄除靈木）、溫泉宿坊。</p>
             <p><b>特色：</b>設有溫泉宿坊，是四國靈場中少數可沐浴溫泉、住宿修行的寺院。本尊藥師如來守護健康，境內另有多寶塔等重要建築，春天梅花與桃花盛開。</p>
           </div></div></li>
 
@@ -934,7 +1030,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore7">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore7">
             <p class="h">第七番　十樂寺（じゅうらくじ）</p>
-            <p><b>典故：</b>弘法大師在此修行，誦念阿彌陀經，感悟極樂淨土之十種安樂，遂開創此寺，命名「十樂寺」。</p>
+            <p><b>典故：</b>原址在北方約3公里的十楽寺谷。弘法大師取人生苦難可獲「十種光明輝耀之樂」之意，命名「光明山十楽寺」。天正10年遭兵火全毀，寬永12年遷現址重建。</p>
+            <p><b>看點：</b>治眼疾目救歲地藏（自古靈驗）、愛染明王（結良緣＋斷惡緣）。</p>
             <p><b>特色：</b>本尊阿彌陀如來。境內「愛染堂」供奉愛染明王，是祈求良緣、戀愛成就的靈場。山門造型獨特，鮮豔朱紅色彩令人印象深刻。</p>
           </div></div></li>
 
@@ -968,7 +1065,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore8">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore8">
             <p class="h">第八番　熊谷寺（くまだにじ）</p>
-            <p><b>典故：</b>相傳弘法大師在此山中修行時，一頭熊引導大師前往靈地，大師感悟此乃神明示現，遂雕刻千手觀音菩薩開創此寺，以「熊谷」為名記此奇遇。</p>
+            <p><b>典故：</b>弘仁6年弘法大師修行時，紀州熊野權現現身授予金製觀音像後隱去。大師遂彫造等身大千手觀音，將金像納入胎內為本尊。昭和2年火災中本堂與本尊焚毀，昭和15年重建。</p>
+            <p><b>看點：</b>仁王門（四國靈場最大級，1687年・縣指定文化財）、大師堂（1707年・室町大師坐像）、多寶塔。</p>
             <p><b>特色：</b>擁有德島縣最大的多寶塔（縣指定文化財）。本尊千手觀音菩薩法力廣大。山門（仁王門）位於山腰，是四國靈場中規模最大的山門之一。</p>
           </div></div></li>
 
@@ -982,7 +1080,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore9">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore9">
             <p class="h">第九番　法輪寺（ほうりんじ）</p>
-            <p><b>典故：</b>弘法大師修行此地時，釋迦如來示現，轉動法輪，大師以此為感，雕刻涅槃釋迦像並開山。寺名「法輪」取佛陀初轉法輪、宣說佛法之意。</p>
+            <p><b>典故：</b>古稱「白蛇山法林寺」，原址在北方約4公里山中。弘法大師發現白蛇（佛使者），彫造釋迦涅槃像（頭北面西右脇臥，「北枕」語源）為本尊。正保年間遷現址，改名「正覺山法輪寺」。</p>
+            <p><b>看點：</b>草鞋守（健腳祈願，因有拐杖遍路者在此痊癒的傳說）、涅槃像每年僅2/15開帳一次。</p>
             <p><b>特色：</b>本尊涅槃釋迦如來（寢姿釋迦）為臥佛造型，在四國靈場中極為罕見。境內「足摩り」（撫足）習俗，信眾撫摸釋迦如來之足部，祈求腿腳健康、旅途平安。</p>
           </div></div></li>
 
@@ -1001,7 +1100,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore10">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore10">
             <p class="h">第十番　切幡寺（きりはたじ）</p>
-            <p><b>典故：</b>相傳弘法大師行腳至此，向一位少女乞布縫補袈裟，少女慷慨將織布用麻布全部奉上。大師感其誠心，以神力將少女化為千手觀音菩薩，並於此地建立伽藍。</p>
+            <p><b>典故：</b>「女人即身成佛之寺」。弘法大師向織布少女求取布片修補僧衣，少女毫不吝惜剪布奉上。大師為其剃度授灌頂，少女當下即身成佛，全身放七色光化為千手觀音。寺名「得度山・灌頂院・切幡寺」即由此而來。</p>
+            <p><b>看點：</b>333段石階（女厄坂・男厄坂）、大塔（國指定重要文化財・日本唯一式樣）、剪布觀音像。</p>
             <p><b>特色：</b>本尊千手觀音菩薩即化現自那位善良少女。境內333段石階通往本堂，兩重塔（重要文化財）建築精美，是境內代表性文化遺產。</p>
           </div></div></li>
 
@@ -1032,6 +1132,10 @@
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（含兩食）</p>
           <p class="meta">時間訂房時確認，遲到請電話聯繫（見 🆘 急難頁）</p></div></li>
+
+        <li><span class="t">20:30</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 05:00</b> — 明天 Day 4 燒山寺（全程最難）。05:30 起床整裝、06:00 早餐、<b>06:30 出發</b>。</div>
+          <div class="checkpoint">⚠ <b>明天關鍵判斷點</b><br>① 打電話跟四季の里確認入住、約定「16:00沒到就報警」<br>② 11:00 未到柳水庵（中繼庵）→ <b>折返，不硬撐</b><br>③ 14:00 前未登頂燒山寺 → 考慮叫計程車下山到神山溫泉</div></div></li>
       </ol>
 
       <div class="shop">
@@ -1168,7 +1272,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore11">🏯 典故</button></div>
           <div class="rowpanel lore" id="d4-lore11">
             <p class="h">第十一番　藤井寺（ふじいでら）</p>
-            <p><b>典故：</b>弘法大師在此地以一夜之功刻造藥師如來像，並在寺院四周種植藤花，祈願眾生消除病苦。每逢春日藤花盛開，因而得名「藤井寺」。</p>
+            <p><b>典故：</b>弘仁6年，42歲厄年的弘法大師在此修護摩法17日，彫造藥師如來像（國指定重要文化財），並親植五色紫藤，故稱「藤井寺」。延寶2年臨濟宗南山國師入山重興，寺宗改為臨濟宗。</p>
+            <p><b>看點：</b>雲龍天井畫（約30疊大巨龍圖）、春日五色紫藤花。往燒山寺約13km「遍路轉」難行古道，男約8hr、女約9hr。</p>
             <p><b>特色：</b>境內藤棚規模宏大，本尊藥師如來守護眾生健康。此寺是前往第十二番燒山寺「遍路最大難所」之登山起點，遍路者在此整備身心，準備迎接最艱難的山路考驗。</p>
           </div></div></li>
 
@@ -1188,7 +1293,8 @@
           <p class="act">杉木林道・無補給點</p>
           <p class="meta">全程約5–6小時</p>
           <p class="fac">必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</p>
-          <p class="fac"><b>安全約定：</b>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」。兩人絕不分開。</p></div></li>
+          <p class="fac"><b>安全約定：</b>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」。兩人絕不分開。</p>
+          <div class="checkpoint" style="margin-top:.5rem">⚠ <b>設鬧鐘 11:00</b>（上山前設好）<br>11:00 響時檢查：已到柳水庵（中繼庵）了嗎？<br>→ <b>還沒到 = 折返</b>，不硬撐。安全第一。</div></div></li>
 
         <li><span class="t">14:00</span><div class="sb">
           <p class="act">第12番 燒山寺 抵達・參拜（標高700m）</p>
@@ -1196,7 +1302,8 @@
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore12">🏯 典故</button></div>
           <div class="rowpanel lore" id="d4-lore12">
             <p class="h">第十二番　燒山寺（しょうさんじ）</p>
-            <p><b>典故：</b>弘法大師在此深山修行時，以燒木（護摩木）燃燒修「燒供」（火供護摩），驅除妨礙修行的惡鬼，淨化山林，感得虛空藏菩薩示現。大師以此靈地開山，稱為「燒山」，此後成為考驗修行者意志的靈山。</p>
+            <p><b>典故：</b>四國靈場海拔第二高的山岳札所。此山原棲大蛇，常噴火燒害農民。弘法大師結「摩廬之印」誦真言上山，於虛空藏菩薩加護下將大蛇封印岩窟。因山曾成火海故稱「燒山寺」，山號「摩廬」意為水輪。</p>
+            <p><b>看點：</b>三面大黑天、杖杉庵（遍路開山始祖「衛門三郎」臨終之地）、境內數百年杉木巨林（縣天然紀念物）。</p>
             <p><b>特色：</b>四國八十八箇所中著名的「遍路最大難所」，從藤井寺至此需翻越陡峭山路約12公里。本尊虛空藏菩薩賜予無限智慧與福德。海拔約700公尺，晴天可眺望吉野川平原，視野開闊。修行艱辛後抵達，令人感受極大的成就感。</p>
           </div></div></li>
 
@@ -1229,6 +1336,9 @@
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（含兩食）</p>
           <p class="meta">✅ 18:00～20:00 已確認</p></div></li>
+
+        <li><span class="t">21:00</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 06:30</b> — 明天 Day 5 最後一天，神山溫泉退房 09:00。輕鬆日，好好休息。</div></div></li>
       </ol>
     </div>
   </details>
@@ -1376,6 +1486,9 @@
           <span class="wtag">⚠ 報到截止・當天最後一班飛機</span>
           <p class="act">CI 179 Check-in 截止（起飛前2小時）</p></div></li>
 
+        <li><span class="t">12:30</span><div class="sb">
+          <div class="checkpoint">⚠ <b>Day 5 關鍵判斷</b><br>① 12:36 公車是回程主線，<b>錯過就叫計程車</b>（¥8,000–10,000）<br>② 提早出發備案：搭 11:16 班次（比主案早2hr到機場）<br>③ 16:55 報到截止、當天最後一班飛機，沒有容錯空間</div></div></li>
+
         <li><span class="t">18:55</span><div class="sb">
           <p class="act">CI 179 起飛 TAK → TPE</p>
           <p class="meta">飛機 ・ 3h10m ・ 21:05 抵達台北・お疲れさまでした！</p></div></li>
@@ -1423,133 +1536,58 @@
       <div class="progtext" id="progtext">0 / 12 間</div>
       <div class="progbar"><i id="progbar" style="width:0%"></i></div>
     </div>
+
+    <section class="blk" id="sanpai-guide" style="margin-bottom:1rem">
+      <h3 style="font-size:1rem;margin:0 0 .5rem">參拜流程</h3>
+      <ol class="plain" style="padding-left:1.2rem;margin:0">
+        <li><b>淨手漱口</b> — 於手水舍潔淨雙手與口，帶著尊敬之心進入</li>
+        <li><b>點香與獻燈</b> — 點香、獻燈表達虔誠，祈求心願圓滿</li>
+        <li><b>參拜本堂與大師堂</b> — 雙手合十，恭敬參拜本尊佛與弘法大師</li>
+        <li><b>唸經迴向</b> — 持納經帳唸經，可為自己或他人祈福</li>
+        <li><b>祈願</b> — 身心健康、疾病平癒、家庭平安、親友幸福、工作順利、事業發展、解開煩惱、心靈安穩、修行圓滿、智慧成長</li>
+      </ol>
+    </section>
+
     <div id="ci-cards"></div>
     <p class="storenote">💾 打勾／筆記存在這支手機（localStorage）；照片存在這支手機（IndexedDB）。都<b>不會上傳</b>、也不會同步到別的裝置。私密瀏覽模式或不支援的瀏覽器會停用照片功能，改用手機相簿拍就好。回程請盡快到「回憶」頁整理成 PDF。</p>
     <p class="dbwarn" id="dbwarn">⚠ 這支手機的瀏覽器不支援照片本機儲存（IndexedDB），已停用「＋加照片」。請改用手機相簿拍照，勾選與筆記仍會正常保存。</p>
   </div>
 
-  <!-- ================= 回憶 ================= -->
-  <section class="blk memoryblk" id="memory">
-    <h2>旅遊回憶</h2>
-    <p class="blkintro">把 12 間的打卡（參拜／納経、筆記、當時的名言、照片）排成相片書版面。資料只在這支手機，<b>回國請儘快匯出 PDF</b>。</p>
-    <div id="memory-cards"></div>
-    <div class="memactions">
-      <button type="button" class="btn solid" id="btnMemoryPdf">🖨 整理成 PDF</button>
-      <button type="button" class="btn" id="btnMemoryCopy">📋 複製全部文字</button>
-    </div>
-    <p class="storenote">「整理成 PDF」會開啟手機的列印畫面，選「儲存為 PDF」即可存成永久檔案。「複製全部文字」把所有筆記＋名言複製到剪貼簿，回國後可貼給 Claude 做精緻版回憶簿。</p>
-  </section>
-
-
-  <!-- ================= 費用頁 ================= -->
-  <section class="blk" id="cost">
-    <h2>費用概算（一人／兩人・不含機票）</h2>
-    <p class="blkintro">住宿為確定金額，交通與飲食為估計。機場巴士車資已按 2026/10/1 起的新價 ¥1,300 更新（行程表舊數字 ¥1,000 已修正）。</p>
-
-    <div class="costgroup">
-      <h3>交通</h3>
-      <ul class="costlist">
-        <li><span class="ci">機場巴士 高松空港→高松駅 <em>Day1</em></span><span class="cv">¥1,300 ／ ¥2,600</span><span class="cn">琴電・ICOCA可・2026/10/1起漲價</span></li>
-        <li><span class="ci">JR うずしお 高松→板野 自由席 <em>Day1</em></span><span class="cv">¥2,440 ／ ¥4,880</span><span class="cn">運賃¥1,210＋特急¥1,230</span></li>
-        <li><span class="ci">計程車 板野→靈山寺 <em>Day1</em></span><span class="cv">¥500 ／ ¥1,000</span></li>
-        <li><span class="ci">路線巴士 板野駅南→大日寺口 <em>Day2</em></span><span class="cv">¥260 ／ ¥520</span><span class="cn">鍛冶屋原線47/48号</span></li>
-        <li><span class="ci">路線巴士 羅漢→板野駅南 <em>Day2</em></span><span class="cv">¥340 ／ ¥680</span><span class="cn">鍛冶屋原線28号</span></li>
-        <li><span class="ci">路線巴士 板野駅南→東原 <em>Day3</em></span><span class="cv">¥480 ／ ¥960</span><span class="cn">28號鍛冶屋原線</span></li>
-        <li><span class="ci">計程車 第7→8番 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
-        <li><span class="ci">計程車 切幡寺→安樂寺 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
-        <li><span class="ci">計程車 安樂寺→藤井寺 <em>Day4</em></span><span class="cv">¥3,000 ／ ¥6,000</span></li>
-        <li><span class="ci">計程車 燒山寺→神山温泉 <em>Day4</em></span><span class="cv">¥1,750 ／ ¥3,500</span></li>
-        <li><span class="ci">路線巴士 神山温泉前→德島駅 <em>Day5</em></span><span class="cv">¥1,200 ／ ¥2,400</span><span class="cn">佐那河內線62號</span></li>
-        <li><span class="ci">JR うずしお 德島→栗林 自由席 <em>Day5</em></span><span class="cv">¥2,640 ／ ¥5,280</span></li>
-        <li><span class="ci">琴電大巴 栗林公園前→空港 <em>Day5</em></span><span class="cv">¥900 ／ ¥1,800</span></li>
-        <li class="sub"><span class="ci">交通小計</span><span class="cv">¥16,310–16,720 ／ ¥32,620–33,440</span></li>
+  <!-- ================= 實務提示 ================= -->
+  <section class="blk" id="tips">
+    <h2>實務提示</h2>
+    <div class="tip" style="margin-top:0">
+      <h3>🌤 天氣</h3>
+      <ul>
+        <li>10/30–11/3 德島秋季平地約 11–16°C</li>
+        <li>燒山寺標高700m，明顯更冷、可能下雨 → 洋蔥式穿法＋雨具必備</li>
       </ul>
     </div>
-
-    <div class="costgroup">
-      <h3>住宿</h3>
-      <ul class="costlist">
-        <li><span class="ci">HOTEL AZ 徳島板野店 N1+N2 <em>10/30–31・2晚</em></span><span class="cv">¥12,320 ／ ¥24,640</span><span class="cn">✓已訂・夕食付＋朝食・到場付款</span></li>
-        <li><span class="ci">安樂寺 宿坊 N3 <em>11/1</em></span><span class="cv">¥11,000 ／ ¥22,000</span><span class="cn">✓已訂・已線上付清・含兩食・溫泉</span></li>
-        <li><span class="ci">神山溫泉ホテル四季の里 N4 <em>11/2</em></span><span class="cv">¥18,810 ／ ¥37,620</span><span class="cn">✓已訂・到場付款・含兩食・天然溫泉</span></li>
-        <li class="sub"><span class="ci">住宿小計</span><span class="cv">¥42,130 ／ ¥84,260</span></li>
+    <div class="tip">
+      <h3>💴 現金</h3>
+      <ul>
+        <li>宿坊／納経／御朱印／鄉下計程車多半只收現金，每人備 ¥80,000 日幣（台灣先換好）</li>
+        <li>ICOCA 儲值 ¥5,000 以上，涵蓋琴電機場巴士＋徳島バス全路線（含神山線・鍛冶屋原線）＋JR四国高德線閘門</li>
+        <li>JR うずしお 特急自由席的「自由席特急券」IC 卡刷不到，要另外在綠色窗口或售票機買</li>
       </ul>
     </div>
-
-    <div class="costgroup">
-      <h3>飲食・自費</h3>
-      <ul class="costlist">
-        <li><span class="ci">Day1 高松駅讚岐烏冬午餐</span><span class="cv">¥500–900 ／ ¥1,000–1,800</span></li>
-        <li><span class="ci">Day2 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
-        <li><span class="ci">Day3 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
-        <li><span class="ci">Day4 燒山寺登山 行動糧×3食＋2L水</span><span class="cv">¥1,000–1,500 ／ ¥2,000–3,000</span><span class="cn">山中無補給</span></li>
-        <li><span class="ci">Day5 德島駅午餐</span><span class="cv">¥800–1,200 ／ ¥1,600–2,400</span></li>
-        <li><span class="ci">Day5 機場輕食</span><span class="cv">¥500–1,500 ／ ¥1,000–3,000</span></li>
-        <li class="sub"><span class="ci">飲食小計</span><span class="cv">¥3,800–7,100 ／ ¥7,600–14,200</span></li>
+    <div class="tip">
+      <h3>🔋 手機電力</h3>
+      <ul>
+        <li>導航＋拍照很耗電，每人行動電源 10000mAh 以上</li>
+        <li>燒山寺段（08:30–14:00）可開飛航模式省電，反正也無訊號</li>
+        <li>頭燈務必帶備用電池</li>
       </ul>
     </div>
-
-    <div class="costgroup">
-      <h3>其他</h3>
-      <ul class="costlist">
-        <li><span class="ci">遍路用品 第1番購入</span><span class="cv">¥4,000–6,000 ／ ¥8,000–12,000</span><span class="cn">白衣・金剛杖・納経帳・輪袈裟</span></li>
-        <li><span class="ci">御朱印 12寺</span><span class="cv">¥3,600–6,000 ／ ¥7,200–12,000</span><span class="cn">¥300–500／寺</span></li>
-        <li><span class="ci">ecbo cloak 行李寄放</span><span class="cv">¥1,600–2,000 ／ ¥3,200–4,000</span><span class="cn">高松機場 10/30→11/3</span></li>
-        <li><span class="ci">ICOCA 押金（可退）</span><span class="cv">¥500 ／ ¥1,000</span><span class="cn">Mobile Suica 可省</span></li>
-        <li class="sub"><span class="ci">其他小計</span><span class="cv">¥9,700–14,500 ／ ¥19,400–29,000</span></li>
+    <div class="tip">
+      <h3>🙏 遍路禮儀</h3>
+      <ul>
+        <li>山門前一禮再進入，離開時回頭再一禮</li>
+        <li>參拜先合掌一禮，本堂＋大師堂各投納札、點燭上香</li>
+        <li>寺內輕聲，不喧嘩，尊重其他遍路者與信眾</li>
       </ul>
     </div>
-
-    <div class="total">
-      <div>總計（地面費用・不含機票）</div>
-      <div class="big">一人 ¥71,940–80,450 ／ 兩人 ¥143,880–160,900</div>
-      <div class="sub2">住宿已確定 ¥84,260（2人）・建議現金每人約 ¥80,000（宿坊、納経帳、御朱印、鄉下計程車多半只收現金）</div>
-    </div>
-
-    <div class="row2" style="margin-top:1rem">
-      <div class="r-h">與「住宿總覽」對照</div>
-      <div class="r-s">此頁與 Day1–4 各晚住宿卡數字一致；若有出入以此頁為準，訂房明細以列印版（含完整取消規定）為準。</div>
-    </div>
   </section>
-
-
-  <!-- ================= 出發前確認 ================= -->
-  <section class="blk" id="before">
-    <h2>出發前確認清單</h2>
-    <p class="blkintro">勾了會記住（存這支手機），下次打開還在。</p>
-    <ul class="cklist" id="cklist"></ul>
-  </section>
-
-  <section class="blk" id="offlinemap">
-    <h2>📴 離線地圖下載清單</h2>
-    <ul class="plain">
-      <li>Google Maps → 個人檔案 →「離線地圖」→ 下載<b>德島縣＋香川縣</b>全區（涵蓋全部行程範圍）</li>
-      <li>燒山寺步道另用 <b>YAMAP</b> App 下載「藤井寺→燒山寺」路線，比 Google Maps 步道更精準</li>
-      <li>Day 4（11/2）08:30–14:00 山中完全無手機訊號，上面的 Google Maps 連結那時全部打不開，務必<b>出發前</b>就下載好</li>
-    </ul>
-  </section>
-
-  <section class="blk" id="pack">
-    <h2>打包清單</h2>
-    <div class="pack">
-      <span>長袖排汗上衣</span><span>外套</span><span>運動褲</span><span>輕便雨衣</span>
-      <span>運動鞋</span><span>登山包</span><span>墨鏡</span><span>凡士林</span>
-      <span>口罩</span><span>帽子</span><span>睡衣（長袖長褲）</span><span>護膝</span>
-      <span>登山杖 ×2</span><span>頭燈＋電池</span><span>痠痛貼布</span>
-    </div>
-    <p class="r-s" style="margin-top:.7rem;color:var(--muted);font-size:.85rem">氣溫 11–16°C（燒山寺標高700m更冷，可能下雨，洋蔥式＋雨具）。不寄行李，全程背登山包；大行李箱放高松機場1F ecbo cloak（10/30→11/3）。</p>
-  </section>
-
-  <section class="blk" id="confirmcall">
-    <h2>訂房再確認（出發前3天各打一通）</h2>
-    <div class="row2"><div class="r-h">HOTEL AZ 徳島板野店 ・ <a href="tel:+81886722611">☎ 088-672-2611</a></div>
-      <div class="r-s">確認 10/30 15:00 Check-in、夕食付＋朝食サービス時間、到場付款</div></div>
-    <div class="row2"><div class="r-h">溫泉山 安樂寺 宿坊 ・ <a href="tel:+81886942046">☎ 088-694-2046</a></div>
-      <div class="r-s">確認 11/1 最終入住18:00、晚餐18:00早餐07:00、可否參加晨課、隔天06:30早朝便當＋07:00計程車代訂</div></div>
-    <div class="row2"><div class="r-h">神山溫泉ホテル四季の里 ・ <a href="tel:+81886761117">☎ 088-676-1117</a></div>
-      <div class="r-s">確認 11/2 入住時間、早餐07:30／晚餐18:00、11/3退房時間</div></div>
-  </section>
-
 
   <!-- ================= 急難頁 ================= -->
   <section class="blk" id="sos">
@@ -1623,41 +1661,88 @@
     </div>
   </section>
 
+  <!-- ================= 費用頁 ================= -->
+  <section class="blk" id="cost">
+    <h2>費用概算（一人／兩人・不含機票）</h2>
+    <p class="blkintro">住宿為確定金額，交通與飲食為估計。機場巴士車資已按 2026/10/1 起的新價 ¥1,300 更新（行程表舊數字 ¥1,000 已修正）。</p>
 
-  <!-- ================= 實務提示 ================= -->
-  <section class="blk" id="tips">
-    <h2>實務提示</h2>
-    <div class="tip" style="margin-top:0">
-      <h3>🌤 天氣</h3>
-      <ul>
-        <li>10/30–11/3 德島秋季平地約 11–16°C</li>
-        <li>燒山寺標高700m，明顯更冷、可能下雨 → 洋蔥式穿法＋雨具必備</li>
+    <div class="costgroup">
+      <h3>交通</h3>
+      <ul class="costlist">
+        <li><span class="ci">機場巴士 高松空港→高松駅 <em>Day1</em></span><span class="cv">¥1,300 ／ ¥2,600</span><span class="cn">琴電・ICOCA可・2026/10/1起漲價</span></li>
+        <li><span class="ci">JR うずしお 高松→板野 自由席 <em>Day1</em></span><span class="cv">¥2,440 ／ ¥4,880</span><span class="cn">運賃¥1,210＋特急¥1,230</span></li>
+        <li><span class="ci">計程車 板野→靈山寺 <em>Day1</em></span><span class="cv">¥500 ／ ¥1,000</span></li>
+        <li><span class="ci">路線巴士 板野駅南→大日寺口 <em>Day2</em></span><span class="cv">¥260 ／ ¥520</span><span class="cn">鍛冶屋原線47/48号</span></li>
+        <li><span class="ci">路線巴士 羅漢→板野駅南 <em>Day2</em></span><span class="cv">¥340 ／ ¥680</span><span class="cn">鍛冶屋原線28号</span></li>
+        <li><span class="ci">路線巴士 板野駅南→東原 <em>Day3</em></span><span class="cv">¥480 ／ ¥960</span><span class="cn">28號鍛冶屋原線</span></li>
+        <li><span class="ci">計程車 第7→8番 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
+        <li><span class="ci">計程車 切幡寺→安樂寺 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
+        <li><span class="ci">計程車 安樂寺→藤井寺 <em>Day4</em></span><span class="cv">¥3,000 ／ ¥6,000</span></li>
+        <li><span class="ci">計程車 燒山寺→神山温泉 <em>Day4</em></span><span class="cv">¥1,750 ／ ¥3,500</span></li>
+        <li><span class="ci">路線巴士 神山温泉前→德島駅 <em>Day5</em></span><span class="cv">¥1,200 ／ ¥2,400</span><span class="cn">佐那河內線62號</span></li>
+        <li><span class="ci">JR うずしお 德島→栗林 自由席 <em>Day5</em></span><span class="cv">¥2,640 ／ ¥5,280</span></li>
+        <li><span class="ci">琴電大巴 栗林公園前→空港 <em>Day5</em></span><span class="cv">¥900 ／ ¥1,800</span></li>
+        <li class="sub"><span class="ci">交通小計</span><span class="cv">¥16,310–16,720 ／ ¥32,620–33,440</span></li>
       </ul>
     </div>
-    <div class="tip">
-      <h3>💴 現金</h3>
-      <ul>
-        <li>宿坊／納経／御朱印／鄉下計程車多半只收現金，每人備 ¥80,000 日幣（台灣先換好）</li>
-        <li>ICOCA 儲值 ¥5,000 以上，涵蓋琴電機場巴士＋徳島バス全路線（含神山線・鍛冶屋原線）＋JR四国高德線閘門</li>
-        <li>JR うずしお 特急自由席的「自由席特急券」IC 卡刷不到，要另外在綠色窗口或售票機買</li>
+
+    <div class="costgroup">
+      <h3>住宿</h3>
+      <ul class="costlist">
+        <li><span class="ci">HOTEL AZ 徳島板野店 N1+N2 <em>10/30–31・2晚</em></span><span class="cv">¥12,320 ／ ¥24,640</span><span class="cn">✓已訂・夕食付＋朝食・到場付款</span></li>
+        <li><span class="ci">安樂寺 宿坊 N3 <em>11/1</em></span><span class="cv">¥11,000 ／ ¥22,000</span><span class="cn">✓已訂・已線上付清・含兩食・溫泉</span></li>
+        <li><span class="ci">神山溫泉ホテル四季の里 N4 <em>11/2</em></span><span class="cv">¥18,810 ／ ¥37,620</span><span class="cn">✓已訂・到場付款・含兩食・天然溫泉</span></li>
+        <li class="sub"><span class="ci">住宿小計</span><span class="cv">¥42,130 ／ ¥84,260</span></li>
       </ul>
     </div>
-    <div class="tip">
-      <h3>🔋 手機電力</h3>
-      <ul>
-        <li>導航＋拍照很耗電，每人行動電源 10000mAh 以上</li>
-        <li>燒山寺段（08:30–14:00）可開飛航模式省電，反正也無訊號</li>
-        <li>頭燈務必帶備用電池</li>
+
+    <div class="costgroup">
+      <h3>飲食・自費</h3>
+      <ul class="costlist">
+        <li><span class="ci">Day1 高松駅讚岐烏冬午餐</span><span class="cv">¥500–900 ／ ¥1,000–1,800</span></li>
+        <li><span class="ci">Day2 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
+        <li><span class="ci">Day3 行動糧・飲水</span><span class="cv">¥500–1,000 ／ ¥1,000–2,000</span></li>
+        <li><span class="ci">Day4 燒山寺登山 行動糧×3食＋2L水</span><span class="cv">¥1,000–1,500 ／ ¥2,000–3,000</span><span class="cn">山中無補給</span></li>
+        <li><span class="ci">Day5 德島駅午餐</span><span class="cv">¥800–1,200 ／ ¥1,600–2,400</span></li>
+        <li><span class="ci">Day5 機場輕食</span><span class="cv">¥500–1,500 ／ ¥1,000–3,000</span></li>
+        <li class="sub"><span class="ci">飲食小計</span><span class="cv">¥3,800–7,100 ／ ¥7,600–14,200</span></li>
       </ul>
     </div>
-    <div class="tip">
-      <h3>🙏 遍路禮儀</h3>
-      <ul>
-        <li>山門前一禮再進入，離開時回頭再一禮</li>
-        <li>參拜先合掌一禮，本堂＋大師堂各投納札、點燭上香</li>
-        <li>寺內輕聲，不喧嘩，尊重其他遍路者與信眾</li>
+
+    <div class="costgroup">
+      <h3>其他</h3>
+      <ul class="costlist">
+        <li><span class="ci">遍路用品 第1番購入</span><span class="cv">¥4,000–6,000 ／ ¥8,000–12,000</span><span class="cn">白衣・金剛杖・納経帳・輪袈裟</span></li>
+        <li><span class="ci">御朱印 12寺</span><span class="cv">¥3,600–6,000 ／ ¥7,200–12,000</span><span class="cn">¥300–500／寺</span></li>
+        <li><span class="ci">ecbo cloak 行李寄放</span><span class="cv">¥1,600–2,000 ／ ¥3,200–4,000</span><span class="cn">高松機場 10/30→11/3</span></li>
+        <li><span class="ci">ICOCA 押金（可退）</span><span class="cv">¥500 ／ ¥1,000</span><span class="cn">Mobile Suica 可省</span></li>
+        <li class="sub"><span class="ci">其他小計</span><span class="cv">¥9,700–14,500 ／ ¥19,400–29,000</span></li>
       </ul>
     </div>
+
+    <div class="total">
+      <div>總計（地面費用・不含機票）</div>
+      <div class="big">一人 ¥71,940–80,450 ／ 兩人 ¥143,880–160,900</div>
+      <div class="sub2">住宿已確定 ¥84,260（2人）・建議現金每人約 ¥80,000（宿坊、納経帳、御朱印、鄉下計程車多半只收現金）</div>
+    </div>
+
+    <div class="row2" style="margin-top:1rem">
+      <div class="r-h">與「住宿總覽」對照</div>
+      <div class="r-s">此頁與 Day1–4 各晚住宿卡數字一致；若有出入以此頁為準，訂房明細以列印版（含完整取消規定）為準。</div>
+    </div>
+  </section>
+
+
+  <!-- ================= 回憶 ================= -->
+  <section class="blk memoryblk" id="memory">
+    <h2>旅遊回憶</h2>
+    <p class="blkintro">把 12 間的打卡（參拜／納経、筆記、當時的名言、照片）排成相片書版面。資料只在這支手機，<b>回國請儘快匯出 PDF</b>。</p>
+    <div id="memory-cards"></div>
+    <div class="memactions">
+      <button type="button" class="btn solid" id="btnMemoryPdf">🖨 整理成 PDF</button>
+      <button type="button" class="btn" id="btnMemoryCopy">📋 複製全部文字</button>
+    </div>
+    <p class="storenote">「整理成 PDF」會開啟手機的列印畫面，選「儲存為 PDF」即可存成永久檔案。「複製全部文字」把所有筆記＋名言複製到剪貼簿，回國後可貼給 Claude 做精緻版回憶簿。</p>
   </section>
 
 
@@ -1716,7 +1801,7 @@
   </div>
 
   <footer>
-    人生即遍路 ～ 兩人同行 ・ 建置 2026-08-28<br>
+    人生即遍路 同行二人 ・ 建置 2026-08-28<br>
     行程／備案／例句／典故／名言 皆取自隨行資料夾內既有檔案・僅供本次旅程使用<br>
     <span id="swstatus"></span>
   </footer>
@@ -1793,18 +1878,18 @@ window.addEventListener("afterprint",function(){
    4. 打卡：12 間寺廟 + 名言
 ========================================================= */
 var TEMPLES=[
-  {n:1,name:"靈山寺",kana:"りょうぜんじ",day:2,one:"遍路之旅的起點。大師在此發願踏上四國巡禮。"},
-  {n:2,name:"極樂寺",kana:"ごくらくじ",day:2,one:"長命杉與阿彌陀如來，延命長壽的靈場。"},
-  {n:3,name:"金泉寺",kana:"こんせんじ",day:2,one:"大師錫杖插地湧出的「獨鈷水」，至今不息。"},
-  {n:4,name:"大日寺",kana:"だいにちじ",day:2,one:"大師親刻大日如來，境內三十三觀音石佛。"},
-  {n:5,name:"地藏寺",kana:"じぞうじ",day:2,one:"五百羅漢堂，據說能找到與親人相似的一尊。"},
-  {n:6,name:"安樂寺",kana:"あんらくじ",day:3,one:"溫泉宿坊，今晚就住這裡，藥師如來守護健康。"},
-  {n:7,name:"十樂寺",kana:"じゅうらくじ",day:3,one:"愛染堂祈良緣，山門朱紅色令人印象深刻。"},
-  {n:8,name:"熊谷寺",kana:"くまだにじ",day:3,one:"德島縣最大多寶塔，千手觀音法力廣大。"},
-  {n:9,name:"法輪寺",kana:"ほうりんじ",day:3,one:"臥佛涅槃釋迦像，撫足祈求腿腳健康。"},
-  {n:10,name:"切幡寺",kana:"きりはたじ",day:3,one:"333 段石階，織女獻布化為千手觀音的傳說。"},
-  {n:11,name:"藤井寺",kana:"ふじいでら",day:4,one:"燒山寺登山口，大師親植藤花，準備最艱難的路。"},
-  {n:12,name:"燒山寺",kana:"しょうさんじ",day:4,one:"遍路最大難所，海拔700m，抵達即是最大成就。"}
+  {n:1,name:"靈山寺",kana:"りょうぜんじ",day:2,one:"四國遍路「發願之寺」。大師修法37天感見靈鷲山說法之景。"},
+  {n:2,name:"極樂寺",kana:"ごくらくじ",day:2,one:"大師親植長命杉（樹齡1200年）、安產大師靈驗。"},
+  {n:3,name:"金泉寺",kana:"こんせんじ",day:2,one:"大師掘井湧「黃金之井」解旱。弁慶之力石典故。"},
+  {n:4,name:"大日寺",kana:"だいにちじ",day:2,one:"大師一刀三禮彫大日如來。黑谷寺，西國三十三觀音。"},
+  {n:5,name:"地藏寺",kana:"じぞうじ",day:2,one:"五百羅漢堂（現存約200尊）、水琴窟、800年大銀杏。"},
+  {n:6,name:"安樂寺",kana:"あんらくじ",day:3,one:"400年溫泉宿坊。大師傳授湯治利益，今晚住這裡。"},
+  {n:7,name:"十樂寺",kana:"じゅうらくじ",day:3,one:"「十種光明之樂」。治眼疾地藏靈驗、愛染明王結良緣。"},
+  {n:8,name:"熊谷寺",kana:"くまだにじ",day:3,one:"四國靈場最大仁王門（1687年）、千手觀音、多寶塔。"},
+  {n:9,name:"法輪寺",kana:"ほうりんじ",day:3,one:"涅槃釋迦像（北枕語源）。草鞋守健腳祈願。"},
+  {n:10,name:"切幡寺",kana:"きりはたじ",day:3,one:"女人即身成佛之寺。333段石階、國指定重文大塔。"},
+  {n:11,name:"藤井寺",kana:"ふじいでら",day:4,one:"大師親植五色紫藤。厄除藥師（國重文）、雲龍天井畫。"},
+  {n:12,name:"燒山寺",kana:"しょうさんじ",day:4,one:"四國靈場海拔第二高。大師封印大蛇傳說，遍路最大難所。"}
 ];
 var QUOTES=[
   {q:"同行二人。（兩人同行，從不孤單。）",src:"出處：四國遍路傳承　主題：遍路・慈悲同行",
@@ -1998,44 +2083,22 @@ function icsEscape(s){return String(s).replace(/[\\;,]/g,function(c){return "\\"
 
 /* EVENTS: [年,月,日,時,分,持續分鐘,標題,說明,是否為截止型(額外-15分提醒)] */
 var EVENTS=[
-  [2026,10,30,4,0,20,"家裡出發→桃園機場","起飛前3小時",0],
-  [2026,10,30,5,0,120,"CI278 報到","中華航空 CI278 桃園→高松",0],
-  [2026,10,30,7,0,140,"CI278 起飛 TPE→TAK","",0],
-  [2026,10,30,10,20,50,"抵達高松機場・入境領行李","大行李箱送 ecbo cloak 寄放",0],
-  [2026,10,30,11,10,45,"高松空港→高松駅 機場巴士","¥1,300／人",0],
-  [2026,10,30,13,0,60,"高松駅→板野駅 JR特急うずしお","¥2,440自由席",0],
-  [2026,10,30,14,30,60,"HOTEL AZ→靈山寺 買遍路用品","",0],
-  [2026,10,30,18,0,60,"HOTEL AZ 晚餐","夕食付プラン",0],
-  [2026,10,31,7,30,30,"第1番 靈山寺 參拜","",0],
-  [2026,10,31,9,20,30,"第2番 極樂寺 參拜","",0],
-  [2026,10,31,10,40,30,"第3番 金泉寺 參拜","",0],
-  [2026,10,31,11,29,15,"板野駅南→大日寺口 巴士","鍛冶屋原線47/48号",0],
-  [2026,10,31,14,0,30,"第4番 大日寺 參拜","",0],
-  [2026,10,31,15,10,30,"第5番 地藏寺 參拜","納経所17:00關門",1],
-  [2026,10,31,16,21,10,"羅漢→板野駅南 巴士","鍛冶屋原線28号回程",0],
-  [2026,10,31,18,0,60,"HOTEL AZ 晚餐","",0],
-  [2026,11,1,8,19,15,"板野駅南→東原 巴士","鍛冶屋原線28号 土日祝首班",1],
-  [2026,11,1,8,50,30,"第6番 安樂寺 參拜","今晚住宿地",0],
-  [2026,11,1,10,10,30,"第7番 十樂寺 參拜","",0],
-  [2026,11,1,12,0,50,"第8番 熊谷寺 參拜","視體力機動放棄8、9番",0],
-  [2026,11,1,13,35,30,"第9番 法輪寺 參拜","",0],
-  [2026,11,1,15,45,30,"第10番 切幡寺 參拜","333段石階",0],
-  [2026,11,1,16,15,0,"計程車 切幡寺→安樂寺宿坊","前一晚需預約",1],
+  [2026,10,30,5,0,120,"CI278 報到 桃園→高松","起飛前2小時報到",1],
+  [2026,10,30,7,0,140,"CI278 起飛 TPE→TAK","10:20抵達高松",0],
+  [2026,10,30,11,10,45,"機場巴士 高松空港→高松駅","¥1,300",0],
+  [2026,10,30,13,10,57,"JR特急うずしお15号 高松→板野","¥2,440自由席・14:01到",1],
+  [2026,10,31,11,29,15,"巴士 板野駅南→大日寺口","鍛冶屋原線47/48号",1],
+  [2026,10,31,16,21,10,"巴士 羅漢→板野駅南","鍛冶屋原線28号回程",1],
+  [2026,11,1,8,19,15,"巴士 板野駅南→東原","鍛冶屋原線28号 土日祝首班・必搭",1],
   [2026,11,1,17,0,0,"Check-in 安樂寺宿坊","最終入住18:00",1],
-  [2026,11,1,18,0,60,"安樂寺宿坊 晚餐","",0],
-  [2026,11,2,6,30,30,"早朝便當・準備出發","前一晚請宿坊代訂計程車",0],
-  [2026,11,2,7,0,60,"計程車 安樂寺→藤井寺","約¥6,000",1],
-  [2026,11,2,8,0,30,"第11番 藤井寺 參拜","燒山寺登山口",0],
-  [2026,11,2,8,30,330,"藤井寺→燒山寺 徒步登山","12km・爬升640m・全程無訊號",0],
-  [2026,11,2,14,0,30,"第12番 燒山寺 抵達參拜","海拔700m",0],
-  [2026,11,2,14,30,30,"計程車 燒山寺→神山溫泉","下山務必搭車",1],
-  [2026,11,2,15,0,60,"Check-in 四季の里","",0],
-  [2026,11,2,18,0,60,"四季の里 晚餐","",0],
-  [2026,11,3,10,0,0,"四季の里 退房","",1],
-  [2026,11,3,12,36,60,"神山溫泉前→德島駅 巴士","佐那河內線62号・務必12:20前到站",1],
-  [2026,11,3,14,24,60,"德島駅→栗林駅 JR特急うずしお18号","¥2,640自由席",0],
-  [2026,11,3,15,41,30,"栗林公園前→高松空港 機場大巴","¥900",0],
-  [2026,11,3,16,55,0,"CI179 報到截止","起飛前2小時，硬底線",1],
+  [2026,11,2,7,0,60,"計程車 安樂寺→藤井寺","前晚預約・約¥6,000",1],
+  [2026,11,2,11,0,0,"⚠ 燒山寺折返判斷 11:00","未到柳水庵→折返",1],
+  [2026,11,2,16,0,0,"⚠ 四季の里 Check-in 約定","沒到就報警",1],
+  [2026,11,3,9,0,0,"四季の里 退房","退房09:00",1],
+  [2026,11,3,12,36,60,"巴士 神山溫泉前→德島駅","佐那河內線62号・12:20前到站牌",1],
+  [2026,11,3,14,24,60,"JR特急うずしお18号 德島→栗林","¥2,640自由席",0],
+  [2026,11,3,15,41,30,"機場大巴 栗林公園前→高松空港","¥900",0],
+  [2026,11,3,16,55,0,"CI179 報到截止","起飛前2小時，硬底線！！",1],
   [2026,11,3,18,55,190,"CI179 起飛 TAK→TPE","21:05抵台北",0]
 ];
 
@@ -2070,12 +2133,18 @@ function buildICS(){
 }
 document.getElementById("btnIcsAll").onclick=function(){
   try{
-    var blob=new Blob([buildICS()],{type:"text/calendar;charset=utf-8"});
+    var icsText=buildICS();
+    var blob=new Blob([icsText],{type:"text/calendar;charset=utf-8"});
     var url=URL.createObjectURL(blob);
-    var a=document.createElement("a");
-    a.href=url;a.download="henro-2026.ics";
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(isIOS){
+      window.open(url,"_blank");
+    }else{
+      var a=document.createElement("a");
+      a.href=url;a.download="henro-2026.ics";
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+    }
+    setTimeout(function(){URL.revokeObjectURL(url);},10000);
   }catch(e){alert("匯出失敗，請改用「分享」把這個網址傳給自己在電腦上開。");}
 };
 document.getElementById("btnInstallHint").onclick=function(){
@@ -2180,7 +2249,7 @@ document.getElementById("btnMemoryPdf").onclick=function(){
   window.henroPrintMemory();
 };
 document.getElementById("btnMemoryCopy").onclick=function(){
-  var lines=["人生即遍路 ～ 兩人同行　旅遊回憶　"+new Date().toLocaleDateString("zh-TW")];
+  var lines=["人生即遍路 同行二人　旅遊回憶　"+new Date().toLocaleDateString("zh-TW")];
   TEMPLES.forEach(function(tp){
     var st=getSt(tp.n);
     if(!st.sanpai && !st.nokyo && !st.note)return;
@@ -2221,6 +2290,26 @@ window.henroPrintMemory=function(){
   document.body.classList.add("print-memory");
   window.print();
 };
+(function initSpeech(){
+  if(!window.speechSynthesis)return;
+  var allJa=document.querySelectorAll(".ja");
+  allJa.forEach(function(el){
+    var btn=document.createElement("button");
+    btn.type="button";btn.className="btn-speak";btn.textContent="🔊";
+    btn.setAttribute("aria-label","朗讀日文");
+    btn.onclick=function(){
+      speechSynthesis.cancel();
+      var txt=el.textContent.trim();
+      var u=new SpeechSynthesisUtterance(txt);
+      u.lang="ja-JP";u.rate=0.85;
+      btn.classList.add("speaking");
+      u.onend=u.onerror=function(){btn.classList.remove("speaking");};
+      speechSynthesis.speak(u);
+    };
+    if(el.parentNode)el.parentNode.insertBefore(btn,el.nextSibling);
+  });
+})();
+
 window.henroGoto=gotoSection;
 
 })();
