@@ -159,6 +159,10 @@
   .alarm b{color:var(--accent)}
   .checkpoint{background:color-mix(in srgb,var(--warn-ink) 12%,transparent);border-radius:8px;padding:.5rem .7rem;margin-top:.3rem;font-size:.88rem}
   .checkpoint b{color:var(--warn-ink)}
+  .qbadge{color:var(--sos);font-weight:800;margin-right:.2rem}
+  .checkpoint .lv{font-weight:800}
+  .checkpoint .lv-y{color:var(--warn-line)}
+  .checkpoint .lv-r{color:var(--sos)}
   .tt-tbl{width:100%;font-size:.78rem;border-collapse:collapse;white-space:nowrap}
   .tt-tbl th{background:var(--accent);color:#fff;padding:.3rem .4rem;font-weight:600}
   .tt-tbl td{padding:.3rem .4rem;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
@@ -260,7 +264,12 @@
   .warnline{color:var(--warn-ink);background:var(--warn-bg);border-left:3px solid var(--warn-line);
     padding:.5rem .7rem;border-radius:.3rem;margin:.5rem 0;font-size:.86rem}
   .pack{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
-  .pack span{border:1px solid var(--hair);border-radius:2rem;padding:.25rem .7rem;font-size:.83rem;background:var(--surface-2)}
+  .pack button{border:1px solid var(--hair);border-radius:2rem;padding:.35rem .8rem;font-size:.83rem;background:var(--surface-2);
+    color:var(--ink);font-family:inherit;cursor:pointer;min-height:2.3rem}
+  .pack button.got{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);text-decoration:line-through}
+  .pack button.got::before{content:"✓ ";text-decoration:none;display:inline-block}
+  .packhint{margin-top:.5rem;font-size:.8rem;color:var(--muted)}
+  .packhint button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:0;text-decoration:underline}
 
   /* ---- checklist (出發前) ---- */
   .cklist{list-style:none;margin:.5rem 0 0;padding:0}
@@ -272,6 +281,34 @@
   .cklist .cktext b{display:block}
   .cklist .cktext span{color:var(--muted);font-size:.82rem}
   .cklist label:has(input:checked) .cktext{color:var(--muted);text-decoration:line-through}
+  .cklist .ckwhen{display:inline-block;margin-bottom:.2rem;padding:.05rem .55rem;border-radius:2rem;font-size:.72rem;
+    font-weight:700;background:var(--accent-soft);color:var(--accent);letter-spacing:.02em;text-decoration:none}
+  .cklist label:has(input:checked) .ckwhen{opacity:.45}
+
+  /* ---- 記帳／分帳 ---- */
+  .exp-who{display:flex;gap:.6rem;flex-wrap:wrap;margin:.2rem 0 .9rem}
+  .exp-who label{flex:1 1 8rem;font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:.35rem}
+  .exp-who input{flex:1;min-width:0;min-height:2.5rem;border:1.5px solid var(--hair);border-radius:.5rem;
+    background:var(--surface);color:var(--ink);font-family:inherit;font-size:.9rem;padding:0 .55rem}
+  .exp-summary{background:var(--accent-soft);border-radius:.7rem;padding:.9rem 1rem;font-size:.9rem;margin-bottom:1rem}
+  .exp-summary .big{font-size:1.05rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;margin-top:.35rem}
+  .exp-summary .settle{margin-top:.45rem;font-weight:700}
+  .exp-form{display:flex;flex-direction:column;gap:.55rem;background:var(--surface-2);border:1px solid var(--hair);border-radius:.7rem;padding:.9rem}
+  .exp-row{display:flex;gap:.55rem}
+  .exp-row>*{flex:1;min-width:0}
+  .exp-form input,.exp-form select{min-height:2.7rem;border:1.5px solid var(--hair);border-radius:.5rem;
+    background:var(--surface);color:var(--ink);font-family:inherit;font-size:.9rem;padding:0 .55rem}
+  .exp-form input[type=number]{font-variant-numeric:tabular-nums}
+  #expList{margin-top:.7rem}
+  #expList .none{color:var(--muted);font-style:italic;font-size:.85rem;padding:.6rem 0}
+  .exp-item{border-top:1px solid var(--hair);padding:.7rem 0;display:flex;gap:.6rem;align-items:flex-start;font-size:.88rem}
+  .exp-item:first-child{border-top:none}
+  .exp-item .ei-main{flex:1;min-width:0}
+  .exp-item .ei-h{font-weight:700;word-break:break-word}
+  .exp-item .ei-s{color:var(--muted);font-size:.8rem}
+  .exp-item .ei-amt{font-weight:800;color:var(--cost);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .exp-item img{width:3.2rem;height:3.2rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--hair);cursor:pointer;flex:0 0 auto}
+  .exp-item .ei-del{border:none;background:none;color:var(--sos);font-weight:700;cursor:pointer;font-size:.95rem;padding:.1rem .3rem;flex:0 0 auto}
 
   /* ---- 打卡 ---- */
   .checkin{background:var(--surface);border:1px solid var(--hair);border-radius:.9rem;padding:1.1rem;margin-top:1.6rem;scroll-margin-top:6rem}
@@ -392,6 +429,7 @@
     <button type="button" data-goto="tips">實務</button>
     <button type="button" data-goto="sos">急難</button>
     <button type="button" data-goto="cost">費用</button>
+    <button type="button" data-goto="expense">記帳</button>
     <button type="button" data-goto="memory">回憶</button>
   </nav>
   <div class="countbar" id="countbar"></div>
@@ -405,7 +443,6 @@
     <p class="sub">字級用右上 A－／A＋ 調・電話號碼點一下可直撥・整支 App 離線可用</p>
     <span class="previewtag">資料只存這支手機，可放心亂點・回程請盡快「整理成 PDF」</span>
     <div class="quicklinks">
-      <button type="button" id="btnIcsAll">📅 把全部行程加進手機行事曆</button>
       <button type="button" id="btnInstallHint">📲 加到主畫面</button>
     </div>
   </div>
@@ -440,21 +477,39 @@
 
   <section class="blk" id="pack">
     <h2>打包清單</h2>
-    <div class="pack">
-      <span>長袖排汗上衣</span><span>外套</span><span>運動褲</span><span>輕便雨衣</span>
-      <span>運動鞋</span><span>登山包</span><span>墨鏡</span><span>凡士林</span>
-      <span>口罩</span><span>帽子</span><span>睡衣（長袖長褲）</span><span>護膝</span>
-      <span>登山杖 ×2</span><span>頭燈＋電池</span><span>痠痛貼布</span>
-      <span>盥洗用具</span><span>小毛巾</span><span>行動電源</span><span>充電器</span>
-      <span>透氣膠帶</span><span>OK繃</span><span>防曬乳</span><span>護唇膏</span>
-      <span>塑膠袋（裝濕衣物）</span><span>零錢包（公車/自販機）</span><span>耳塞＋眼罩</span>
+    <p class="blkintro">收進包包就點一下，會變綠色打勾（存這支手機，下次打開還在）。</p>
+    <div class="pack" id="packlist">
+      <button type="button">長袖排汗上衣</button><button type="button">外套</button><button type="button">運動褲</button><button type="button">輕便雨衣</button>
+      <button type="button">運動鞋</button><button type="button">登山包</button><button type="button">墨鏡</button><button type="button">凡士林</button>
+      <button type="button">口罩</button><button type="button">帽子</button><button type="button">睡衣（長袖長褲）</button><button type="button">護膝</button>
+      <button type="button">登山杖 ×2</button><button type="button">頭燈＋電池</button><button type="button">痠痛貼布</button>
+      <button type="button">盥洗用具</button><button type="button">小毛巾</button><button type="button">行動電源</button><button type="button">充電器</button>
+      <button type="button">透氣膠帶</button><button type="button">OK繃</button><button type="button">防曬乳</button><button type="button">護唇膏</button>
+      <button type="button">塑膠袋（裝濕衣物）</button><button type="button">零錢包（公車/自販機）</button><button type="button">耳塞＋眼罩</button>
+      <button type="button">空白小筆記本＋筆（講不出來可以用寫的／畫的）</button><button type="button">簡易小包（隨身：護照影本・現金・IC卡）</button>
+    </div>
+    <h3 style="margin-top:.8rem;font-size:.95rem">D4 燒山寺登山專用（山中無訊號，務必兩人都齊全）</h3>
+    <div class="pack" id="packlist2">
+      <button type="button">頭燈 ×2（每人一個）</button><button type="button">保暖毯</button><button type="button">哨子</button>
+      <button type="button">離線地圖確認（Google+YAMAP）</button><button type="button">行動糧 ×3份</button><button type="button">水 2L／人</button>
     </div>
     <h3 style="margin-top:.8rem;font-size:.95rem">藥品</h3>
-    <div class="pack">
-      <span>胃藥</span><span>止痛藥</span><span>感冒藥</span><span>止瀉藥</span>
-      <span>暈車藥</span><span>蚊蟲藥膏</span><span>生理食鹽水（洗眼）</span>
+    <div class="pack" id="packlist3">
+      <button type="button">胃藥</button><button type="button">止痛藥</button><button type="button">感冒藥</button><button type="button">止瀉藥</button>
+      <button type="button">暈車藥</button><button type="button">蚊蟲藥膏</button><button type="button">生理食鹽水（洗眼）</button>
     </div>
-    <p class="r-s" style="margin-top:.7rem;color:var(--muted);font-size:.85rem">氣溫 11–16°C（燒山寺標高700m更冷，可能下雨，洋蔥式＋雨具）。不寄行李，全程背登山包；大行李箱放高松機場1F ecbo cloak（10/30→11/3）。</p>
+    <p class="packhint"><span id="packcount"></span> ・ <button type="button" id="packreset">全部清除</button></p>
+
+    <h3 style="margin-top:.9rem;font-size:.95rem">👕 穿衣建議（氣溫 11–16°C・日夜溫差大）</h3>
+    <ul class="plain">
+      <li><b>洋蔥式三層：</b>底層長袖排汗衣 → 中層薄刷毛或羽絨背心 → 外層防風防水外套。走熱了就脫，一停下休息馬上加回去。</li>
+      <li><b>下半身：</b>排汗長褲；怕冷或雨天加一件保暖內搭褲。</li>
+      <li><b>城鎮參拜日（D2／D3／D5）：</b>白天走路多半只要底層＋中層，早晚加外層外套。</li>
+      <li><b>D4 燒山寺（標高700m，比平地低 5–8°C、稜線風大）：</b>多帶一件中層、防水手套、毛帽或脖圍。衣服一旦被汗或雨浸濕，山上停下來會急速失溫，務必另備乾的替換上衣＋襪子，用夾鏈袋密封放包包。</li>
+      <li><b>雨天：</b>輕便雨衣直接罩最外層＋背包防雨套；鞋子濕了換乾襪比換鞋有效。</li>
+      <li>白衣（遍路裝束）套在最外層之外，不影響裡面保暖層的增減。</li>
+    </ul>
+    <p class="r-s" style="margin-top:.7rem;color:var(--muted);font-size:.85rem">不寄行李，全程背登山包；大行李箱放高松機場1F ecbo cloak（10/30→11/3）。</p>
   </section>
 
   <section class="blk" id="confirmcall">
@@ -465,16 +520,6 @@
       <div class="r-s">確認 11/1 最終入住18:00、晚餐18:00早餐07:00、可否參加晨課、隔天06:30早朝便當＋07:00計程車代訂</div></div>
     <div class="row2"><div class="r-h">神山溫泉ホテル四季の里 ・ <a href="tel:+81886761117">☎ 088-676-1117</a></div>
       <div class="r-s">確認 11/2 入住時間、早餐07:30／晚餐18:00、11/3退房時間</div></div>
-  </section>
-
-  <section class="blk" id="pre-check">
-    <h2>出發前一週確認</h2>
-    <div class="row2"><div class="r-h">🚌 高松空港利木津巴士時刻表</div>
-      <div class="r-s">巴士配合航班發車（國內線到達後約 15 分鐘出發），沒有固定時刻。出發前一週上 <a href="https://www.takamatsu-airport.com/access/bus/index.php" target="_blank" rel="noopener">高松空港官網</a> 查 10/30 當天實際班次，確認 Day 1 銜接時間</div></div>
-    <div class="row2"><div class="r-h">🚃 JR うずしお時刻表（高松↔德島／板野）</div>
-      <div class="r-s">Day 1 高松→板野、Day 5 德島→高松的特急班次，出發前上 <a href="https://www.jr-shikoku.co.jp/01_trainbus/jikoku/" target="_blank" rel="noopener">JR 四國官網</a> 確認 10/30、11/3 當天時刻</div></div>
-    <div class="row2"><div class="r-h">🌤 天氣預報</div>
-      <div class="r-s">tenki.jp 查德島 10 天預報，Day 4 燒山寺若有豪雨警報要評估是否改路線</div></div>
   </section>
 
   <!-- ================= DAY 1 ================= -->
@@ -525,6 +570,7 @@
 
       <div class="panel jp" id="d1-jp">
         <h4>Day 1 日文例句（點目的地給司機／站員看）</h4>
+        <div class="jpq"><div class="zh">【每次開口先講這句】不好意思，我是台灣人，日文只會一點點</div><div class="ja">すみません、台湾から来ました。日本語は少ししか話せません</div><div class="ro">Sumimasen, Taiwan kara kimashita. Nihongo wa sukoshi shika hanasemasen</div></div>
         <h5>1-A　高松機場　入境・領行李</h5>
         <div class="jpq"><div class="zh">觀光，停留5天</div><div class="ja">観光です。5日間の滞在です</div><div class="ro">Kankou desu. Itsukakan no taizai desu</div></div>
         <div class="jpq"><div class="zh">我的行李還沒出來</div><div class="ja">荷物がまだ出てきません</div><div class="ro">Nimotsu ga mada dete kimasen</div></div>
@@ -534,7 +580,7 @@
         <div class="jpq"><div class="zh">想寄放這兩個行李箱，11月3日下午來取</div><div class="ja">このスーツケースを2つ預けたいです。11月3日の午後に取りに来ます</div><div class="ro">Kono suutsukeesu o futatsu azuketai desu. Juuichi-gatsu mikka no gogo ni tori ni kimasu</div></div>
         <h5>1-C　機場巴士　高松空港 → 高松駅</h5>
         <div class="jpq"><div class="zh">往高松車站的巴士站牌在哪裡？</div><div class="ja">高松駅行きのバス乗り場はどこですか？</div><div class="ro">Takamatsu-eki yuki no basu noriba wa doko desu ka?</div></div>
-        <div class="jpq"><div class="zh">可以用 ICOCA 付車資嗎？</div><div class="ja">運賃は ICOCA で払えますか？</div><div class="ro">Unchin wa ICOCA de haraemasu ka?</div></div>
+        <div class="jpq"><div class="zh">可以用 Suica／ICOCA 付車資嗎？</div><div class="ja">運賃は Suica や ICOCA で払えますか？</div><div class="ro">Unchin wa Suica ya ICOCA de haraemasu ka?</div></div>
         <div class="jpq"><div class="zh">到站請告訴我</div><div class="ja">着いたら教えてください</div><div class="ro">Tsuitara oshiete kudasai</div></div>
         <h5>1-E　買 ICOCA（JR 綠色窗口 みどりの窓口）</h5>
         <div class="jpq"><div class="zh">我想買一張 ICOCA，請儲值 3000 日圓</div><div class="ja">ICOCA を1枚買いたいです。3000円チャージしてください</div><div class="ro">ICOCA o ichimai kaitai desu. Sanzen-en chaaji shite kudasai</div></div>
@@ -572,7 +618,7 @@
       <ol class="tl">
         <li><span class="t">04:00</span><div class="sb">
           <p class="act">家裡出發 → 桃園機場</p>
-          <p class="meta">起飛前 3 小時 ・ 自行安排（早班捷運或計程車）</p></div></li>
+          <p class="meta">起飛前 3 小時 ・ 已安排計程車接送（這時間捷運還沒發車）</p></div></li>
 
         <li><span class="t">05:00</span><div class="sb">
           <p class="act">桃園機場 Check-in</p>
@@ -586,59 +632,66 @@
           <p class="act">抵達高松機場 ・ 入境・領行李</p>
           <p class="meta">入境審查約 30 分</p>
           <p class="fac"><b>行李：</b>大行李箱 → 機場 1F ecbo cloak 寄放（10/30 → 11/3）</p>
-          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp1">🔀 備案</button></div>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp1">🕐 機場巴士時刻對照</button></div>
           <div class="rowpanel alt" id="d1-rp1">
-            <p class="h">銜接風險：入境＋領行李＋寄 ecbo 要在 11:30 巴士前完成</p>
-            <p>・文化の日連假前的週五，入境可能排較久</p>
-            <p>・出關先衝 2 號巴士站牌；大件行李可寄放高松空港置物櫃（Day5 回程經高松駅→機場巴士，回來取）</p>
-            <p>・掉了 11:30 這班 → 改搭 12:40／13:05 也還接得上 14:10 うずしお，Check-in 15:00 仍趕得上（15:25 到飯店）</p>
-            <p>・真的很趕 → 機場直接叫計程車到高松駅（約 ¥3,000）</p>
-          </div></div></li>
-
-        <li><span class="t">11:10</span><div class="sb">
-          <p class="act">高松空港 → 高松駅</p>
-          <p class="meta">機場巴士約 45 分 ・ 站牌在國內線航廈出口外 2 號 ・ 可刷 ICOCA</p>
-          <p class="cost">¥1,300／人（2026/10/1 起調漲，行程表舊數字 ¥1,000 已修正）</p>
-          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp2">🔀 備案</button><button type="button" class="r-alt" data-rp="d1-rp-tt">🕐 時刻表</button></div>
-          <div class="rowpanel alt" id="d1-rp2">
-            <p class="h">銜接：機場巴士 → JR 渦潮（うずしお）13:10</p>
-            <p>・搭到 12:00 前的班次都接得上 13:10</p>
-            <p>・12:40／13:05 那班到站後還有 41–47 分鐘，夠在綠色窗口或自動售票機買特急券（3–5 分鐘搞定），可接 14:10</p>
-            <p>・渦潮 1 小時一班（13:10／14:10），最晚 14:10 墊底，當天一定到得了</p>
-          </div>
-          <div class="rowpanel alt" id="d1-rp-tt">
-            <p class="h">高松機場 → 高松駅 → 板野駅 時刻表（參考）</p>
+            <p class="h">巴士配合航班發車，不是固定班距：官方公告「國際線到達約1小時後發車」</p>
             <div style="overflow-x:auto">
             <table class="tt-tbl">
-              <thead><tr><th>機場巴士發</th><th>抵高松駅</th><th>等候</th><th>特急車次</th><th>高松駅發</th><th>抵板野駅</th><th>備註</th></tr></thead>
+              <thead><tr><th>巴士發車</th><th>抵JRホテル高松駅</th><th>銜接特急</th><th>備註</th></tr></thead>
               <tbody>
-                <tr class="rec"><td>11:00</td><td>11:50</td><td>80分</td><td>うずしお 15號</td><td>13:10</td><td>14:01</td><td>可在高松駅前吃午餐</td></tr>
-                <tr><td>11:30</td><td>12:20</td><td>50分</td><td>うずしお 15號</td><td>13:10</td><td>14:01</td><td>轉乘標準舒適</td></tr>
-                <tr><td>13:20</td><td>14:05</td><td>65分</td><td>うずしお 19號</td><td>15:10</td><td>16:01</td><td>下午班次</td></tr>
-                <tr><td>15:15</td><td>16:00</td><td>70分</td><td>うずしお 23號</td><td>17:10</td><td>18:01</td><td>傍晚班次</td></tr>
+                <tr class="rec"><td>11:30</td><td>12:17</td><td>13:10 うずしお15號</td><td>綁定CI278（週五限定班表）・主案</td></tr>
+                <tr><td>12:40</td><td>13:22</td><td>14:10 うずしお17號</td><td>第一備案</td></tr>
+                <tr><td>13:05</td><td>13:47</td><td>14:10 うずしお17號</td><td>再更晚的備案，23分鐘買票走去月台仍夠</td></tr>
               </tbody>
             </table>
             </div>
-            <p style="font-size:.78rem;color:var(--muted);margin-top:.4rem">巴士 ¥1,300、特急自由席 ¥2,440（運賃¥950＋特急券¥1,490）。步行剪票口約 2-3 分。</p>
-            <p style="font-size:.78rem;color:var(--warn-ink);margin-top:.3rem">⚠ 巴士配合航班發車（到達後約 15 分鐘出發），非固定時刻。出發前一週查 <a href="https://www.takamatsu-airport.com/access/bus/index.php" target="_blank" rel="noopener">高松空港官網</a> 確認當天實際班次。</p>
+            <p style="font-size:.78rem;color:var(--muted);margin-top:.4rem">大人¥1,300／小孩¥650，車上收現金或刷IC卡皆可。以上是高松空港官網公告的 10/1～10/24 班表，<b>出發前會再核對一次官網最新班表</b>，屆時如有異動再修正。</p>
+            <p style="margin-top:.4rem">・大件行李也可改寄高松空港置物櫃（Day5 回程經高松駅→機場巴士，回來取）</p>
+            <p>・真的很趕 → 機場直接叫計程車到高松駅（約 ¥3,000）</p>
+          </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：11:20 還沒出關嗎？</b>（逼近11:30発車）<br>
+          <span class="lv lv-y">🟡 還沒出關</span>（會延誤，但整趟行程還是走得完）→ 這班是綁定妳班機的官方巴士，通常會等，不用衝；真的錯過 → 還有 <b>12:40</b>、<b>13:05</b> 兩班備案，都接得上 14:10 うずしお，不會卡住<br>
+          <b>影響：</b>越晚出關，午餐與靈山寺散策時間依序被壓縮，18:00晚餐時間不變</div></div></li>
+
+        <li><span class="t">11:30</span><div class="sb">
+          <p class="act">高松空港 → 高松駅（JRホテル高松駅前）</p>
+          <p class="meta">機場巴士約 47 分 ・ 站牌在國內線航廈出口外 ・ 可刷 Suica／ICOCA・這班綁定CI278航班發車</p>
+          <p class="cost">¥1,300／人</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp2">🔀 備案</button></div>
+          <div class="rowpanel alt" id="d1-rp2">
+            <p class="h">銜接：12:17到站 → JR 渦潮（うずしお）13:10</p>
+            <p>・53分鐘緩衝，夠買票＋簡單吃午餐</p>
+            <p>・萬一搭到12:40下一班（13:22到站），一樣接得上14:10うずしお</p>
           </div></div></li>
 
-        <li><span class="t">12:00</span><div class="sb">
-          <p class="act">高松駅周邊午餐（讚岐烏冬）</p>
-          <p class="meta">抵日第一餐</p>
-          <p class="cost">¥500–900</p>
-          <p class="fac">🏪 <b>設施：</b>高松駅內與駅前有多家讚岐烏冬店＋便利商店（LAWSON／セブン）</p></div></li>
+        <li><span class="t">12:20</span><div class="sb">
+          <p class="act">高松駅周邊午餐</p>
+          <p class="meta">抵日第一餐・食べログ 4.0以上在這一帶幾乎沒有，以下是車站步行圈內評分最高、菜色也不重複的三間</p>
+          <p class="cost">¥500–1,500</p>
+          <p class="fac">🍜 <a href="https://www.google.com/maps/search/?api=1&query=めりけんや+高松駅前店" target="_blank" rel="noopener">めりけんや 高松駅前店</a>（讚岐烏龍・3.49分・車站正對面走1-2分・自助式出餐快）<br>
+          🍣 <a href="https://www.google.com/maps/search/?api=1&query=天勝+高松+本店" target="_blank" rel="noopener">天勝 本店</a>（海鮮壽司・一銭焼名物・3.45分・徒歩約5分）<br>
+          🍱 <a href="https://www.google.com/maps/search/?api=1&query=立喰い寿司+七幸+高松駅" target="_blank" rel="noopener">立喰い寿司 七幸</a>（站內立食壽司・3.48分・駅直結・最快）</p>
+          </div></li>
 
-        <li><span class="t">13:00</span><div class="sb">
+        <li><span class="t">13:10</span><div class="sb">
           <p class="act">高松駅 → 板野駅</p>
           <p class="meta">JR 高德線 特急うずしお ・ 直達約 57 分 ・ 13:10 或 14:10 發</p>
           <p class="cost">¥2,440 自由席（運賃¥1,210＋特急券¥1,230）</p>
-          <p class="fac">⚠ <b>提醒：</b>「自由席特急券」要另外在綠色窗口／售票機買（IC 卡只刷運賃部分）</p></div></li>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-ticket">🎫 買票流程</button></div>
+          <div class="rowpanel alt" id="d1-ticket">
+            <p class="h">怎麼買到板野的自由席特急券（2人份）</p>
+            <p>① 找「みどりの窓口」綠色窗口，或有「指定席券売機」字樣的黃色售票機</p>
+            <p>② 跟站員說「板野まで、自由席２枚」，或機台選特急券→うずしお→板野→自由席→2枚</p>
+            <p>③ 一次付清運賃＋特急券共 ¥2,440×2＝¥4,880（現金／信用卡都收）</p>
+            <p>④ 拿到2張票（乘車券＋特急券，或已合併成一張），過改札口時放進閘口／給站員看即可上車</p>
+            <p style="color:var(--warn-ink)">⚠ ICOCA不能單獨扣特急券。如果想先刷ICOCA進站，特急券還是要另外拿紙本上車，不然車上驗票會被要求補票</p>
+          </div></div></li>
 
         <li><span class="t">14:08</span><div class="sb">
           <p class="act">板野駅着 → HOTEL AZ 徳島板野店</p>
           <p class="meta">步行約 15 分 ・ 可先寄放行李</p>
-          <p class="fac">🏪 <b>設施：</b>Marunaka 超市就在板野站旁，可買行動糧</p></div></li>
+          <p class="fac">🏪 <b>行動糧：</b><a href="https://www.google.com/maps/search/?api=1&query=マルナカ+板野店" target="_blank" rel="noopener">Marunaka 板野店</a>（超市，在板野站旁）</p>
+          <p class="fac">💊 <b>藥妝／痠痛貼布／常備藥：</b>這一帶有兩間開架藥妝，Day 2、Day 3 出發前要補的痠痛貼布、防曬、腸胃藥都在這買——<a href="https://www.google.com/maps/search/?api=1&query=ドラッグコスモス+板野店" target="_blank" rel="noopener">ドラッグコスモス 板野店</a>、<a href="https://www.google.com/maps/search/?api=1&query=ウエルシア薬局+板野北島町店" target="_blank" rel="noopener">ウエルシア 板野北島町店</a>（🟡 營業時間出發前查，一般到 21–22 點）</p></div></li>
 
         <li><span class="t">14:30</span><div class="sb">
           <p class="act">HOTEL AZ → 靈山寺　散步・環境確認・買遍路用品</p>
@@ -646,8 +699,22 @@
           <p class="cost">¥1,000</p>
           <div class="rowbtns">
             <button type="button" class="r-lore" data-rp="d1-lore">🏯 典故</button>
+            <button type="button" class="r-alt" data-rp="d1-goods">🛍 遍路用品</button>
             <button type="button" class="r-car" data-rp="d1-car">🚕 車行電話</button>
             <button type="button" class="r-alt" data-rp="d1-rp3">🔀 備案</button>
+          </div>
+          <div class="rowpanel alt" id="d1-goods">
+            <p class="h">第1番 靈山寺賣店　遍路用品（納経所旁，17:00 關門）</p>
+            <p><b>一定要買：</b></p>
+            <p>・<b>納札（納め札）</b>：白色一疊約 ¥100–200。每參拜一寺，在本堂＋大師堂各投 1 張，12 寺 ×2 ＝至少 24 張，買 2 疊夠。上面先寫好姓名、住所（台灣就寫 Taiwan）、日期、願望。</p>
+            <p>・<b>納経帳</b>：蓋 12 寺御朱印用，約 ¥1,500–2,500。這是回憶的主體，一定買。（御朱印每寺另付 ¥300–500）</p>
+            <p><b>可買可不買（看你要不要儀式感）：</b></p>
+            <p>・白衣（¥2,000–4,000）：遍路象徵、拍照好看，不穿也完全沒關係。</p>
+            <p>・輪袈裟（¥2,000）：掛脖的簡易法衣，禮儀性質，進本堂會比較「正式」。</p>
+            <p>・金剛杖（¥2,000）：山路輔助，<b>你們帶了登山杖 ×2，可以不買</b>。</p>
+            <p>・菅笠（斗笠 ¥2,000）：遮陽擋雨，但體積大、塞不進背包，這趟不建議。</p>
+            <p>・經本、持鈴、念珠、蠟燭線香：想照完整儀軌再買；只是走走看看可略。</p>
+            <p style="font-size:.8rem;color:var(--muted)">建議組合：納札 ×2疊 ＋ 納経帳，＋（想要的話）輪袈裟。其餘都可省。</p>
           </div>
           <div class="rowpanel lore" id="d1-lore">
             <p class="h">第一番　靈山寺（りょうぜんじ）</p>
@@ -676,7 +743,11 @@
           <p class="meta">出發前再跟櫃檯確認開飯時間</p></div></li>
 
         <li><span class="t">21:00</span><div class="sb">
-          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 2 要 07:00 出發參拜第1番靈山寺。早餐 06:30。</div></div></li>
+          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 2 要 07:00 出發參拜第1番靈山寺。早餐 06:30。</div>
+          <div class="shop" style="margin-top:.5rem">
+            <b>🌙 宵夜（板野周邊）</b>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=居酒屋+どんぶり+板野町" target="_blank" rel="noopener">居酒屋 どんぶり</a>（炭火烤雞串・至23:00・飯店步行10-12分）｜<a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+板野店" target="_blank" rel="noopener">Hotto Motto 板野店</a>（外帶炸雞・唐揚・至22:00）｜<a href="https://www.google.com/maps/search/?api=1&query=7-ELEVEN+板野" target="_blank" rel="noopener">7-ELEVEN／Lawson 板野站前店</a>（24H）</p>
+          </div></div></li>
       </ol>
     </div>
   </details>
@@ -712,6 +783,7 @@
 
       <div class="panel jp" id="d2-jp">
         <h4>Day 2 日文例句</h4>
+        <div class="jpq"><div class="zh">【每次開口先講這句】不好意思，我是台灣人，日文只會一點點</div><div class="ja">すみません、台湾から来ました。日本語は少ししか話せません</div><div class="ro">Sumimasen, Taiwan kara kimashita. Nihongo wa sukoshi shika hanasemasen</div></div>
         <h5>2-A　各寺之間問路</h5>
         <div class="jpq"><div class="zh">請問第○番○○寺怎麼走？</div><div class="ja">第○番○○寺はどう行きますか？</div><div class="ro">Dai-○ban ○○ji wa dou ikimasu ka?</div></div>
         <div class="jpq"><div class="zh">遍路道是這邊嗎？</div><div class="ja">遍路道はこちらですか？</div><div class="ro">Henromichi wa kochira desu ka?</div></div>
@@ -748,11 +820,12 @@
 
       <ol class="tl">
         <li><span class="t">07:00</span><div class="sb">
-          <p class="act">免費早餐・備好行動糧出發</p></div></li>
+          <p class="act">HOTEL AZ 免費早餐（06:30）・備好行動糧 → 叫計程車去靈山寺</p>
+          <p class="meta">飯店 → 第1番 約 7 分・約¥1,000。<b>走路要 1h10m，會來不及 07:30 參拜，一定要搭計程車。</b>門前招不到車打 ☎ 德島第一交通 088-654-8811</p></div></li>
 
         <li><span class="t">07:30</span><div class="sb">
           <p class="act">第1番 靈山寺　正式參拜</p>
-          <p class="meta">步行約1h10m／計程車約7分</p>
+          <p class="meta">約40分 ・（若昨天沒買遍路用品，賣店08:00開，這時一起買）</p>
           <p class="fac">參拜完成後，到下方「打卡進度」勾選第1番，會跳出「同行二人」名言</p>
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d2-lore1">🏯 典故</button></div>
           <div class="rowpanel lore" id="d2-lore1">
@@ -790,10 +863,11 @@
             <p><b>特色：</b>境內「獨鈷水」水質清澈甘甜，遍路者多汲取供養或飲用。傳說以此水洗眼可治眼疾。另有「鏡池」，傳說照鏡可預知壽命長短。</p>
           </div></div></li>
 
-        <li><span class="t">11:15</span><div class="sb">
-          <p class="act">午餐（金泉寺周邊便利商店或行動糧）→ 步行到板野駅南巴士站</p>
-          <p class="meta">約15分抵站牌</p>
-          <p class="cost">¥500–900</p></div></li>
+        <li><span class="t">11:10</span><div class="sb">
+          <p class="act">超商飯糰邊走邊吃 → 步行到板野駅南巴士站</p>
+          <p class="meta">第3番約 11:10 拜完 → 走約 15 分到站牌，剛好接 11:29。<b>這班沒有真的坐下吃午餐的時間</b>：在金泉寺旁 Marunaka／超商抓飯糰、麵包，邊走邊吃。</p>
+          <p class="cost">¥500–900</p>
+          <p class="fac">想好好吃午餐（含道地烏龍麵 <a href="https://www.google.com/maps/search/?api=1&query=こんせん+金泉寺+徳島県板野町" target="_blank" rel="noopener">こんせん</a>・肉玉天うどん・3.40分）→ 改搭 <b>12:04</b> 那班巴士。代價：大日寺／地藏寺各壓到 20 分才趕得上 13:21 回程；不想壓縮就放掉 13:21，改叫計程車 羅漢→HOTEL AZ（約 15 分・¥1,500），不必等到 16:21。</p></div></li>
 
         <li><span class="t">11:29</span><div class="sb">
           <p class="act">板野駅南 → 大日寺口　巴士</p>
@@ -803,15 +877,7 @@
           <div class="rowpanel bus" id="d2-bus1">
             <p class="h">鍛冶屋原線 47/48号（不動経由・下り）　板野駅南 → 大日寺口</p>
             <div class="bustable-wrap"><table class="bustable">
-              <caption>平日ダイヤ</caption>
-              <tr><th>板野駅南 發</th><th>大日寺口 着</th></tr>
-              <tr><td>08:36</td><td>08:43</td></tr><tr><td>09:29</td><td>09:40</td></tr>
-              <tr><td>11:04</td><td>11:15</td></tr><tr><td>12:04</td><td>12:15</td></tr>
-              <tr><td>14:22</td><td>14:29</td></tr><tr><td>16:19</td><td>16:26</td></tr>
-              <tr><td>18:26</td><td>18:33</td></tr><tr><td>19:21</td><td>19:28</td></tr>
-            </table></div>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>土日祝ダイヤ（10/31 用這個）</caption>
+              <caption>★ 土日祝ダイヤ（10/31 週六用這個）</caption>
               <tr><th>板野駅南 發</th><th>大日寺口 着</th></tr>
               <tr><td>09:31</td><td>09:42</td></tr>
               <tr class="hl"><td class="use">11:29</td><td class="use">11:36</td></tr>
@@ -819,8 +885,19 @@
               <tr><td>15:49</td><td>16:00</td></tr><tr><td>17:49</td><td>17:56</td></tr>
               <tr><td>19:19</td><td>19:26</td></tr>
             </table></div>
-            <p style="font-size:.8rem;color:var(--muted)">上車先抽整理券，下車看螢幕號碼付現／刷ICOCA。✅ 已查證週六確實有班次。</p>
-          </div></div></li>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ（參考・這趟用不到）</caption>
+              <tr><th>板野駅南 發</th><th>大日寺口 着</th></tr>
+              <tr><td>08:36</td><td>08:43</td></tr><tr><td>09:29</td><td>09:40</td></tr>
+              <tr><td>11:04</td><td>11:15</td></tr><tr><td>12:04</td><td>12:15</td></tr>
+              <tr><td>14:22</td><td>14:29</td></tr><tr><td>16:19</td><td>16:26</td></tr>
+              <tr><td>18:26</td><td>18:33</td></tr><tr><td>19:21</td><td>19:28</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--muted)">上車先抽整理券，下車看螢幕號碼付現／刷 Suica・ICOCA。✅ 已查證週六確實有班次。</p>
+          </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：趕得上11:29發車嗎？</b><br>
+          <span class="lv lv-y">🟡 趕不上</span>（行程仍走得完）→ 不用衝，改搭 <b>12:04</b> 班次（12:15到大日寺口，只晚11分）；想吃こんせん烏龍麵就是配合這班<br>
+          <b>影響：</b>大日寺／地藏寺參拜時間依序壓縮約35分，16:21回程班次不受影響</div></div></li>
 
         <li><span class="t">11:40</span><div class="sb">
           <p class="act">大日寺口 → 第4番 大日寺</p>
@@ -841,7 +918,9 @@
           <p class="meta">步行約30分</p></div></li>
 
         <li><span class="t">12:50</span><div class="sb">
-          <p class="act">第5番 地藏寺 參拜</p><p class="meta">約30分</p>
+          <p class="act">第5番 地藏寺 參拜</p>
+          <p class="meta">標準約30分；想趕 13:21 回程巴士請壓到 20–25 分（見下方判斷）</p>
+          <div class="alarm">⏰ <b>一到地藏寺就設鬧鐘 13:10</b> — 響了就收尾、往地藏寺門口的羅漢站牌走，搭 13:21 巴士；沒把握趕上就直接叫計程車（羅漢→HOTEL AZ 約¥1,500），別拖到 16:21。</div>
           <div class="rowbtns">
             <button type="button" class="r-lore" data-rp="d2-lore5">🏯 典故</button>
             <button type="button" class="r-alt" data-rp="d2-rp1">🔀 備案</button>
@@ -856,16 +935,16 @@
             <p class="h">第5番納経所 17:00 關門</p>
             <p>・若前段大幅 delay，趕不上御朱印，中段可改叫計程車搶時間</p>
             <p>・真的來不及就放棄該印，或 Day3 早上順路補（差不多順路）</p>
-          </div></div></li>
+          </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：大日寺＋地藏寺拜完，趕得上 13:21 的巴士嗎？</b>（羅漢巴士站就在地藏寺門口，不用再走去別處）<br>
+          <span class="lv lv-y">🟡 大日寺在 12:25 前結束、地藏寺 13:10 前拜完</span> → 走得到，搭 <b>13:21 羅漢發</b>（13:27 到板野駅南），整個下午回飯店休息、養腿迎接明天 20km<br>
+          <span class="lv lv-y">🟡 已經超過</span>（行程仍走得完）→ <b>別衝</b>：這條土日祝下一班要等到 <b>16:21</b>（中間 14、15 點完全沒有車），直接打電話叫計程車 羅漢→HOTEL AZ（約15分・¥1,500）比乾等 3 小時划算；不趕時間就搭 16:21<br>
+          <b>壓縮法：</b>本堂＋大師堂各念「御本尊真言→光明真言→御寶號」一輪、御朱印避開整點人潮、地藏寺五百羅漢堂（¥300）這次跳過，兩寺各 20 分就夠</div></div></li>
 
-        <li><span class="t">13:20</span><div class="sb">
-          <p class="act">自由時間・返回板野周邊採買（今晚 Day3 用）</p>
-          <p class="meta">下午到 16:21 巴士前約 3 小時空檔，可休息、逛 Marunaka</p></div></li>
-
-        <li><span class="t">16:21</span><div class="sb">
-          <p class="act">羅漢 → 板野駅南　巴士</p>
-          <p class="meta">鍛冶屋原線 28号（住吉経由）・約6分</p>
-          <p class="cost">¥340</p>
+        <li><span class="t">13:21</span><div class="sb">
+          <p class="act">羅漢 → 板野駅南　巴士（主案）</p>
+          <p class="meta">鍛冶屋原線 28号（住吉経由）・約6分・13:27 到 ・ 羅漢站就在地藏寺門口</p>
+          <p class="cost">¥340／人</p>
           <div class="rowbtns"><button type="button" class="r-bus" data-rp="d2-bus2">🚌 時刻表</button></div>
           <div class="rowpanel bus" id="d2-bus2">
             <p class="h">鍛冶屋原線 28号（住吉経由・上り）　羅漢 → 板野駅南</p>
@@ -882,28 +961,34 @@
               <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
               <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:56</td><td>07:02</td></tr>
               <tr><td>08:26</td><td>08:32</td></tr><tr><td>10:31</td><td>10:37</td></tr>
-              <tr><td>13:21</td><td>13:27</td></tr>
-              <tr class="hl"><td class="use">16:21</td><td class="use">16:27</td></tr>
+              <tr class="hl"><td class="use">13:21</td><td class="use">13:27</td></tr>
+              <tr><td>16:21</td><td>16:27</td></tr>
               <tr><td>18:21</td><td>18:27</td></tr>
             </table></div>
-            <p style="font-size:.8rem;color:var(--muted)">替代：計程車約15分 ¥1,500。回飯店晚一點沒關係，HOTEL AZ 無門禁、晚餐時間彈性。</p>
+            <p style="font-size:.8rem;color:var(--muted)">★ 土日祝這段只有 <b>13:21</b> 和 <b>16:21</b> 兩班，中間沒有車。趕不上 13:21 → 叫計程車（羅漢→HOTEL AZ 約15分 ¥1,500）或等 16:21。HOTEL AZ 無門禁、晚餐時間彈性，晚回沒關係。</p>
           </div></div></li>
 
-        <li><span class="t">16:35</span><div class="sb">
-          <p class="act">板野駅南 → HOTEL AZ</p>
-          <p class="meta">步行約15分</p></div></li>
+        <li><span class="t">13:30</span><div class="sb">
+          <p class="act">回到板野・下午自由</p>
+          <p class="meta">在 HOTEL AZ 休息、泡腳、睡前貼痠痛貼布；到 Marunaka 補 Day 3＋Day 4 燒山寺的水和行動糧（見下方採買）</p>
+          <p class="fac">若改搭 16:21，這段自由時間就在羅漢／地藏寺周邊消化：五百羅漢堂、水琴窟、800年大銀杏約 40–60 分，其餘時間找café坐著休息即可，不必硬撐 3 小時。</p></div></li>
 
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（HOTEL AZ 含）</p>
           <p class="meta">出發前再確認時間</p></div></li>
 
         <li><span class="t">21:00</span><div class="sb">
-          <div class="alarm">⏰ <b>設鬧鐘 05:30</b> — 明天 Day 3 走安樂寺→切幡寺（約20km），06:30 出發。早餐先在超市買好。</div></div></li>
+          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 3 走 6→10 番（約16km、切幡寺333階）。07:00 在 HOTEL AZ 吃早餐、退房帶走全部行李、<b>07:50 出發</b>走去板野駅南搭 08:19 公車。</div>
+          <div class="shop" style="margin-top:.5rem">
+            <b>🌙 宵夜（板野周邊・同 Day1）</b>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=居酒屋+どんぶり+板野町" target="_blank" rel="noopener">居酒屋 どんぶり</a>（炭火烤雞串・至23:00・步行10-12分）｜<a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+板野店" target="_blank" rel="noopener">Hotto Motto 板野店</a>（外帶炸雞・唐揚・至22:00）｜<a href="https://www.google.com/maps/search/?api=1&query=ローソン+板野駅前" target="_blank" rel="noopener">Lawson／7-ELEVEN 板野站前</a>（24H）</p>
+          </div></div></li>
       </ol>
 
       <div class="shop">
-        <b>🛒 今晚採買（Day 3 用）</b>
-        行動糧補充 ・ 水 2L×2人（明日長距無補給段）・ 痠痛貼布（膝・小腿 睡前貼）・ 確認護膝・登山杖
+        <b>🛒 今晚在板野 Marunaka 採買（板野是最後的補給點）</b>
+        <p><b>Day 3 用：</b>行動糧、水 2L×2人（明天 7→10 番長距少補給）、痠痛貼布（膝・小腿睡前貼）、確認護膝＋登山杖。</p>
+        <p><b>Day 4 燒山寺用（★今天就要買齊）：</b>高熱量行動糧 3 餐份／人、鹽糖或電解質錠、頭燈備用電池。<b>Day 3 晚上住安樂寺宿坊，周邊沒有商店，Day 4 清晨 06:30 摸黑出發也來不及採買</b>，燒山寺全程無補給，一定要今天在板野買足帶著走。</p>
       </div>
     </div>
   </details>
@@ -957,6 +1042,7 @@
 
       <div class="panel jp" id="d3-jp">
         <h4>Day 3 日文例句</h4>
+        <div class="jpq"><div class="zh">【每次開口先講這句】不好意思，我是台灣人，日文只會一點點</div><div class="ja">すみません、台湾から来ました。日本語は少ししか話せません</div><div class="ro">Sumimasen, Taiwan kara kimashita. Nihongo wa sukoshi shika hanasemasen</div></div>
         <h5>3-A　巴士 HOTEL AZ 附近 → 東原（28號 鍛冶屋原線）</h5>
         <div class="jpq"><div class="zh">這班有到「東原」嗎？</div><div class="ja">このバスは「東原」に行きますか？</div><div class="ro">Kono basu wa "Higashibara" ni ikimasu ka?</div></div>
         <div class="jpq"><div class="zh">我要在東原下車</div><div class="ja">東原で降ります</div><div class="ro">Higashibara de orimasu</div></div>
@@ -975,6 +1061,17 @@
         <div class="jpq"><div class="zh">明天想 6:30 出發，早餐可以做成便當嗎？</div><div class="ja">明日は6時半に出発したいです。朝食をお弁当にできますか？</div><div class="ro">Ashita wa rokuji-han ni shuppatsu shitai desu. Choushoku o obentou ni dekimasu ka?</div></div>
         <div class="jpq"><div class="zh">明天早上想叫計程車到藤井寺，可以幫忙打電話嗎？</div><div class="ja">明日の朝、藤井寺までタクシーをお願いしたいです。電話してもらえますか？</div><div class="ro">Ashita no asa, Fujiidera made takushii o onegai shitai desu. Denwa shite moraemasu ka?</div></div>
         <div class="jpq"><div class="zh">早上 7 點，兩位</div><div class="ja">朝7時、二人です</div><div class="ro">Asa shichiji, futari desu</div></div>
+        <h5>3-F　會晚到　打電話給安樂寺宿坊（最終入住 18:00，會遲到務必先打 ☎ 088-694-2046）</h5>
+        <div class="jpq"><div class="zh">今晚我有訂宿坊，姓○○。行程延誤，會晚一點到</div><div class="ja">今晩の宿坊を予約した○○です。到着が遅れます</div><div class="ro">Konban no shukubou o yoyaku shita ○○ desu. Touchaku ga okuremasu</div></div>
+        <div class="jpq"><div class="zh">大概○點到，這樣可以嗎？</div><div class="ja">○時ごろ着きます。大丈夫でしょうか？</div><div class="ro">○-ji goro tsukimasu. Daijoubu deshou ka?</div></div>
+        <div class="jpq"><div class="zh">晚餐可以晚一點、或幫我們留著嗎？</div><div class="ja">夕食は遅い時間、または取り置きできますか？</div><div class="ro">Yuushoku wa osoi jikan, mata wa torioki dekimasu ka?</div></div>
+        <div class="jpq"><div class="zh">最晚要幾點前到？</div><div class="ja">何時までに着けばいいですか？</div><div class="ro">Nanji made ni tsukeba ii desu ka?</div></div>
+        <div class="jpq"><div class="zh">造成困擾非常抱歉</div><div class="ja">ご迷惑をおかけして申し訳ありません</div><div class="ro">Gomeiwaku o okake shite moushiwake arimasen</div></div>
+        <h5>3-G　已預約的計程車　想改時間（切幡寺下山慢了、或提早）</h5>
+        <div class="jpq"><div class="zh">我是預約○點的計程車，姓○○</div><div class="ja">○時に予約したタクシーの○○です</div><div class="ro">○-ji ni yoyaku shita takushii no ○○ desu</div></div>
+        <div class="jpq"><div class="zh">可以晚 30 分再來嗎？／可以改成○點嗎？</div><div class="ja">30分ほど遅らせてもらえますか？　○時に変更できますか？</div><div class="ro">Sanjuppun hodo okurasete moraemasu ka? ○-ji ni henkou dekimasu ka?</div></div>
+        <div class="jpq"><div class="zh">我現在在切幡寺山上，大概○點會下到山門</div><div class="ja">今、切幡寺の上にいます。○時ごろ山門に下ります</div><div class="ro">Ima, Kirihataji no ue ni imasu. ○-ji goro sanmon ni orimasu</div></div>
+        <div class="jpq"><div class="zh">現在方便馬上派一台車來嗎？</div><div class="ja">今すぐ一台お願いできますか？</div><div class="ro">Ima sugu ichidai onegai dekimasu ka?</div></div>
       </div>
 
       <div class="panel map" id="d3-map">
@@ -992,10 +1089,26 @@
       <div class="panel sos" id="d3-sos"></div>
 
       <ol class="tl">
+        <li><span class="t">06:30</span><div class="sb">
+          <p class="act">起床整裝</p></div></li>
+
+        <li><span class="t">07:00</span><div class="sb">
+          <p class="act">HOTEL AZ 早餐（朝食サービス）→ 退房</p>
+          <p class="meta">出發前跟櫃檯確認早餐開始時間；若早於供餐時間，前一晚先在 Lawson／7-ELEVEN 板野站前買好隔天早餐。</p>
+          <p class="fac">⚠ <b>今天不回這間</b>，退房務必帶走所有行李（大行李箱已在高松機場，身上只有背包）。Check-out 10:00 前。</p></div></li>
+
+        <li><span class="t">07:50</span><div class="sb">
+          <p class="act">HOTEL AZ 出發 → 板野駅南巴士站</p>
+          <p class="meta">步行約15分</p></div></li>
+
         <li class="warnrow"><span class="t">08:15</span><div class="sb">
           <span class="wtag">⚠ 首班車，務必準時</span>
           <p class="act">站在板野駅南巴士站牌</p>
-          <p class="meta">土日祝首班 08:19，錯過要等到 10:32（→東原10:44），整天行程會壓縮</p></div></li>
+          <p class="meta">土日祝首班 08:19，錯過要等到 10:32（→東原10:44），整天行程會壓縮</p>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：趕得上08:19嗎？</b><br>
+          <span class="lv lv-y">🟡 趕不上</span>（行程仍走得完）→ 改搭 <b>10:32</b>（10:44到東原，晚2h13m）→ 到7番後直接啟動下方「三問法則」跳過8、9番，把時間補回來，避免影響18:00宿坊最終入住<br>
+          <b>影響：</b>當天行程全面壓後，切幡寺下山恐更晚，16:20計程車務必改預約更晚時間<br>
+          <b>下車站不變：一樣在「東原」下車</b>（這方向 28 號只停到東原）。趕時間時不先拜 6 番安樂寺（反正今晚就住那），從東原直接走去 <b>7 番十樂寺</b> 開始（🟡 步行約 25–30 分，比先拜 6 番只多幾分鐘路程，省下的是 6 番參拜那 30 分）；6 番改今晚 Check-in 後、或 Day 4 清晨出發前補拜。</div></div></li>
 
         <li><span class="t">08:19</span><div class="sb">
           <p class="act">板野駅南 → 東原　巴士</p>
@@ -1005,18 +1118,18 @@
           <div class="rowpanel bus" id="d3-bus1">
             <p class="h">鍛冶屋原線 28号（住吉経由・下り）　板野駅南 → 東原</p>
             <div class="bustable-wrap"><table class="bustable">
-              <caption>平日ダイヤ</caption>
-              <tr><th>板野駅南 發</th><th>東原 着</th></tr>
-              <tr><td>07:53</td><td>08:05</td></tr><tr><td>08:31</td><td>08:43</td></tr>
-              <tr><td>10:32</td><td>10:44</td></tr><tr><td>13:02</td><td>13:14</td></tr>
-              <tr><td>17:02</td><td>17:14</td></tr><tr><td>18:07</td><td>18:19</td></tr>
-            </table></div>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>土日祝ダイヤ（11/1 用這個）</caption>
+              <caption>★ 土日祝ダイヤ（11/1 週日用這個）</caption>
               <tr><th>板野駅南 發</th><th>東原 着</th></tr>
               <tr class="hl"><td class="use">08:19</td><td class="use">08:31</td></tr>
               <tr><td>10:32</td><td>10:44</td></tr><tr><td>13:02</td><td>13:14</td></tr>
               <tr><td>17:02</td><td>17:14</td></tr><tr><td>19:02</td><td>19:14</td></tr>
+            </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ（參考・這趟用不到）</caption>
+              <tr><th>板野駅南 發</th><th>東原 着</th></tr>
+              <tr><td>07:53</td><td>08:05</td></tr><tr><td>08:31</td><td>08:43</td></tr>
+              <tr><td>10:32</td><td>10:44</td></tr><tr><td>13:02</td><td>13:14</td></tr>
+              <tr><td>17:02</td><td>17:14</td></tr><tr><td>18:07</td><td>18:19</td></tr>
             </table></div>
           </div></div></li>
 
@@ -1038,6 +1151,7 @@
 
         <li><span class="t">10:10</span><div class="sb">
           <p class="act">第7番 十樂寺 參拜</p><p class="meta">約30分</p>
+          <div class="alarm">⏰ <b>一到十樂寺就設鬧鐘 11:00</b> — 響了做下一段的「三問法則」：過 11 點了？膝蓋不舒服？下雨？任一個「是」→ 跳過 8、9 番，直接叫車去 10 番切幡寺，把腿力留給明天燒山寺。</div>
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d3-lore7">🏯 典故</button></div>
           <div class="rowpanel lore" id="d3-lore7">
             <p class="h">第七番　十樂寺（じゅうらくじ）</p>
@@ -1049,9 +1163,11 @@
         <li class="warnrow"><span class="t">10:40</span><div class="sb">
           <span class="wtag">⚠ 體力評估點・三問法則</span>
           <p class="act">第7番 → 第8番 熊谷寺</p>
-          <p class="meta">計程車 4.3km・約12分</p>
-          <p class="cost">¥1,500</p>
-          <p class="fac">問自己三件事：① 已過11:00？ ② 膝蓋不舒服？ ③ 下雨？ — 任一個「是」→ 跳過8、9番，直接7→10番切幡寺，把腿留給明天燒山寺。三個都「否」→ 叫車去8番，到8番再用同樣三問決定9番。</p>
+          <p class="meta">步行 4.3km・約1小時10分（三問法則觸發時改叫計程車・約12分・¥1,500）</p>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：問自己三件事——已過11:00？膝蓋不舒服？下雨？</b><br>
+          <span class="lv lv-y">🟡 任一個「是」</span>（行程仍走得完）→ 跳過8、9番，直接叫車去10番切幡寺，把腿力留給明天燒山寺<br>
+          <span class="lv lv-y">🟡 三個都「否」</span> → 叫車去8番（見下方🚕），到8番後用同樣三問法則決定9番怎麼走<br>
+          <b>影響：</b>跳過8、9番不影響隔天燒山寺行程，只是少蓋2個御朱印（非必要，可事後想辦法補）</div>
           <div class="rowbtns">
             <button type="button" class="r-car" data-rp="d3-car78">🚕 車行電話</button>
             <button type="button" class="r-alt" data-rp="d3-rp1">🔀 備案</button>
@@ -1065,9 +1181,10 @@
           </div>
           <div class="rowpanel alt" id="d3-rp1">
             <p class="h">不會講日文怎麼叫車</p>
-            <p>・這一帶（阿波市／上板町）不是山區，白天臨時打電話叫車 10–30 分內會到</p>
-            <p>・請該寺納経所人員幫忙打電話，或用 Google 翻譯語音</p>
-            <p>・想更保險：昨晚可請 HOTEL AZ 櫃檯代打，訂了不搭提早1–2小時取消，鄉下遍路計程車不收費</p>
+            <p>・<b>先試 Uber／GO App</b>（台灣出發前綁好信用卡）：徳島縣 2025 年起部分區域開通，阿波市／上板町白天有機會叫到，App 直接定位、免講日文、可看車資。<b>山區（神山町、燒山寺）幾乎叫不到</b>，Day 4 不要指望。</p>
+            <p>・App 叫不到 → 打下面車行電話（德島第一 088-654-8811／鴨島 0883-24-2345）；這一帶不是山區，白天臨時叫車約 10–30 分到</p>
+            <p>・請該寺納経所人員幫忙打電話，或用 Google 翻譯語音／給司機看行程表上的日文寺名</p>
+            <p>・想更保險：昨晚請 HOTEL AZ 櫃檯代打預約，訂了不搭提早 1–2 小時取消，鄉下遍路計程車不收費</p>
           </div></div></li>
 
         <li><span class="t">12:00</span><div class="sb">
@@ -1127,14 +1244,19 @@
           </div>
           <div class="rowpanel car" id="d3-car10">
             <p class="h">計程車　切幡寺 → 安樂寺宿坊（約20分・約¥1,500）</p>
-            <a class="tel" href="tel:+81883242345">☎ 鴨島タクシー 0883-24-2345</a>
+            <a class="tel" href="tel:+81883242345">☎ 鴨島タクシー 0883-24-2345（就在切幡寺山下・最近）</a>
             <a class="tel" href="tel:+81886548811" style="margin-top:.4rem">☎ 德島第一交通 088-654-8811</a>
             <div class="jarow"><div class="ja">安楽寺までタクシーをお願いします。</div><div class="ro">Anrakuji made takushii o onegai shimasu.（請叫車回安樂寺）</div></div>
+            <p style="font-size:.8rem;color:var(--muted)">鴨島タクシー 車庫就在切幡寺山腳，白天 15–30 分內能到；也可先試 Uber／GO App。</p>
           </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：預約的計程車在等了嗎？</b><br>
+          <span class="lv lv-y">🟡 沒看到車</span>（行程仍走得完）→ 打上面電話確認（切幡寺山下的鴨島タクシー最快）。<b>時間卡到了就直接改預約時間</b>，不用硬趕：例句見 🗣 <b>3-G</b>（「30分ほど遅らせてもらえますか？」）。<br>
+          <b>不必為了預約時間硬衝下山：</b>切幡寺山下白天叫得到車，預約只是把等待縮短。真的都叫不到 → 見下方🔀備案，晚餐 18:00 前先電話告知宿坊會晚到（例句 3-F）。</div>
           <div class="rowpanel alt" id="d3-rp2">
-            <p class="h">★必預約：333階下山後叫不到車</p>
-            <p>・下山後摸黑走4km回宿坊，膝蓋負擔極大，不建議</p>
-            <p>・Day2 晚上請 HOTEL AZ 櫃檯代打，時間抓「16:15 頃 切幡寺」，下山前提早30分再call一次確認</p>
+            <p class="h">預約 vs 現場叫：怎麼抓比較安心</p>
+            <p>・<b>建議做法：</b>Day 2 晚上請 HOTEL AZ 櫃檯代訂，時間先抓寬鬆一點「16:30 頃 切幡寺」；下山前 30 分打一次確認，慢了就用 3-G 例句往後延，早到就問能不能提早。</p>
+            <p>・鄉下遍路計程車預約後不搭多半不收費，訂了很安心。</p>
+            <p>・完全叫不到車的最壞情況：下山後走 4km 回宿坊、膝蓋負擔大又可能摸黑，非常不建議——所以務必先預約。</p>
           </div></div></li>
 
         <li><span class="t">17:00</span><div class="sb">
@@ -1142,16 +1264,25 @@
 
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（含兩食）</p>
-          <p class="meta">時間訂房時確認，遲到請電話聯繫（見 🆘 急難頁）</p></div></li>
+          <p class="meta">時間訂房時確認。會遲到：先打 ☎ 088-694-2046，例句見上方 🗣 3-F</p></div></li>
 
         <li><span class="t">20:30</span><div class="sb">
           <div class="alarm">⏰ <b>設鬧鐘 05:00</b> — 明天 Day 4 燒山寺（全程最難）。05:30 起床整裝、06:00 早餐、<b>06:30 出發</b>。</div>
-          <div class="checkpoint">⚠ <b>明天關鍵判斷點</b><br>① 打電話跟四季の里確認入住、約定「16:00沒到就報警」<br>② 11:00 未到柳水庵（中繼庵）→ <b>折返，不硬撐</b><br>③ 14:00 前未登頂燒山寺 → 考慮叫計程車下山到神山溫泉</div></div></li>
+          <div class="checkpoint">⚠ <b>明天關鍵判斷點</b><br>① 打電話跟四季の里確認入住、約定「16:00沒到就報警」<br>② 11:00 未到柳水庵（中繼庵）→ <b>折返，不硬撐</b><br>③ 14:00 前未登頂燒山寺 → 考慮叫計程車下山到神山溫泉<br>④ <b>睡前查 D4 燒山寺天氣</b>（tenki.jp／房間電視／問櫃檯）：預報中雨以上或強風，<b>今晚就決定改雨天備案</b>，別明早才慌。也先請宿坊幫忙留一台計程車。</div>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d3-rain">🌧 燒山寺雨天備案</button></div>
+          <div class="rowpanel alt" id="d3-rain">
+            <p class="h">Day 4 燒山寺 雨天／惡劣天氣備案</p>
+            <p><b>① 小雨（毛毛雨、無風）：</b>照原計畫走，但全套雨具、背包套、放慢腳程；柳水庵 11:00 折返線更嚴格執行，濕滑路面沒到就折返。</p>
+            <p><b>② 中雨以上／強風／雷雨：</b>放棄步行段。改叫計程車走產業道路 藤井寺→燒山寺（約 40 分・¥4,000–5,000，寄井観光 088-676-0345／川又 088-677-0137），只參拜 11＋12 番，省下的時間回四季の里泡湯休息。</p>
+            <p><b>③ 豪雨特報／道路封閉／打雷：</b>燒山寺整個跳過。從安樂寺直接叫計程車或搭公車去神山溫泉四季の里，11＋12 番留待日後再訪——<b>遍路本來就可以分次走，不必一次完成，安全第一</b>。</p>
+            <p><b>決策時間：</b>Day 3 睡前看預報先做初判＋請宿坊留車；Day 4 早上 06:00 再看一次即時雨勢與風速定案。兩人意見不同時，以「想中止的那個人」為準。</p>
+          </div></div></li>
       </ol>
 
       <div class="shop">
-        <b>🛒 今晚採買（Day 4 燒山寺用・最重要）</b>
-        水 2L×2人（山中無補給）・行動糧 高熱量×3食份・確認 offline 地圖已下載・確認頭燈・電池・痠痛貼布貼膝・小腿後就寢
+        <b>🛒 睡前確認（Day 4 燒山寺用・最重要）</b>
+        <p>⚠ <b>安樂寺周邊沒有商店</b>，Day 4 補給品應在 <b>Day 2 晚上板野 Marunaka</b> 就買齊帶來。今晚只做確認：水 2L×2人已備、高熱量行動糧 3 餐份／人已備、offline 地圖（Google＋YAMAP）已下載、頭燈＋備用電池已備、痠痛貼布貼膝・小腿後就寢。</p>
+        <p>真的缺東西：Day 4 清晨搭計程車去藤井寺途中，跟司機說「コンビニに寄ってください（konbini ni yotte kudasai・請在便利商店停一下）」。</p>
       </div>
     </div>
   </details>
@@ -1212,6 +1343,7 @@
 
       <div class="panel jp" id="d4-jp">
         <h4>Day 4 日文例句</h4>
+        <div class="jpq"><div class="zh">【每次開口先講這句】不好意思，我是台灣人，日文只會一點點</div><div class="ja">すみません、台湾から来ました。日本語は少ししか話せません</div><div class="ro">Sumimasen, Taiwan kara kimashita. Nihongo wa sukoshi shika hanasemasen</div></div>
         <h5>4-A　出發前（宿坊）</h5>
         <div class="jpq"><div class="zh">謝謝招待，我要出發了</div><div class="ja">お世話になりました。出発します</div><div class="ro">Osewa ni narimashita. Shuppatsu shimasu</div></div>
         <h5>4-B　計程車電話預約／上車</h5>
@@ -1226,6 +1358,9 @@
         <div class="jpq"><div class="zh">辛苦了（山中打招呼）</div><div class="ja">お疲れさまです</div><div class="ro">Otsukaresama desu</div></div>
         <h5>4-E　燒山寺　抵達・下山計程車（必須）</h5>
         <div class="jpq"><div class="zh">我想叫計程車到神山溫泉「四季の里」</div><div class="ja">神山温泉の「四季の里」までタクシーをお願いします</div><div class="ro">Kamiyama onsen no "Shiki-no-sato" made takushii o onegai shimasu</div></div>
+        <div class="jpq"><div class="zh">我是預約○點的○○，會晚到，可以改○點嗎？</div><div class="ja">○時に予約した○○です。到着が遅れています。○時に変更できますか？</div><div class="ro">○-ji ni yoyaku shita ○○ desu. Touchaku ga okurete imasu. ○-ji ni henkou dekimasu ka?</div></div>
+        <div class="jpq"><div class="zh">我剛到燒山寺，可以馬上派一台車來嗎？</div><div class="ja">今、焼山寺に着きました。今すぐ一台お願いできますか？</div><div class="ro">Ima, Shousanji ni tsukimashita. Ima sugu ichidai onegai dekimasu ka?</div></div>
+        <div class="jpq"><div class="zh">可以借用一下電話嗎？（跟寺務所講）</div><div class="ja">すみません、電話をお借りできますか？</div><div class="ro">Sumimasen, denwa o okari dekimasu ka?</div></div>
         <div class="jpq"><div class="zh">這裡收得到手機訊號嗎？</div><div class="ja">ここは電波が入りますか？</div><div class="ro">Koko wa denpa ga hairimasu ka?</div></div>
         <h5>4-F　四季の里　Check-in</h5>
         <div class="jpq"><div class="zh">我有訂房，我姓○○</div><div class="ja">予約している○○です</div><div class="ro">Yoyaku shite iru ○○ desu</div></div>
@@ -1270,6 +1405,9 @@
             <div class="jarow"><div class="ja">明日の朝7時にタクシーを予約したいです。</div><div class="ro">Ashita no asa shichiji ni takushii o yoyaku shitai desu.（想預約明早7點的計程車）</div></div>
             <div class="jarow"><div class="ja">藤井寺の登山口までお願いします。</div><div class="ro">Fujiidera no tozanguchi made onegai shimasu.（請到藤井寺登山口）</div></div>
           </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：07:00 計程車到了嗎？</b><br>
+          <span class="lv lv-y">🟡 還沒到</span>（行程仍走得完）→ 立刻打上面3支電話再確認（見🚕車行電話），前一晚已請宿坊代訂通常會準時<br>
+          <b>影響：</b>越晚出發，11:00柳水庵折返線的緩衝就越少，抓緊腳程</div>
           <div class="rowpanel alt" id="d4-rp1">
             <p class="h">★必預約：沒訂到車＝整個燒山寺計畫崩</p>
             <p>・11/1 晚上在宿坊打3家都確認：松島 088-694-2106／鴨島 0883-24-2345／德島第一 088-654-8811</p>
@@ -1292,11 +1430,13 @@
           <span class="wtag">⚠ 護膝・登山杖 2支必須</span>
           <p class="act">藤井寺 → 燒山寺 上山開始</p>
           <p class="meta">全程步行 12km・爬升640m</p>
+          <div class="alarm">⏰ <b>藤井寺一出發、踏進山路前就設鬧鐘 11:00</b> — 這是評估「有沒有到柳水庵（中繼庵）」的時間點。山中完全無訊號，務必用手機「本機鬧鐘」App，不能靠網路提醒。響時：已過柳水庵 → 繼續；還沒到 → 🔴 立刻折返下山，不追燒山寺。</div>
           <div class="rowbtns"><button type="button" class="r-alt" data-rp="d4-rp2">🔀 備案</button></div>
           <div class="rowpanel alt" id="d4-rp2">
             <p class="h">體調不良／天候驟變備案</p>
-            <p>・宿坊當晚先查天氣，預報雨或風強就改走：計程車產業道路 藤井寺→燒山寺 約40分 ¥4,000</p>
+            <p>・宿坊當晚先查天氣，預報雨或風強就改走：計程車產業道路 藤井寺→燒山寺 約40分 ¥4,000–5,000（寄井観光 088-676-0345／川又 088-677-0137）</p>
             <p>・折返點：11:00 沒到中繼庵（柳水庵）就折返</p>
+            <p>・完整雨天分級（小雨／中雨／豪雨怎麼辦）見 Day 3 睡前那格「🌧 燒山寺雨天備案」</p>
           </div></div></li>
 
         <li class="warnrow"><span class="t">08:30<br>–14:00</span><div class="sb">
@@ -1305,11 +1445,14 @@
           <p class="meta">全程約5–6小時</p>
           <p class="fac">必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</p>
           <p class="fac"><b>安全約定：</b>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」。兩人絕不分開。</p>
-          <div class="checkpoint" style="margin-top:.5rem">⚠ <b>設鬧鐘 11:00</b>（上山前設好）<br>11:00 響時檢查：已到柳水庵（中繼庵）了嗎？<br>→ <b>還沒到 = 折返</b>，不硬撐。安全第一。</div></div></li>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：11:00 到柳水庵（中繼庵）了嗎？</b>（上山前先設好鬧鐘）<br>
+          <span class="lv lv-r">🔴 還沒到</span>（這是安全紅線，不是行程延誤問題）→ 立刻折返藤井寺方向下山，不硬撐、不追燒山寺<br>
+          <b>影響：</b>折返代表今天到不了燒山寺，要改聯絡宿坊與四季の里調整；到了柳水庵 → 照原計畫繼續上山</div></div></li>
 
-        <li><span class="t">14:00</span><div class="sb">
+        <li><span class="t">約14:00</span><div class="sb">
           <p class="act">第12番 燒山寺 抵達・參拜（標高700m）</p>
           <p class="meta">約30分</p>
+          <p class="fac" style="color:var(--warn-ink)">⚠ <b>14:00是目標不是Deadline：</b>登山口官方標示「健腳5h／平均6h／腳弱8h」，08:30出發抓的5.5h偏快腳程。走慢一點很正常，只要11:00過了柳水庵checkpoint，燒山寺晚一點到都沒關係，納経截止17:00還有餘裕</p>
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore12">🏯 典故</button></div>
           <div class="rowpanel lore" id="d4-lore12">
             <p class="h">第十二番　燒山寺（しょうさんじ）</p>
@@ -1318,10 +1461,10 @@
             <p><b>特色：</b>四國八十八箇所中著名的「遍路最大難所」，從藤井寺至此需翻越陡峭山路約12公里。本尊虛空藏菩薩賜予無限智慧與福德。海拔約700公尺，晴天可眺望吉野川平原，視野開闊。修行艱辛後抵達，令人感受極大的成就感。</p>
           </div></div></li>
 
-        <li class="warnrow"><span class="t">14:30</span><div class="sb">
-          <span class="wtag">⚠ 下山務必搭計程車・務必前一晚預約</span>
+        <li class="warnrow"><span class="t">14:30<br>前後</span><div class="sb">
+          <span class="wtag">⚠ 下山務必搭計程車・前一晚預約時間抓 15:00–15:30</span>
           <p class="act">燒山寺 → 神山溫泉 下山</p>
-          <p class="meta">計程車 7km・約25分</p>
+          <p class="meta">計程車 7km・約25分 ・ 到站時間依實際腳程，跑慢了打電話延後（見 🚕）</p>
           <p class="cost">¥3,500</p>
           <div class="rowbtns">
             <button type="button" class="r-car" data-rp="d4-car2">🚕 車行電話</button>
@@ -1332,8 +1475,16 @@
             <a class="tel" href="tel:+81886760345">☎ 寄井観光タクシー 088-676-0345</a>
             <a class="tel" href="tel:+81886780224" style="margin-top:.4rem">☎ つばめ観光タクシー 088-678-0224</a>
             <a class="tel" href="tel:+81886770137" style="margin-top:.4rem">☎ 川又タクシー 088-677-0137</a>
+            <p style="color:var(--warn-ink)">⚠ <b>預約時間抓保守：15:00–15:30</b>（不要照「約14:00到」訂 14:30）。官方標平均腳程 6hr（≈14:30 到）、腳弱 8hr（≈16:30），走慢很正常。訂太早的話反而要一直打電話延。</p>
+            <p><b>跑慢了 → 打電話延後預約：</b>燒山寺山門一帶訊號很弱，先試自己手機，不行就<b>借燒山寺寺務所（納経所）市話</b>打。</p>
             <div class="jarow"><div class="ja">神山温泉の「四季の里」までタクシーをお願いします。</div><div class="ro">Kamiyama onsen no "Shiki-no-sato" made takushii o onegai shimasu.</div></div>
+            <div class="jarow"><div class="ja">○時に予約したタクシーの○○です。到着が遅れています。○時に変更できますか？</div><div class="ro">○-ji ni yoyaku shita takushii no ○○ desu. Touchaku ga okurete imasu. ○-ji ni henkou dekimasu ka?（我是預約○點的○○，會晚到，可以改○點嗎）</div></div>
+            <div class="jarow"><div class="ja">今、焼山寺に着きました。今すぐ来てもらえますか？</div><div class="ro">Ima, Shousanji ni tsukimashita. Ima sugu kite moraemasu ka?（我剛到燒山寺，可以馬上來嗎）</div></div>
           </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：跟預約時間差多少？</b>（燒山寺抵達時間很難抓準，走慢是常態）<br>
+          <span class="lv lv-y">🟡 比預約時間晚</span>（行程仍走得完）→ 一到燒山寺就借寺務所市話打電話<b>延後預約時間</b>（例句見 🚕 車行電話），不用衝參拜。四季の里 15:00 才 Check-in，晚一點到沒關係，只要 16:00 前到就不會觸發報警約定。<br>
+          <span class="lv lv-y">🟡 比預約時間早</span> → 打電話問能不能提早派車，或直接請寺務所現場叫一台。<br>
+          <b>真的都叫不到車：</b>見下方🔀備案（走7km下山480m，不建議但可行），先電話告知四季の里會晚到。</div>
           <div class="rowpanel alt" id="d4-rp3">
             <p class="h">★必預約：沒車就得走7km下山（下降480m）＋天黑，膝蓋受傷風險極高</p>
             <p>・11/1 晚上在宿坊訂：寄井観光 088-676-0345／つばめ 088-678-0224／川又 088-677-0137</p>
@@ -1342,14 +1493,15 @@
 
         <li><span class="t">15:00</span><div class="sb">
           <p class="act">神山溫泉ホテル四季の里 Check-in・溫泉入浴</p>
-          <p class="meta">約16:00到達 ・ 溫泉 15:00～翌09:30</p></div></li>
+          <p class="meta">計程車約25分後抵達 ・ 溫泉 15:00～翌09:30</p></div></li>
 
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">晚餐（含兩食）</p>
           <p class="meta">✅ 18:00～20:00 已確認</p></div></li>
 
         <li><span class="t">21:00</span><div class="sb">
-          <div class="alarm">⏰ <b>設鬧鐘 06:30</b> — 明天 Day 5 最後一天，神山溫泉退房 09:00。輕鬆日，好好休息。</div></div></li>
+          <div class="alarm">⏰ <b>設鬧鐘 06:30</b> — 明天 Day 5 最後一天，四季の里退房 <b>10:00</b>（🟡 出發前打電話確認）。輕鬆日，好好休息。</div>
+          <div class="checkpoint" style="margin-top:.5rem">⚠ <b>明天3個關鍵點</b><br>① 四季の里退房 <b>10:00</b>；退房後決定搭方案A(11:16・利木津銜接較從容・建議)或方案B(12:36)<br>② 公車錯過就叫計程車（¥8,000–10,000），下一班15:16會趕不上報到<br>③ 華航報到約起飛前60分關櫃，方案B這段利木津只能搭16:33、約17:20到機場，會比較趕</div></div></li>
       </ol>
     </div>
   </details>
@@ -1381,14 +1533,16 @@
 
       <div class="panel jp" id="d5-jp">
         <h4>Day 5 日文例句</h4>
+        <div class="jpq"><div class="zh">【每次開口先講這句】不好意思，我是台灣人，日文只會一點點</div><div class="ja">すみません、台湾から来ました。日本語は少ししか話せません</div><div class="ro">Sumimasen, Taiwan kara kimashita. Nihongo wa sukoshi shika hanasemasen</div></div>
         <h5>5-A　退房</h5>
         <div class="jpq"><div class="zh">我要退房</div><div class="ja">チェックアウトをお願いします</div><div class="ro">Chekku-auto o onegai shimasu</div></div>
-        <h5>5-B　巴士　神山溫泉前 → 德島（62號 佐那河內線）</h5>
-        <div class="jpq"><div class="zh">12點36分的62號巴士停這裡嗎？</div><div class="ja">12時36分の62番のバスはここに停まりますか？</div><div class="ro">Juuniji sanjuuroppun no rokujuuniban no basu wa koko ni tomarimasu ka?</div></div>
+        <h5>5-B　巴士　神山溫泉前 → 德島（56號／62號都坐到終點）</h5>
+        <div class="jpq"><div class="zh">我要坐到終點「德島車站前」</div><div class="ja">終点の「徳島駅前」まで乗ります</div><div class="ro">Shuuten no "Tokushima-eki-mae" made norimasu</div></div>
         <div class="jpq"><div class="zh">今天是假日，這班有開嗎？</div><div class="ja">今日は祝日ですが、このバスは運行していますか？</div><div class="ro">Kyou wa shukujitsu desu ga, kono basu wa unkou shite imasu ka?</div></div>
-        <div class="jpq"><div class="zh">我要在「八百屋」下車</div><div class="ja">「八百屋」で降ります</div><div class="ro">"Yaoya" de orimasu</div></div>
-        <h5>5-D　JR 特急うずしお18號　德島 → 高松駅（終點站）</h5>
+        <div class="jpq"><div class="zh">到終點站請告訴我</div><div class="ja">終点に着いたら教えてください</div><div class="ro">Shuuten ni tsuitara oshiete kudasai</div></div>
+        <h5>5-D　JR 特急うずしお　德島 → 高松駅（終點站・16號或18號）</h5>
         <div class="jpq"><div class="zh">到高松，兩位，自由席特急券</div><div class="ja">高松まで、二人、自由席特急券をください</div><div class="ro">Takamatsu made, futari, jiyuuseki tokkyuuken o kudasai</div></div>
+        <div class="jpq"><div class="zh">下一班往高松的特急是幾點？</div><div class="ja">次の高松行きの特急は何時ですか？</div><div class="ro">Tsugi no Takamatsu yuki no tokkyuu wa nanji desu ka?</div></div>
         <h5>5-E　高松駅 → 高松空港 機場巴士</h5>
         <div class="jpq"><div class="zh">往高松機場的機場巴士站牌在哪裡？</div><div class="ja">高松空港行きのリムジンバス乗り場はどこですか？</div><div class="ro">Takamatsu-kuukou yuki no rimujin basu noriba wa doko desu ka?</div></div>
         <h5>5-F　高松空港　取 ecbo cloak 行李・報到</h5>
@@ -1400,7 +1554,7 @@
         <h4>Day 5 地點地圖</h4>
         <div class="maplinks">
           <a href="https://www.google.com/maps/search/?api=1&query=神山温泉前+バス停" target="_blank" rel="noopener">🚌 神山溫泉前 站牌</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=八百屋町+バス停+徳島市" target="_blank" rel="noopener">🚌 八百屋町 站牌（下車→步行6分到德島駅）</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=徳島駅前+バス乗り場" target="_blank" rel="noopener">🚌 徳島駅前（56號／62號都坐到這個終點站，就在JR德島駅正門口）</a>
           <a href="https://www.google.com/maps/search/?api=1&query=徳島駅" target="_blank" rel="noopener">🚉 德島駅（JR 特急うずしお）</a>
           <a href="https://www.google.com/maps/search/?api=1&query=高松駅" target="_blank" rel="noopener">🚉 高松駅（機場巴士站在駅前）</a>
           <a href="https://www.google.com/maps/search/?api=1&query=高松空港" target="_blank" rel="noopener">🛫 高松空港</a>
@@ -1415,128 +1569,164 @@
           <p class="meta">✅ 07:30～09:00 已確認</p></div></li>
 
         <li><span class="t">10:00</span><div class="sb">
-          <p class="act">退房</p>
-          <p class="meta">退房後有約 2.5h 空檔，可在神山町散步或再泡一次溫泉</p>
-          <div class="checkpoint" style="margin-top:.5rem">⚠ <b>現在決定：搭哪班車？</b><br>
-          <b>方案 A（提早・最保險）：</b>搭 <b>11:16</b> 神山線56號 → 12:12 元町 → 12:24 うずしお14號 → 13:30 高松駅 → 機場巴士 → <b>約14:35 到機場</b>（比主案早2小時）<br>
-          <b>方案 B（主案）：</b>搭 <b>12:36</b> 佐那河內線62號 → 13:34 德島駅（午餐41分）→ 14:24 うずしお18號 → 15:30 高松駅 → 機場巴士 → <b>約16:35 到機場</b></div></div></li>
-
-        <li><span class="t">11:00</span><div class="sb">
-          <div class="alarm">⏰ <b>選方案A → 設鬧鐘 11:00</b><br>11:16 發車，提前到 📍 <a href="https://www.google.com/maps/search/?api=1&query=神山温泉前+バス停" target="_blank" rel="noopener">神山溫泉前站牌</a> 等車。<br>搭「神山線56號」往德島方向，在「元町」下車，步行5分到德島駅。</div></div></li>
-
-        <li class="warnrow"><span class="t">12:20</span><div class="sb">
-          <span class="wtag">⚠ 方案B主案・假日班表・務必12:20前到站</span>
-          <p class="act">神山溫泉前 → 八百屋町</p>
-          <p class="meta">德島市 佐那河內線 62號 ・ 12:36發 → 13:27着</p>
-          <p class="cost">¥1,200</p>
-          <p class="fac">八百屋町下車 → 步行6分 → 德島駅</p>
-          <div class="rowbtns">
-            <button type="button" class="r-bus" data-rp="d5-bus1">🚌 時刻表</button>
-            <button type="button" class="r-alt" data-rp="d5-rp1">🔀 備案</button>
-          </div>
-          <div class="rowpanel bus" id="d5-bus1">
-            <p class="h">佐那河內線 62号（上り→德島方向）　神山温泉前 → 八百屋町 → 徳島駅前</p>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>平日ダイヤ</caption>
-              <tr><th>神山温泉前</th><th>八百屋町</th><th>徳島駅前</th></tr>
-              <tr><td>06:20</td><td>07:07</td><td>07:11</td></tr>
-              <tr><td>07:03</td><td>07:58</td><td>08:12</td></tr>
-              <tr><td>09:16</td><td>10:07</td><td>10:14</td></tr>
-              <tr><td>12:36</td><td>13:27</td><td>13:34</td></tr>
-              <tr><td>16:21</td><td>17:12</td><td>17:19</td></tr>
-            </table></div>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>土日祝ダイヤ（11/3 用這個・方案B主案）</caption>
-              <tr><th>神山温泉前</th><th>八百屋町</th><th>徳島駅前</th></tr>
-              <tr><td>06:51</td><td>07:42</td><td>07:46</td></tr>
-              <tr><td>09:16</td><td>10:07</td><td>10:14</td></tr>
-              <tr class="hl"><td class="use">12:36</td><td class="use">13:27</td><td class="use">13:34</td></tr>
-              <tr><td>16:21</td><td>17:12</td><td>17:19</td></tr>
-            </table></div>
-            <p class="h" style="margin-top:.7rem">神山線 56号（上り→德島方向）　神山温泉前 → 元町 → 徳島駅前（方案A提早出發用）</p>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>土日祝ダイヤ（11/3）</caption>
-              <tr><th>神山温泉前</th><th>元町</th><th>徳島駅前</th></tr>
-              <tr class="hl"><td class="use">11:16</td><td class="use">12:12</td><td class="use">12:20</td></tr>
-              <tr><td>15:16</td><td>16:12</td><td>16:20</td></tr>
-            </table></div>
-            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ 原方案C「12:46神山線」只有平日才有，11/3 土日祝不存在，已刪除不採用。方案A「11:16」行程表舊標「假日不開」是錯的，土日祝確實有這班。</p>
-          </div>
-          <div class="rowpanel alt" id="d5-rp1">
-            <p class="h">錯過 12:36 怎麼辦（唯一備案：計程車）</p>
-            <p>・下一班公車 15:16 到德島 16:20，趕不上 16:55 報到截止，不能等</p>
-            <p>・叫計程車：神山溫泉→德島駅 約40–50分・¥8,000–10,000</p>
+          <p class="act">四季の里 退房（退房時間 10:00）</p>
+          <p class="meta">本行程按 <b>方案 A（提早出發）</b> 跑：11:16 神山線56號 → 徳島駅吃午餐（比方案B從容）→ うずしお → 高松駅 → 15:15 利木津 → 約16:06 到機場。</p>
+          <p class="fac">退房後到 11:00 約 1 小時，神山町散步或再泡一次溫泉。</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d5-planB">🔀 方案B（不想早起／想在神山多待）</button></div>
+          <div class="rowpanel alt" id="d5-planB">
+            <p class="h">方案 B　搭 12:36 那班公車・不在德島吃午餐、改到高松駅／機場吃</p>
+            <p>① 10:00 退房後在神山町待到 <b>12:20</b> 前到「神山溫泉前」站牌</p>
+            <p>② <b>12:36</b> 佐那河內線 62号（土日祝）→ <b>13:34</b> 徳島駅前（坐到終點，不用中途下車）</p>
+            <p>③ 不在德島吃午餐：直接進站買 <b>うずしお18号</b> 高松 自由席特急券（¥2,840/人，見 🎫 購票流程）＋順手買 駅弁／おにぎり 帶著</p>
+            <p>④ <b>14:24</b> うずしお18号 → <b>15:30</b> 高松駅（＝你設的最晚一班）</p>
+            <p>⑤ 15:30 → 3番のりば。下一班利木津 <b>16:33</b>（■週二有開），中間無車 → 這 63 分鐘就在高松駅買午餐坐著吃、上廁所</p>
+            <p>⑥ <b>16:33</b> 利木津 → 約 <b>17:20</b> 高松空港</p>
+            <p>⑦ 17:20 取 ecbo cloak 行李 → 華航報到 → 安檢（小機場約 40–60 分）→ 距 18:55 約 95 分，趕但可行。<b>正餐盡量在高松駅解決，別賭機場慢慢吃。</b></p>
+            <p class="h" style="margin-top:.5rem">出狀況就直接叫計程車，不要等下一班</p>
+            <p style="color:var(--warn-ink)">・<b>錯過 12:36 公車</b> → 直接搭計程車 神山溫泉 → 德島駅，約 40–50 分・¥8,000–10,000（下一班公車 15:16 太晚，一定趕不上）</p>
+            <p style="color:var(--warn-ink)">・<b>公車或 うずしお 誤點</b> → 直接搭計程車 高松駅 → 高松空港，約 30 分・¥3,500–4,500</p>
             <a class="tel" href="tel:+81886548811">☎ 德島第一交通 088-654-8811</a>
             <a class="tel" href="tel:+81886760345" style="margin-top:.4rem">☎ 寄井観光タクシー 088-676-0345</a>
-            <p style="font-size:.8rem;color:var(--muted)">更保險做法：出發前一晚請四季の里代訂「神山溫泉→德島駅」計程車 11:30 左右發，公車準時來再取消（不收費）。</p>
           </div></div></li>
 
-        <li><span class="t">13:33</span><div class="sb">
-          <p class="act">德島駅周邊午餐（自理）</p>
-          <p class="meta">步行 ・ 駅周邊</p>
-          <p class="cost">¥800–1,200</p></div></li>
+        <li><span class="t">11:00</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 11:00</b> — 11:16 發車。提前到 📍 <a href="https://www.google.com/maps/search/?api=1&query=神山温泉前+バス停" target="_blank" rel="noopener">神山溫泉前站牌</a> 等「神山線56號」往德島方向。</div></div></li>
 
-        <li><span class="t">13:40</span><div class="sb">
-          <div class="alarm">⏰ <b>設鬧鐘 14:10</b> — 14:24 うずしお發車，提前進月台。自由席車廂在後方。</div></div></li>
+        <li><span class="t">11:16</span><div class="sb">
+          <p class="act">神山溫泉前 → 德島駅（坐到終點）</p>
+          <p class="meta">神山線 56號（往德島方向）・ 11:16發 → 約12:20 到終點「徳島駅前」・11:10 前先到站牌</p>
+          <p class="cost">約¥1,200／人</p>
+          <div class="rowbtns"><button type="button" class="r-bus" data-rp="d5-bus1">🚌 時刻表</button></div>
+          <div class="rowpanel bus" id="d5-bus1">
+            <p class="h">神山線 56号（往德島方向）　神山温泉前 → 徳島駅前【方案A・坐到終點】</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（11/3 文化の日用這個）</caption>
+              <tr><th>神山温泉前 發</th><th>徳島駅前 終点 着</th></tr>
+              <tr class="hl"><td class="use">11:16</td><td class="use">12:20</td></tr>
+              <tr><td>15:16</td><td>16:20</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ 「11:16」行程表舊標「假日不開」是錯的，土日祝確實有這班。11/3 是文化の日，一律用土日祝班表。</p>
+            <p class="h" style="margin-top:.7rem">佐那河內線 62号（方案B用）　神山温泉前 → 徳島駅前【坐到終點】</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>土日祝ダイヤ（11/3）</caption>
+              <tr><th>神山温泉前 發</th><th>徳島駅前 終点 着</th></tr>
+              <tr><td>06:51</td><td>07:46</td></tr>
+              <tr><td>09:16</td><td>10:14</td></tr>
+              <tr><td>12:36</td><td>13:34</td></tr>
+              <tr><td>16:21</td><td>17:19</td></tr>
+            </table></div>
+          </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>趕不上 11:16 嗎？</b> → 直接改 <b>方案B</b>（見上方 🔀）：走去搭 12:36 佐那河內線62號；或叫計程車 神山溫泉→德島駅（¥8,000–10,000）。</div></div></li>
 
-        <li><span class="t">14:24</span><div class="sb">
+        <li><span class="t">12:25</span><div class="sb">
+          <p class="act">德島駅・先買特急券 → 午餐</p>
+          <p class="meta">約 12:20 到德島駅。先到綠色窗口買 うずしお 高松 自由席特急券（假日可能排隊，抓 10–20 分），剩下約 <b>35–45 分</b> 吃午餐——夠站前烏龍麵／拉麵／點心。想坐下來慢慢吃 → 這班うずしお不搭，改搭下一班（見下方判斷，代價是改接 16:33 利木津）。</p>
+          <p class="cost">午餐 ¥800–1,500／人</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d5-ticket">🎫 德島駅 買票流程</button></div>
+          <div class="rowpanel alt" id="d5-ticket">
+            <p class="h">德島駅 買 うずしお 高松行 自由席特急券（2人份）</p>
+            <p>① 進站前先到「みどりの窓口」綠色窗口，或「みどりの券売機」（附視訊客服的售票機）</p>
+            <p>② 跟站員說（或給看）：「<b>高松まで、特急うずしお、自由席２枚</b>」</p>
+            <p>③ 一次付清 運賃＋自由席特急券 共 <b>¥2,840 × 2 ＝ ¥5,680</b>（現金／信用卡都收）</p>
+            <p>④ 拿到票（乘車券＋特急券），過改札放進閘口或給站員看</p>
+            <p>⑤ 上車找「自由席」車廂（通常在後方 1–2 節，月台地面／車門有標示），沒有對號，先上先坐</p>
+            <p style="color:var(--warn-ink)">⚠ Suica／ICOCA <b>不能</b>扣特急券，一定要在這裡先買紙本，否則車上驗票要補票＋手續費</p>
+            <div class="jarow"><div class="ja">高松まで、特急うずしおの自由席を2枚ください。</div><div class="ro">Takamatsu made, tokkyuu Uzushio no jiyuuseki o nimai kudasai.</div></div>
+            <div class="jarow"><div class="ja">自由席の車両は何号車ですか？</div><div class="ro">Jiyuuseki no sharyou wa nangousha desu ka?（自由席是幾號車廂）</div></div>
+          </div>
+          <p class="fac"><b>烏龍麵／拉麵（站前 1–3 分）：</b><br>
+          🍜 <a href="https://www.google.com/maps/search/?api=1&query=セルフうどん+やま+徳島駅前店" target="_blank" rel="noopener">セルフうどん やま 徳島駅前店</a>（自助烏龍・約3.5・出餐最快）　🍥 <a href="https://www.google.com/maps/search/?api=1&query=麺王+徳島駅前本店" target="_blank" rel="noopener">麺王 徳島駅前本店</a>（德島拉麵・約3.3）</p>
+          <p class="fac"><b>不吃烏龍麵（食べログ約 3.4–3.5，這區駅前上限差不多在這，沒有 4.0＋）：</b><br>
+          🥟 <a href="https://www.google.com/maps/search/?api=1&query=点心バル+やすなが+クレメントプラザ" target="_blank" rel="noopener">点心バル やすなが</a>（JR德島駅直結・クレメントプラザ B1F・點心＋德島拉麵・雨天不用出站）<br>
+          🍚 <a href="https://www.google.com/maps/search/?api=1&query=クレメントプラザ+レストラン街+徳島" target="_blank" rel="noopener">クレメントプラザ 5F レストラン街</a>（駅直結・とんかつ／洋食／和食多間・想坐下來吃）<br>
+          🐟 <a href="https://www.google.com/maps/search/?api=1&query=町家だいにんぐ+銀乃介+徳島" target="_blank" rel="noopener">町家だいにんぐ 銀乃介</a>（徒歩約5分・阿波尾鶏／生魚片）<br>
+          🍜 <a href="https://www.google.com/maps/search/?api=1&query=中華そば+いのたに+本店+徳島" target="_blank" rel="noopener">中華そば いのたに 本店</a>（德島拉麵名店・食べログ 3.68・徒歩約15分・時間夠才去）</p>
+          <p class="fac" style="color:var(--warn-ink)">🟡 評分／營業時間出發前用食べログ 再確認；11/3 假日部分店公休。</p></div></li>
+
+        <li><span class="t">13:15</span><div class="sb">
+          <div class="alarm">⏰ <b>設鬧鐘 13:15</b> — 準備進月台搭 うずしお。自由席在後方 1–2 節。</div></div></li>
+
+        <li><span class="t">約13:24</span><div class="sb">
           <p class="act">德島駅 → 高松駅（終點站）</p>
-          <p class="meta">JR特急 うずしお18號 ・ 約66分 ・ 15:30着</p>
-          <p class="cost">¥2,840 自由席</p>
-          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=徳島駅" target="_blank" rel="noopener">德島駅地圖</a>　坐到終點站高松駅，不用擔心坐過站</p></div></li>
+          <p class="meta">JR特急 うずしお16號 ・ 約66分 ・ 目標是接上 15:15 高松駅利木津 ・ 🟡 約 13:2x 發 → 約 14:3x 着（<b>出發前上 JR 四國官網確認確切時刻</b>）</p>
+          <p class="cost">¥2,840 自由席／人</p>
+          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=徳島駅" target="_blank" rel="noopener">德島駅地圖</a>　坐到終點站高松駅，不用擔心坐過站</p>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>午餐拖到、或沒有合適的 16号？</b><br>
+          <span class="lv lv-y">🟡</span> 退而求其次：搭 <b>うずしお18號 14:24發 → 15:30着</b>（＝你設的最晚一班），到高松駅後改搭 <b>16:33</b> 利木津 → 約17:20到機場（見下方判斷）。<b>比 15:30 更晚的うずしお不要搭。</b></div></div></li>
 
-        <li><span class="t">15:30</span><div class="sb">
-          <div class="alarm">⏰ <b>15:30 到高松駅</b> — 出站後步行3分到駅前 <b>2 號站牌</b> 排隊搭機場巴士</div></div></li>
+        <li><span class="t">約14:35</span><div class="sb">
+          <div class="alarm">⏰ <b>到高松駅（うずしお16號）</b> — 出站直奔駅前 <b>3番のりば</b>，搭 <b>15:15</b> 利木津。約 40 分空檔可買晚餐前的墊肚食物、上廁所。<br>（若搭的是 18號、15:30 才到 → 改等 16:33 利木津。）</div></div></li>
 
-        <li><span class="t">約15:50</span><div class="sb">
-          <p class="act">高松駅 → 高松空港　機場巴士</p>
-          <p class="meta">琴電利木津巴士（ことでんバス）・ 約45分 ・ 班次配合航班</p>
-          <p class="cost">¥1,300（2026/10/1 起新價・可刷 ICOCA）</p>
-          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=高松駅" target="_blank" rel="noopener">高松駅地圖</a>　站牌在駅前巴士總站 <b>2 號乘車處</b>，和 Day 1 下車的地方一樣</p>
-          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d5-rp2">🔀 備案</button></div>
-          <div class="rowpanel alt" id="d5-rp2">
-            <p class="h">うずしお 嚴重誤點怎麼辦</p>
-            <p>・高松駅機場巴士班次密集（約20-30分），晚一班也來得及</p>
-            <p>・最遲搭 16:00 左右的巴士（16:45到機場）還趕得上 16:55 報到</p>
-            <p>・真的趕不上：高松駅→高松空港 計程車約30分・¥3,500–4,500</p>
-          </div></div></li>
+        <li><span class="t">15:15</span><div class="sb">
+          <p class="act">高松駅 3番のりば → 高松空港　利木津巴士</p>
+          <p class="meta">約45分 → 約 16:06 到機場 ・ 班次配合航班、不是每20分一班（這班之後要等到 16:33）</p>
+          <p class="cost">¥1,300／人（可刷 Suica／ICOCA，上下車都要感應）</p>
+          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=高松駅+3番のりば" target="_blank" rel="noopener">高松駅 3番のりば</a>　駅前巴士總站，Day 1 下車那一帶</p>
+          <div class="rowbtns"><button type="button" class="r-bus" data-rp="d5-bus2">🚌 時刻表</button></div>
+          <div class="rowpanel bus" id="d5-bus2">
+            <p class="h">高松駅 3番のりば → 高松空港（官方利木津巴士・資料夾 PDF「高松車站-高松機場時刻表1001-1024」）</p>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>高松駅発（下午段・🟡 OCR 判讀，出發前官網核對）</caption>
+              <tr><th>高松駅 発</th><th>高松空港 着（約）</th><th>備註</th></tr>
+              <tr><td>13:20 / 13:23 / 13:26 / 13:29</td><td>約14:00–14:14</td><td>この一波</td></tr>
+              <tr class="hl"><td class="use">15:15 / 15:18 / 15:21</td><td class="use">約16:06</td><td>方案A（うずしお16號 14:3x 到）搭這班</td></tr>
+              <tr><td>16:33 / 16:36</td><td>約17:16–17:21</td><td>■ 日火金運行（11/3 週二有開）・搭18號(15:30着)時用</td></tr>
+              <tr><td>17:43 / 17:46 / 17:49</td><td>約18:30</td><td>太晚，趕不上 18:55</td></tr>
+            </table></div>
+            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ <b>15:21 之後跳到 16:33，中間沒有班次。</b>所以方案A要趕上 15:15；若只能搭 うずしお18號（15:30着）就是 16:33 → 約17:20到機場 → 距 18:55 約 95 分（華航約起飛前 60 分關櫃，趕但可行）。</p>
+            <p style="font-size:.8rem;color:var(--muted)">🟡 時刻為 PDF OCR 判讀，出發前務必上 ことでんバス 官網以「台北(CI) 出発」該列核對，並確認是否另有一般空港連絡巴士。</p>
+          </div>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>你是搭 うずしお18號（15:30到高松駅）嗎？</b><br>
+          <span class="lv lv-y">🟡 是</span> → 只能等 <b>16:33</b> 利木津 → 約17:20到機場。一到高松駅就去 3番のりば排隊、別逛街；巴士沒來或太趕 → 計程車 高松駅→空港 約30分 ¥3,500–4,500。</div></div></li>
 
-        <li><span class="t">16:15</span><div class="sb">
-          <p class="act">高松空港抵達・取 ecbo cloak 行李</p>
-          <p class="meta">起飛前約2h40m ・ 出境手續・機場輕食</p>
-          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=高松空港" target="_blank" rel="noopener">高松空港地圖</a>　當天早上可先在 ecbo cloak APP 按「當日取件」通知店家備妥</p></div></li>
+        <li><span class="t">約16:06</span><div class="sb">
+          <p class="act">高松空港抵達・取 ecbo cloak 行李・報到</p>
+          <p class="meta">方案A（15:15 利木津）約 16:06 到，起飛前約 2h49m；若搭 16:33 利木津則約 17:20 到，起飛前約 1h35m</p>
+          <p class="fac">動線：取 ecbo cloak 行李 → 華航櫃檯報到託運 → 出境安檢 → 候機。時間緊就先報到再買土產。</p>
+          <div class="rowbtns"><button type="button" class="r-alt" data-rp="d5-airport">🛍 高松空港 買什麼</button></div>
+          <div class="rowpanel alt" id="d5-airport">
+            <p class="h">高松空港 賣店（2F 安檢前：ANA FESTA／四国空市場YOSORA；1F：四季の里）</p>
+            <p><b>伴手禮：</b>和三盆糖（¥1,296）、瀬戸内ブループリン（空港限定・雙層布丁）、半生讃岐烏龍麵＋高湯組（¥1,296）、かまど（銘菓）、灸まん、瓦せんべい、日の出製麺所うどん。四国空市場也有德島・愛媛・高知名產。</p>
+            <p><b>飛機上吃的零食：</b>おいり（超輕米菓、不占空間）、瓦せんべい、和三盆糖、小袋あられ；想墊胃可在 2F 買便當／おにぎり／うどん，安檢後也有小賣店。</p>
+            <p style="color:var(--warn-ink)">⚠ <b>高松空港沒有藥妝店（ドラッグストア）。</b>痠痛貼布、常備藥要在市區先買好（見 Day 1 板野藥妝，或高松駅前）。</p>
+          </div>
+          <p class="fac">📍 <a href="https://www.google.com/maps/search/?api=1&query=高松空港" target="_blank" rel="noopener">高松空港地圖</a>　當天早上先在 ecbo cloak APP 按「當日取件」通知店家備妥</p></div></li>
 
         <li class="warnrow"><span class="t">16:55</span><div class="sb">
-          <span class="wtag">⚠ 報到截止・當天最後一班飛機</span>
-          <p class="act">CI 179 Check-in 截止（起飛前2小時）</p></div></li>
-
-        <li><span class="t">12:30</span><div class="sb">
-          <div class="checkpoint">⚠ <b>Day 5 關鍵判斷</b><br>① 12:36 公車是回程主線，<b>錯過就叫計程車</b>（¥8,000–10,000）<br>② 提早出發備案：搭 11:16 班次（比主案早2hr到機場）<br>③ 16:55 報到截止、當天最後一班飛機，沒有容錯空間</div></div></li>
+          <span class="wtag">⚠ 當天最後一班飛機・沒有下一班</span>
+          <p class="act">理想報到時間（起飛前2小時）</p>
+          <p class="meta">華航國際線實際櫃檯關閉約在 <b>起飛前60分＝17:55</b>。方案A（16:06到）非常從容；方案B（約17:20到）也還在關櫃前，但一落地就直接衝報到、別逛街。</p></div></li>
 
         <li><span class="t">18:55</span><div class="sb">
           <p class="act">CI 179 起飛 TAK → TPE</p>
-          <p class="meta">飛機 ・ 3h10m ・ 21:05 抵達台北・お疲れさまでした！</p></div></li>
+          <p class="meta">飛機 ・ 3h10m</p></div></li>
+
+        <li><span class="t">21:05</span><div class="sb">
+          <p class="act">抵達桃園機場・お疲れさまでした！</p>
+          <p class="meta">下機＋入境＋等行李約 30–45 分，實際出關約 21:45–22:00</p>
+          <p class="fac">🚗 <b>接送：</b>預約的車抓「落地後約 45 分」（約 21:50）再到就好，不用催司機；先過關、領完行李再聯絡。班機誤點就以實際落地時間重新通知接送方。</p></div></li>
       </ol>
 
       <div class="plans">
         <div class="plan pick">
-          <h4>方案 B　<span class="tag-pick">★ 主案（高松駅轉）</span></h4>
+          <h4>方案 A　<span class="tag-pick">★ 建議（時間最從容）</span></h4>
           <ol>
-            <li>12:36 神山溫泉前 ・ 62號佐那河內線 ¥1,200</li>
-            <li>13:27 八百屋町下車 ・ 步行6分到德島駅</li>
-            <li>14:24 德島駅 ・ うずしお18特急 → <b>高松駅</b>（終點）¥2,840</li>
-            <li>15:30 高松駅 ・ 機場巴士（2號站牌・可刷ICOCA）¥1,300</li>
-            <li>約16:35 高松機場</li>
+            <li>11:16 神山溫泉前 ・ 神山線56號 → 12:12 元町下車，步行5分到德島駅（約12:20）¥1,200</li>
+            <li>12:20–13:15 德島駅：買特急券＋午餐（約35–45分）</li>
+            <li>約13:24 德島駅 ・ うずしお16號 → 約14:35 高松駅　¥2,840（🟡 16號時刻出發前 JR 官網查）</li>
+            <li>15:15 高松駅 3番のりば ・ 利木津巴士（Suica可）¥1,300</li>
+            <li>約16:06 高松機場（起飛前 2h49m）</li>
           </ol>
+          <p style="font-size:.8rem;color:var(--muted)">午餐拖到或沒有合適的16號 → 退搭 うずしお18號 14:24發/15:30着（最晚一班），改接 16:33 利木津 → 約17:20 機場（同方案B結果）。</p>
         </div>
         <div class="plan">
-          <h4>方案 A（提早出發備案・高松駅轉）</h4>
+          <h4>方案 B（原主案・這段利木津較緊）</h4>
           <ol>
-            <li>11:16 神山溫泉前 ・ 神山線56號 ¥1,200</li>
-            <li>12:12 元町下車 ・ 步行5分到德島駅</li>
-            <li>12:24 德島駅 ・ うずしお14特急 → <b>高松駅</b> ¥2,840</li>
-            <li>13:30 高松駅 ・ 機場巴士（2號站牌・可刷ICOCA）¥1,300</li>
-            <li>14:10 高松機場（比主案早2小時到，最保險）</li>
+            <li>12:36 神山溫泉前 ・ 62號佐那河內線 ¥1,200</li>
+            <li>13:34 徳島駅前⑬のりば下車（坐到終點）</li>
+            <li>14:24 德島駅 ・ うずしお18特急 → <b>高松駅</b> ¥2,840</li>
+            <li>15:30 高松駅 → <b>只能等 16:33 利木津</b>（中間無車）¥1,300</li>
+            <li>約17:20 高松機場（起飛前 1h35m，趕但可行）</li>
           </ol>
         </div>
         <div class="plan no">
@@ -1588,11 +1778,11 @@
       </ul>
     </div>
     <div class="tip">
-      <h3>💴 現金</h3>
+      <h3>💴 現金・IC 卡</h3>
       <ul>
         <li>宿坊／納経／御朱印／鄉下計程車多半只收現金，每人備 ¥80,000 日幣（台灣先換好）</li>
-        <li>ICOCA 儲值 ¥5,000 以上，涵蓋琴電機場巴士＋徳島バス全路線（含神山線・鍛冶屋原線）＋JR四国高德線閘門</li>
-        <li>JR うずしお 特急自由席的「自由席特急券」IC 卡刷不到，要另外在綠色窗口或售票機買</li>
+        <li><b>用 Suica 的看這裡：</b>Suica 與 ICOCA 全國互通，這份行程裡凡是寫「可刷 ICOCA」的地方（機場巴士、徳島バス各線含神山線・鍛冶屋原線、佐那河內線、JR 高德線改札短程、便利商店）<b>Suica 都能用</b>，上下車都要感應。儲值 ¥5,000 以上較保險。</li>
+        <li>唯一例外：JR うずしお 特急的「自由席特急券」<b>IC 卡（含 Suica）刷不到</b>，要在綠色窗口或售票機另外買紙本。</li>
       </ul>
     </div>
     <div class="tip">
@@ -1756,6 +1946,60 @@
     </div>
   </section>
 
+
+  <!-- ================= 記帳／分帳 ================= -->
+  <section class="blk" id="expense">
+    <h2>記帳／分帳</h2>
+    <p class="blkintro">每筆花費記一下、可拍收據。資料只存這支手機（收據照存 IndexedDB、金額存 localStorage），<b>不會同步到妹妹的手機</b>——請固定用這支記，或每晚兩人對一次帳。回國前記得「複製全部」備份。</p>
+
+    <div class="exp-who">
+      <label>我＝<input type="text" id="expNameA" maxlength="6" placeholder="我"></label>
+      <label>同行＝<input type="text" id="expNameB" maxlength="6" placeholder="妹妹"></label>
+    </div>
+
+    <div class="exp-summary" id="expSummary"></div>
+
+    <form class="exp-form" id="expForm">
+      <div class="exp-row">
+        <select id="expDay">
+          <option value="D1">D1 10/30</option>
+          <option value="D2">D2 10/31</option>
+          <option value="D3">D3 11/1</option>
+          <option value="D4">D4 11/2</option>
+          <option value="D5">D5 11/3</option>
+          <option value="其他">其他</option>
+        </select>
+        <select id="expCat">
+          <option>餐食</option><option>交通</option><option>住宿</option>
+          <option>納経御朱印</option><option>購物</option><option>其他</option>
+        </select>
+      </div>
+      <input type="text" id="expItem" placeholder="項目（例：午餐烏龍麵）" maxlength="40">
+      <div class="exp-row">
+        <input type="number" id="expAmt" placeholder="金額 ¥" inputmode="numeric" min="0" step="1">
+        <select id="expPaid"><option value="A">我付</option><option value="B">同行付</option></select>
+        <select id="expSplit">
+          <option value="half">均分</option>
+          <option value="A">算我的</option>
+          <option value="B">算同行的</option>
+        </select>
+      </div>
+      <div class="photobar">
+        <label for="expPhoto">＋ 收據照片</label>
+        <input type="file" id="expPhoto" accept="image/*">
+        <span id="expPhotoName" style="font-size:.8rem;color:var(--muted)">可不放</span>
+      </div>
+      <button type="submit" class="btn solid" id="expAdd">加入這筆</button>
+    </form>
+
+    <div id="expList"></div>
+
+    <div class="memactions">
+      <button type="button" class="btn" id="expCopy">📋 複製全部（備份／對帳）</button>
+      <button type="button" class="btn ghost" id="expClear">清空全部</button>
+    </div>
+    <p class="dbwarn" id="expDbwarn">⚠ 這支瀏覽器不支援收據照片本機儲存，金額仍可正常記錄。</p>
+  </section>
 
   <!-- ================= 回憶 ================= -->
   <section class="blk memoryblk" id="memory">
@@ -2021,7 +2265,7 @@ var db=null,DBOK=true;
 try{
   var req=indexedDB.open("henro-photos",1);
   req.onupgradeneeded=function(e){e.target.result.createObjectStore("p",{keyPath:"id"});};
-  req.onsuccess=function(e){db=e.target.result;loadAllPhotos();};
+  req.onsuccess=function(e){db=e.target.result;loadAllPhotos();if(window.__expRender)window.__expRender();};
   req.onerror=function(){DBOK=false;document.getElementById("dbwarn").classList.add("show");};
 }catch(e){DBOK=false;document.getElementById("dbwarn").classList.add("show");}
 
@@ -2099,20 +2343,16 @@ ciRoot.addEventListener("change",function(ev){
 });
 
 /* =========================================================
-   5. .ics 行事曆匯出
+   5. 行程事件表（供下方「下一段倒數」列使用）
 ========================================================= */
-function pad2(x){return (x<10?"0":"")+x;}
-function icsDate(y,mo,d,h,mi){return y+pad2(mo)+pad2(d)+"T"+pad2(h)+pad2(mi)+"00";}
-function icsEscape(s){return String(s).replace(/[\\;,]/g,function(c){return "\\"+c;}).replace(/\n/g,"\\n");}
-
-/* EVENTS: [年,月,日,時,分,持續分鐘,標題,說明,是否為截止型(額外-15分提醒)] */
+/* EVENTS: [年,月,日,時,分,持續分鐘,標題,說明,截止型旗標] */
 var EVENTS=[
   [2026,10,30,5,0,120,"CI278 報到 桃園→高松","起飛前2小時報到",1],
   [2026,10,30,7,0,140,"CI278 起飛 TPE→TAK","10:20抵達高松",0],
   [2026,10,30,11,10,45,"機場巴士 高松空港→高松駅","¥1,300",0],
   [2026,10,30,13,10,57,"JR特急うずしお15号 高松→板野","¥2,440自由席・14:01到",1],
   [2026,10,31,11,29,15,"巴士 板野駅南→大日寺口","鍛冶屋原線47/48号",1],
-  [2026,10,31,16,21,10,"巴士 羅漢→板野駅南","鍛冶屋原線28号回程",1],
+  [2026,10,31,13,21,10,"巴士 羅漢→板野駅南","鍛冶屋原線28号・趕不上就16:21或計程車",1],
   [2026,11,1,8,19,15,"巴士 板野駅南→東原","鍛冶屋原線28号 土日祝首班・必搭",1],
   [2026,11,1,17,0,0,"Check-in 安樂寺宿坊","最終入住18:00",1],
   [2026,11,2,7,0,60,"計程車 安樂寺→藤井寺","前晚預約・約¥6,000",1],
@@ -2126,51 +2366,6 @@ var EVENTS=[
   [2026,11,3,18,55,190,"CI179 起飛 TAK→TPE","21:05抵台北",0]
 ];
 
-function buildICS(){
-  var lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//henro-app//zh-Hant//EN","CALSCALE:GREGORIAN"];
-  EVENTS.forEach(function(ev,i){
-    var y=ev[0],mo=ev[1],d=ev[2],h=ev[3],mi=ev[4],dur=ev[5],title=ev[6],desc=ev[7],deadline=ev[8];
-    var startD=new Date(y,mo-1,d,h,mi,0);
-    var endD=new Date(startD.getTime()+Math.max(dur,5)*60000);
-    lines.push("BEGIN:VEVENT");
-    lines.push("UID:henro-"+i+"-20260828@local");
-    lines.push("DTSTART:"+icsDate(y,mo,d,h,mi));
-    lines.push("DTEND:"+icsDate(endD.getFullYear(),endD.getMonth()+1,endD.getDate(),endD.getHours(),endD.getMinutes()));
-    lines.push("SUMMARY:"+icsEscape(title));
-    if(desc)lines.push("DESCRIPTION:"+icsEscape(desc));
-    lines.push("BEGIN:VALARM");
-    lines.push("ACTION:DISPLAY");
-    lines.push("DESCRIPTION:"+icsEscape(title));
-    lines.push("TRIGGER:-PT5M");
-    lines.push("END:VALARM");
-    if(deadline){
-      lines.push("BEGIN:VALARM");
-      lines.push("ACTION:DISPLAY");
-      lines.push("DESCRIPTION:"+icsEscape("15分後截止／需完成："+title));
-      lines.push("TRIGGER:-PT15M");
-      lines.push("END:VALARM");
-    }
-    lines.push("END:VEVENT");
-  });
-  lines.push("END:VCALENDAR");
-  return lines.join("\r\n");
-}
-document.getElementById("btnIcsAll").onclick=function(){
-  try{
-    var icsText=buildICS();
-    var blob=new Blob([icsText],{type:"text/calendar;charset=utf-8"});
-    var url=URL.createObjectURL(blob);
-    var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
-    if(isIOS){
-      window.open(url,"_blank");
-    }else{
-      var a=document.createElement("a");
-      a.href=url;a.download="henro-2026.ics";
-      document.body.appendChild(a);a.click();document.body.removeChild(a);
-    }
-    setTimeout(function(){URL.revokeObjectURL(url);},10000);
-  }catch(e){alert("匯出失敗，請改用「分享」把這個網址傳給自己在電腦上開。");}
-};
 document.getElementById("btnInstallHint").onclick=function(){
   alert("加到主畫面：\niPhone Safari → 下方「分享」圖示 → 加入主畫面\nAndroid Chrome → 右上角選單 → 加到主畫面 / 安裝應用程式");
 };
@@ -2196,30 +2391,78 @@ document.getElementById("btnInstallHint").onclick=function(){
 /* =========================================================
    6b. 出發前確認清單（checkbox + localStorage）
 ========================================================= */
+/* [key,標題,說明,建議開始確認時間] — 依「該開始處理的時間」由早到晚排序 */
 var CKLIST=[
-  ["passport","護照效期","確認護照有效期超過回國日6個月（2027/05以後）"],
-  ["vjw","Visit Japan Web","出發前在 vjw-lp.digital.go.jp 登錄入境資訊（入國審查＋稅關申告），到日本掃QR code過關"],
-  ["insurance","旅平險＋不便險","出發前在台灣投保（富邦／新安東京海上），最晚起飛前1小時可保"],
-  ["ecbo","ecbo cloak APP 預約","出發前兩週預約高松機場寄物（10/30→11/3）"],
-  ["offlinemap","離線地圖下載","Google Maps 德島＋香川全區＋YAMAP 燒山寺路線"],
-  ["icoca","ICOCA／Mobile Suica","準備好IC卡，或先在Apple Wallet設定好Mobile Suica"],
-  ["reconfirm","訂房再確認","出發前3天打電話確認3家住宿（見「出發前」頁電話清單）"],
-  ["packing","打包清單","對照「出發前」頁打包清單逐項確認"],
-  ["cash","現金","每人¥80,000日幣現金，台灣先換好"]
+  ["passport","護照效期","確認護照效期至回國日後 6 個月以上（2027/05 以後）。不足要立刻辦換發，這件最花時間。","出發前1個月・約9/30"],
+  ["cash","換日幣現金","每人 ¥80,000，台灣的銀行先換好（宿坊／納経／御朱印／鄉下計程車多半只收現金）。","出發前2週・約10/16"],
+  ["ecbo","ecbo cloak 寄物預約","App 預約高松機場 1F 寄放大行李箱（10/30→11/3）。","出發前2週・約10/16"],
+  ["airporttransfer","機場接送（來回）","直接安排計程車接送。去程 10/30 約 04:00 從家出發→桃園（07:00 CI278）；回程 11/3 CI179 21:05 落地、計程車抓落地+45分（約21:50）再到。出發前跟車行敲定兩段時間。","出發前2週先喬・約10/16"],
+  ["icoca","ICOCA／Mobile Suica","備妥實體 IC 卡，或在 Apple Wallet 設好 Mobile Suica 並儲值 ¥5,000 以上。你用 Suica，行程裡寫 ICOCA 的地方都能用（特急券除外）。","出發前1週・約10/23"],
+  ["esim","eSIM 上網卡","日本 5 天，兩人各一張 10GB 方案就夠（導航＋查資料每天約 1–1.5GB，不看影片）。買 Airalo／Ubigi／Klook 的日本 eSIM，出發前一週先買、掃 QR 安裝好，落地開飛航→開資料漫遊→啟用 eSIM 即可。","出發前1週・約10/23"],
+  ["airportbus","高松空港利木津巴士班次","巴士配合航班發車、無固定時刻。上高松空港官網查 10/30 當天實際班次，確認 Day 1 銜接時間。","出發前1週・約10/23"],
+  ["jrtt","JR うずしお 時刻表","上 JR 四國官網確認 10/30（高松→板野）、11/3（德島→高松）當天特急班次。","出發前1週・約10/23"],
+  ["vjw","Visit Japan Web","在 vjw-lp.digital.go.jp 登錄入境資訊（入國審查＋稅關申告），到日本掃 QR 過關。","出發前5天・約10/25"],
+  ["reconfirm","訂房再確認（3 家）","打電話確認 HOTEL AZ、安樂寺宿坊、四季の里（入住時間、餐食時間、宿坊晨課／早朝便當／計程車代訂）。電話見下方「訂房再確認」欄。","出發前3天・約10/27"],
+  ["weather","天氣預報","tenki.jp 查德島 10 天預報；Day 4 燒山寺若有豪雨警報要評估改路線。","出發前3天起每天看・10/27～"],
+  ["offlinemap","離線地圖下載","Google Maps 德島＋香川全區、YAMAP「藤井寺→燒山寺」路線。","出發前3天・約10/27"],
+  ["insurance","旅平險＋不便險","台灣線上投保（富邦／新安東京海上），承保 10/30–11/03。最晚起飛前 1 小時可保，但先辦好。","出發前2天・約10/28"],
+  ["packing","打包＋秤重","對照下方打包清單逐項點掉；背包試背、行李箱秤重。","出發前2天・約10/28"],
+  ["finalcheck","出門前最後檢查","護照、日幣現金、IC 卡、雨具、行動電源、常備藥、充電器。","當天 10/30 03:30"]
 ];
 (function(){
   var ul=document.getElementById("cklist");
-  var CKKEY="henro-cklist-v1";
+  var CKKEY="henro-cklist-v2";
   var st={};
   try{var raw=localStorage.getItem(CKKEY);if(raw)st=JSON.parse(raw)||{};}catch(e){}
   CKLIST.forEach(function(item){
     var li=document.createElement("li");
-    li.innerHTML='<label><input type="checkbox" data-k="'+item[0]+'"><span class="cktext"><b>'+item[1]+'</b><span>'+item[2]+'</span></span></label>';
+    var when=item[3]?'<span class="ckwhen">🕐 '+item[3]+'</span>':'';
+    li.innerHTML='<label><input type="checkbox" data-k="'+item[0]+'"><span class="cktext">'+when+'<b>'+item[1]+'</b><span>'+item[2]+'</span></span></label>';
     var cb=li.querySelector("input");
     cb.checked=!!st[item[0]];
     cb.onchange=function(){st[item[0]]=cb.checked;try{localStorage.setItem(CKKEY,JSON.stringify(st));}catch(e){}};
     ul.appendChild(li);
   });
+})();
+
+/* =========================================================
+   6b-2. 打包清單：點一下標記已收（localStorage）
+========================================================= */
+(function(){
+  var lists=["packlist","packlist2","packlist3"].map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if(!lists.length)return;
+  var PKEY="henro-pack-v1";
+  var st={};
+  try{var raw=localStorage.getItem(PKEY);if(raw)st=JSON.parse(raw)||{};}catch(e){}
+  var btns=[];
+  function save(){try{localStorage.setItem(PKEY,JSON.stringify(st));}catch(e){}}
+  function updateCount(){
+    var el=document.getElementById("packcount");if(!el)return;
+    var done=btns.filter(function(b){return b.classList.contains("got");}).length;
+    el.textContent="已收 "+done+" / "+btns.length;
+  }
+  lists.forEach(function(list){
+    Array.prototype.forEach.call(list.querySelectorAll("button"),function(b){
+      var k=b.textContent.trim();
+      btns.push(b);
+      if(st[k])b.classList.add("got");
+      b.setAttribute("aria-pressed",st[k]?"true":"false");
+      b.onclick=function(){
+        var on=b.classList.toggle("got");
+        b.setAttribute("aria-pressed",on?"true":"false");
+        if(on)st[k]=1;else delete st[k];
+        save();updateCount();
+      };
+    });
+  });
+  var reset=document.getElementById("packreset");
+  if(reset)reset.onclick=function(){
+    if(!confirm("清除全部打包勾選？"))return;
+    st={};save();
+    btns.forEach(function(b){b.classList.remove("got");b.setAttribute("aria-pressed","false");});
+    updateCount();
+  };
+  updateCount();
 })();
 
 /* =========================================================
@@ -2296,6 +2539,153 @@ function fallbackCopy(text){
     alert("已複製全部文字，可貼給 Claude 做回憶簿。");
   }catch(e){alert("複製失敗，請手動選取文字複製。");}
 }
+
+/* =========================================================
+   6e. 記帳／分帳（金額存 localStorage；收據照存 IndexedDB store "p"，id 前綴 exprcpt-）
+========================================================= */
+(function(){
+  var form=document.getElementById("expForm");
+  if(!form)return;
+  var EKEY="henro-expense-v1";
+  var data={a:"",b:"",items:[]};
+  try{var raw=localStorage.getItem(EKEY);if(raw){var p=JSON.parse(raw)||{};data.a=p.a||"";data.b=p.b||"";data.items=Array.isArray(p.items)?p.items:[];}}catch(e){}
+
+  var elA=document.getElementById("expNameA"),elB=document.getElementById("expNameB");
+  var elSum=document.getElementById("expSummary"),elList=document.getElementById("expList");
+  var elPhoto=document.getElementById("expPhoto"),elPhotoName=document.getElementById("expPhotoName");
+  var pendingReceipt=null;
+
+  elA.value=data.a;elB.value=data.b;
+  function nameA(){return data.a||"我";}
+  function nameB(){return data.b||"妹妹";}
+  function save(){try{localStorage.setItem(EKEY,JSON.stringify(data));}catch(e){}}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+  function yen(n){return "¥"+Math.round(n).toLocaleString("en-US");}
+
+  elA.oninput=function(){data.a=elA.value.trim();save();render();};
+  elB.oninput=function(){data.b=elB.value.trim();save();render();};
+
+  if(!DBOK){var w=document.getElementById("expDbwarn");if(w)w.classList.add("show");}
+
+  elPhoto.onchange=function(){
+    var f=elPhoto.files&&elPhoto.files[0];
+    if(!f){pendingReceipt=null;elPhotoName.textContent="可不放";return;}
+    if(!DBOK||!db){elPhotoName.textContent="此瀏覽器不支援照片儲存，金額仍會記";pendingReceipt=null;return;}
+    elPhotoName.textContent="壓縮中…";
+    compress(f,function(dataUrl){
+      pendingReceipt=dataUrl||null;
+      elPhotoName.textContent=dataUrl?"收據已附（送出時儲存）":"照片讀取失敗";
+    });
+  };
+
+  form.onsubmit=function(ev){
+    ev.preventDefault();
+    var amt=Math.round(parseFloat(document.getElementById("expAmt").value)||0);
+    if(amt<=0){alert("請輸入金額");return;}
+    var id="exp-"+Date.now()+"-"+Math.random().toString(36).slice(2,6);
+    var it={
+      id:id,
+      day:document.getElementById("expDay").value,
+      cat:document.getElementById("expCat").value,
+      item:document.getElementById("expItem").value.trim()||document.getElementById("expCat").value,
+      amt:amt,
+      paid:document.getElementById("expPaid").value,
+      split:document.getElementById("expSplit").value,
+      rcpt:null,
+      ts:Date.now()
+    };
+    if(pendingReceipt&&DBOK&&db){
+      var rid="exprcpt-"+id;
+      try{txStore("readwrite").put({id:rid,data:pendingReceipt});it.rcpt=rid;}catch(e){}
+    }
+    data.items.push(it);save();
+    form.reset();pendingReceipt=null;elPhotoName.textContent="可不放";
+    render();
+  };
+
+  function calc(){
+    var total=0,paidA=0,paidB=0,oweA=0,oweB=0;
+    data.items.forEach(function(it){
+      total+=it.amt;
+      if(it.paid==="A")paidA+=it.amt;else paidB+=it.amt;
+      if(it.split==="A")oweA+=it.amt;
+      else if(it.split==="B")oweB+=it.amt;
+      else{oweA+=it.amt/2;oweB+=it.amt/2;}
+    });
+    return {total:total,paidA:paidA,paidB:paidB,netA:paidA-oweA};
+  }
+
+  function render(){
+    var c=calc();
+    var settle;
+    if(Math.round(c.netA)===0)settle="兩人已平，不用找補";
+    else if(c.netA>0)settle=esc(nameB())+" 給 "+esc(nameA())+" "+yen(c.netA);
+    else settle=esc(nameA())+" 給 "+esc(nameB())+" "+yen(-c.netA);
+    elSum.innerHTML=
+      "總支出 <b>"+yen(c.total)+"</b>（"+data.items.length+" 筆）"+
+      "<div class='big'>"+esc(nameA())+" 付了 "+yen(c.paidA)+"　·　"+esc(nameB())+" 付了 "+yen(c.paidB)+"</div>"+
+      "<div class='settle'>💰 結算："+settle+"</div>";
+
+    if(!data.items.length){elList.innerHTML="<p class='none'>還沒有記帳。用上面的表單加第一筆。</p>";return;}
+    elList.innerHTML="";
+    data.items.slice().reverse().forEach(function(it){
+      var row=document.createElement("div");row.className="exp-item";
+      var who=it.paid==="A"?nameA():nameB();
+      var sp=it.split==="half"?"均分":(it.split==="A"?("算"+nameA()):("算"+nameB()));
+      row.innerHTML=
+        "<div class='ei-main'><div class='ei-h'>"+esc(it.item)+"</div>"+
+        "<div class='ei-s'>"+esc(it.day)+"・"+esc(it.cat)+"・"+esc(who)+"付・"+esc(sp)+"</div></div>"+
+        "<div class='ei-amt'>"+yen(it.amt)+"</div>"+
+        "<button type='button' class='ei-del' aria-label='刪除這筆'>✕</button>";
+      if(it.rcpt&&DBOK&&db){
+        try{
+          var g=txStore("readonly").get(it.rcpt);
+          g.onsuccess=function(){
+            if(g.result&&g.result.data){
+              var im=document.createElement("img");im.src=g.result.data;im.alt="收據";
+              im.onclick=(function(src){return function(){window.open(src,"_blank");};})(g.result.data);
+              row.insertBefore(im,row.querySelector(".ei-amt"));
+            }
+          };
+        }catch(e){}
+      }
+      row.querySelector(".ei-del").onclick=function(){
+        if(!confirm("刪除這筆？"))return;
+        if(it.rcpt&&db){try{txStore("readwrite").delete(it.rcpt);}catch(e){}}
+        data.items=data.items.filter(function(x){return x.id!==it.id;});
+        save();render();
+      };
+      elList.appendChild(row);
+    });
+  }
+  window.__expRender=render;
+
+  document.getElementById("expCopy").onclick=function(){
+    var c=calc();
+    var L=["人生即遍路 記帳／分帳　"+new Date().toLocaleString("zh-TW")];
+    L.push(nameA()+" 付 "+yen(c.paidA)+"　"+nameB()+" 付 "+yen(c.paidB)+"　總 "+yen(c.total));
+    var settle=Math.round(c.netA)===0?"平":(c.netA>0?(nameB()+" 給 "+nameA()+" "+yen(c.netA)):(nameA()+" 給 "+nameB()+" "+yen(-c.netA)));
+    L.push("結算："+settle);
+    L.push("");
+    L.push("日,分類,項目,金額,付款人,分帳");
+    data.items.forEach(function(it){
+      var who=it.paid==="A"?nameA():nameB();
+      var sp=it.split==="half"?"均分":(it.split==="A"?("算"+nameA()):("算"+nameB()));
+      L.push([it.day,it.cat,it.item.replace(/,/g,"、"),it.amt,who,sp].join(","));
+    });
+    var text=L.join("\n");
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){alert("已複製（含 CSV），可貼進備忘錄或試算表備份。");}).catch(function(){fallbackCopy(text);});
+    }else{fallbackCopy(text);}
+  };
+  document.getElementById("expClear").onclick=function(){
+    if(!confirm("清空全部記帳？收據照片也會一起刪除，無法復原。"))return;
+    if(db){data.items.forEach(function(it){if(it.rcpt){try{txStore("readwrite").delete(it.rcpt);}catch(e){}}});}
+    data.items=[];save();render();
+  };
+
+  render();
+})();
 
 /* =========================================================
    7. Service Worker 註冊
