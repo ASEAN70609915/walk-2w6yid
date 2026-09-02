@@ -6,7 +6,7 @@
 */
 "use strict";
 
-var CACHE_VERSION = "henro-v15";
+var CACHE_VERSION = "henro-v16";
 var PRECACHE = [
   "./",
   "./index.html",

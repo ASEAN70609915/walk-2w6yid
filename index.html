@@ -222,6 +222,21 @@
   table.bustable td.use{color:var(--accent);font-weight:800;position:relative}
   table.bustable td.use::after{content:"★";margin-left:.15rem;font-size:.7rem}
 
+  /* ---- 時刻表直式小卡（手機不用橫拖）---- */
+  .tcards{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem}
+  .tcard{background:var(--surface);border:1px solid var(--hair);border-radius:.6rem;padding:.6rem .7rem;font-size:.85rem;line-height:1.45}
+  .tcard.rec{border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+  .tcard .row1{display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap}
+  .tcard .dep{font-size:1.25rem;font-weight:800;color:var(--accent);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+  .tcard .arr{font-size:.95rem;font-weight:600}
+  .tcard .arrow{color:var(--muted)}
+  .tcard .tag{margin-left:auto;font-size:.72rem;font-weight:700;padding:.1rem .45rem;border-radius:1rem;background:var(--accent-soft);color:var(--accent)}
+  .tcard .tag.sub{background:var(--surface-2);color:var(--muted)}
+  .tcard .link{margin-top:.25rem;font-size:.82rem}
+  .tcard .link b{color:var(--accent)}
+  .tcard .note{margin-top:.2rem;font-size:.8rem;color:var(--muted)}
+  .tcard .note.warn{color:var(--warn-ink)}
+
   .shop{margin-top:1rem;background:var(--accent-soft);border-radius:.7rem;padding:.85rem .95rem;font-size:.88rem}
   .shop b{display:block;margin-bottom:.3rem;font-size:.92rem}
 
@@ -471,7 +486,7 @@
     <ul class="plain">
       <li>Google Maps → 個人檔案 →「離線地圖」→ 下載<b>德島縣＋香川縣</b>全區（涵蓋全部行程範圍）</li>
       <li>燒山寺步道另用 <b>YAMAP</b> App 下載「藤井寺→燒山寺」路線，比 Google Maps 步道更精準</li>
-      <li>Day 4（11/2）08:30–14:00 山中完全無手機訊號，上面的 Google Maps 連結那時全部打不開，務必<b>出發前</b>就下載好</li>
+      <li>Day 4（11/2）07:30–14:00 山中完全無手機訊號，上面的 Google Maps 連結那時全部打不開，務必<b>出發前</b>就下載好</li>
     </ul>
   </section>
 
@@ -635,15 +650,23 @@
           <div class="rowbtns"><button type="button" class="r-alt" data-rp="d1-rp1">🕐 機場巴士時刻對照</button></div>
           <div class="rowpanel alt" id="d1-rp1">
             <p class="h">巴士配合航班發車，不是固定班距：官方公告「國際線到達約1小時後發車」</p>
-            <div style="overflow-x:auto">
-            <table class="tt-tbl">
-              <thead><tr><th>巴士發車</th><th>抵JRホテル高松駅</th><th>銜接特急</th><th>備註</th></tr></thead>
-              <tbody>
-                <tr class="rec"><td>11:30</td><td>12:17</td><td>13:10 うずしお15號</td><td>主案（綁定CI278・週五限定班表）<br>🍜 高松駅停留 <b>53 分</b>：扣買票約 15 分＋進月台緩衝 5 分 → <b>可坐下用餐約 33 分</b></td></tr>
-                <tr><td>12:40</td><td>13:22</td><td>14:10 うずしお17號</td><td>第一備案<br>🍜 高松駅停留 <b>48 分</b>：同樣扣 20 分 → <b>可用餐約 28 分</b></td></tr>
-                <tr><td>13:05</td><td>13:47</td><td>14:10 うずしお17號</td><td>最晚備案<br>⚠ 高松駅只剩 <b>23 分</b>：買票＋走月台就用光 → <b>沒時間坐下吃，午餐買了帶上車</b></td></tr>
-              </tbody>
-            </table>
+            <div class="tcards">
+              <div class="tcard rec">
+                <div class="row1"><span class="dep">11:30</span><span class="arrow">→</span><span class="arr">12:17 高松駅</span><span class="tag">★ 主案</span></div>
+                <div class="link">接 <b>13:10 うずしお15號</b>（高松駅停留 53 分）</div>
+                <div class="note">🍜 扣買票約 15 分＋進月台緩衝 5 分 → 可坐下用餐約 33 分</div>
+                <div class="note">綁定 CI278・週五限定班表</div>
+              </div>
+              <div class="tcard">
+                <div class="row1"><span class="dep">12:40</span><span class="arrow">→</span><span class="arr">13:22 高松駅</span><span class="tag sub">第一備案</span></div>
+                <div class="link">接 <b>14:10 うずしお17號</b>（停留 48 分）</div>
+                <div class="note">🍜 同樣扣 20 分 → 可用餐約 28 分</div>
+              </div>
+              <div class="tcard">
+                <div class="row1"><span class="dep">13:05</span><span class="arrow">→</span><span class="arr">13:47 高松駅</span><span class="tag sub">最晚備案</span></div>
+                <div class="link">接 <b>14:10 うずしお17號</b>（停留 23 分）</div>
+                <div class="note warn">⚠ 買票＋走月台就用光，午餐買了帶上車</div>
+              </div>
             </div>
             <p style="font-size:.78rem;color:var(--muted);margin-top:.4rem">大人¥1,300／小孩¥650，車上收現金或刷IC卡皆可。以上是高松空港官網公告的 10/1～10/24 班表，<b>出發前會再核對一次官網最新班表</b>，屆時如有異動再修正。</p>
             <p style="margin-top:.4rem">・大件行李也可改寄高松空港置物櫃（Day5 回程經高松駅→機場巴士，回來取）</p>
@@ -687,11 +710,11 @@
             <p style="color:var(--warn-ink)">⚠ ICOCA不能單獨扣特急券。如果想先刷ICOCA進站，特急券還是要另外拿紙本上車，不然車上驗票會被要求補票</p>
           </div></div></li>
 
-        <li><span class="t">14:08</span><div class="sb">
+        <li><span class="t">14:01</span><div class="sb">
           <p class="act">板野駅着 → HOTEL AZ 徳島板野店</p>
           <p class="meta">步行約 15 分 ・ 可先寄放行李</p>
           <p class="fac">🏪 <b>行動糧：</b><a href="https://www.google.com/maps/search/?api=1&query=マルナカ+板野店" target="_blank" rel="noopener">Marunaka 板野店</a>（超市，在板野站旁）</p>
-          <p class="fac">💊 <b>藥妝／痠痛貼布／常備藥：</b>這一帶有兩間開架藥妝，Day 2、Day 3 出發前要補的痠痛貼布、防曬、腸胃藥都在這買——<a href="https://www.google.com/maps/search/?api=1&query=ドラッグコスモス+板野店" target="_blank" rel="noopener">ドラッグコスモス 板野店</a>、<a href="https://www.google.com/maps/search/?api=1&query=ウエルシア薬局+板野北島町店" target="_blank" rel="noopener">ウエルシア 板野北島町店</a>（🟡 營業時間出發前查，一般到 21–22 點）</p></div></li>
+          <p class="fac">💊 <b>藥妝／痠痛貼布／常備藥：</b>Day 2、Day 3 出發前要補的痠痛貼布、防曬、腸胃藥在這買——<a href="https://www.google.com/maps/search/?api=1&query=ドラッグコスモス+板野店+犬伏" target="_blank" rel="noopener">ドラッグコスモス 板野店</a>（板野町犬伏・距板野駅約 1.2km・🟡 營業時間出發前查，一般到 21–22 點）</p></div></li>
 
         <li><span class="t">14:30</span><div class="sb">
           <p class="act">HOTEL AZ → 靈山寺　散步・環境確認・買遍路用品</p>
@@ -738,6 +761,10 @@
             <p>・沒關係：Day 2 早上 07:30 本來就在第1番，改那時買即可（只會佔用 Day 2 一點時間）</p>
           </div></div></li>
 
+        <li><span class="t">16:30</span><div class="sb">
+          <p class="act">靈山寺 → HOTEL AZ 徳島板野店（回程）</p>
+          <p class="meta">計程車約 7 分・¥1,000（賣店 17:00 關，用品買完就回）・門前招不到車打 ☎ 德島第一交通 088-654-8811</p></div></li>
+
         <li><span class="t">18:00</span><div class="sb">
           <p class="act">HOTEL AZ 晚餐（含夕食付・朝食サービス）</p>
           <p class="meta">出發前再跟櫃檯確認開飯時間</p></div></li>
@@ -746,7 +773,7 @@
           <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 2 要 07:00 出發參拜第1番靈山寺。早餐 06:30。</div>
           <div class="shop" style="margin-top:.5rem">
             <b>🌙 宵夜（板野周邊）</b>
-            <p><a href="https://www.google.com/maps/search/?api=1&query=居酒屋+どんぶり+板野町" target="_blank" rel="noopener">居酒屋 どんぶり</a>（炭火烤雞串・至23:00・飯店步行10-12分）｜<a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+板野店" target="_blank" rel="noopener">Hotto Motto 板野店</a>（外帶炸雞・唐揚・至22:00）｜<a href="https://www.google.com/maps/search/?api=1&query=7-ELEVEN+板野" target="_blank" rel="noopener">7-ELEVEN／Lawson 板野站前店</a>（24H）</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+上板町店" target="_blank" rel="noopener">ほっともっと 上板町店</a>（外帶炸雞・唐揚・至 21:30）｜<a href="https://www.google.com/maps/search/?api=1&query=セブンイレブン+板野インター店" target="_blank" rel="noopener">セブンイレブン 板野インター店</a>（24H）</p>
           </div></div></li>
       </ol>
     </div>
@@ -759,7 +786,7 @@
       <span class="daymain">
         <span class="date">10/31 週六</span>
         <span class="dtitle">第1番～第5番・購入遍路用品</span>
-        <span class="dmeta">步行約13km ・ 難度 <span class="diff">●●●○○</span></span>
+        <span class="dmeta">步行約8.5km ・ 難度 <span class="diff">●●●○○</span></span>
       </span>
       <span class="chev" aria-hidden="true">▸</span>
     </summary>
@@ -867,7 +894,7 @@
           <p class="act">超商飯糰邊走邊吃 → 步行到板野駅南巴士站</p>
           <p class="meta">第3番約 11:10 拜完 → 走約 15 分到站牌，剛好接 11:29。<b>這班沒有真的坐下吃午餐的時間</b>：在金泉寺旁 Marunaka／超商抓飯糰、麵包，邊走邊吃。</p>
           <p class="cost">¥500–900</p>
-          <p class="fac">想好好吃午餐（含道地烏龍麵 <a href="https://www.google.com/maps/search/?api=1&query=こんせん+金泉寺+徳島県板野町" target="_blank" rel="noopener">こんせん</a>・肉玉天うどん・3.40分）→ 改搭 <b>12:04</b> 那班巴士。代價：大日寺／地藏寺各壓到 20 分才趕得上 13:21 回程；不想壓縮就放掉 13:21，改叫計程車 羅漢→HOTEL AZ（約 15 分・¥1,500），不必等到 16:21。</p></div></li>
+          <p class="fac">想好好吃午餐（含道地烏龍麵 <a href="https://www.google.com/maps/search/?api=1&query=こんせん+金泉寺+徳島県板野町" target="_blank" rel="noopener">こんせん</a>・肉玉天うどん・3.40分）→ 改搭 <b>12:04</b> 那班巴士（12:15 到大日寺口）。代價：這樣<b>趕不上 13:21 回程</b>（大日寺／地藏寺就算各壓到 20 分，最快也要 13:35 才回得到羅漢站）→ 下午改叫計程車 羅漢→HOTEL AZ（約 15 分・¥1,500），或等 16:21。</p></div></li>
 
         <li><span class="t">11:29</span><div class="sb">
           <p class="act">板野駅南 → 大日寺口　巴士</p>
@@ -928,7 +955,7 @@
           <div class="rowpanel lore" id="d2-lore5">
             <p class="h">第五番　地藏寺（じぞうじ）</p>
             <p><b>典故：</b>嵯峨天皇勅願，弘仁12年弘法大師開創，親彫勝軍地藏菩薩為本尊。後以靈木刻延命地藏像，將原像納入胎內。因勝軍地藏信仰，源賴朝、蜂須賀家等武將多有寄進，全盛時擁末寺約300間。</p>
-            <p><b>看點：</b>五百羅漢（現存約200尊，門票¥300）、水琴窟、800年大銀杏。</p>
+            <p><b>看點：</b>五百羅漢（現存約200尊，門票¥200）、水琴窟、800年大銀杏。</p>
             <p><b>特色：</b>本尊勝軍地藏菩薩（秘佛）具學業成就、旅途平安之靈驗。境內奧之院有「五百羅漢堂」，安置五百尊各具表情的羅漢像，傳說必能找到與自己或親人相似之像，是重要文化財。</p>
           </div>
           <div class="rowpanel alt" id="d2-rp1">
@@ -937,9 +964,9 @@
             <p>・真的來不及就放棄該印，或 Day3 早上順路補（差不多順路）</p>
           </div>
           <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：大日寺＋地藏寺拜完，趕得上 13:21 的巴士嗎？</b>（羅漢巴士站就在地藏寺門口，不用再走去別處）<br>
-          <span class="lv lv-y">🟡 大日寺在 12:25 前結束、地藏寺 13:10 前拜完</span> → 走得到，搭 <b>13:21 羅漢發</b>（13:27 到板野駅南），整個下午回飯店休息、養腿迎接明天 20km<br>
+          <span class="lv lv-y">🟡 大日寺在 12:25 前結束、地藏寺 13:10 前拜完</span> → 走得到，搭 <b>13:21 羅漢發</b>（13:27 到板野駅南），整個下午回飯店休息、養腿迎接明天約 13km<br>
           <span class="lv lv-y">🟡 已經超過</span>（行程仍走得完）→ <b>別衝</b>：這條土日祝下一班要等到 <b>16:21</b>（中間 14、15 點完全沒有車），直接打電話叫計程車 羅漢→HOTEL AZ（約15分・¥1,500）比乾等 3 小時划算；不趕時間就搭 16:21<br>
-          <b>壓縮法：</b>本堂＋大師堂各念「御本尊真言→光明真言→御寶號」一輪、御朱印避開整點人潮、地藏寺五百羅漢堂（¥300）這次跳過，兩寺各 20 分就夠</div></div></li>
+          <b>壓縮法：</b>本堂＋大師堂各念「御本尊真言→光明真言→御寶號」一輪、御朱印避開整點人潮、地藏寺五百羅漢堂（¥200）這次跳過，兩寺各 20 分就夠</div></div></li>
 
         <li><span class="t">13:21</span><div class="sb">
           <p class="act">羅漢 → 板野駅南　巴士（主案）</p>
@@ -949,15 +976,7 @@
           <div class="rowpanel bus" id="d2-bus2">
             <p class="h">鍛冶屋原線 28号（住吉経由・上り）　羅漢 → 板野駅南</p>
             <div class="bustable-wrap"><table class="bustable">
-              <caption>平日ダイヤ</caption>
-              <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
-              <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:41</td><td>06:47</td></tr>
-              <tr><td>07:46</td><td>07:52</td></tr><tr><td>10:01</td><td>10:07</td></tr>
-              <tr><td>13:01</td><td>13:07</td></tr><tr><td>15:21</td><td>15:27</td></tr>
-              <tr><td>16:21</td><td>16:27</td></tr><tr><td>17:51</td><td>17:57</td></tr>
-            </table></div>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>土日祝ダイヤ（10/31 用這個）</caption>
+              <caption>★ 土日祝ダイヤ（10/31 週六用這個）</caption>
               <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
               <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:56</td><td>07:02</td></tr>
               <tr><td>08:26</td><td>08:32</td></tr><tr><td>10:31</td><td>10:37</td></tr>
@@ -965,7 +984,16 @@
               <tr><td>16:21</td><td>16:27</td></tr>
               <tr><td>18:21</td><td>18:27</td></tr>
             </table></div>
+            <div class="bustable-wrap"><table class="bustable">
+              <caption>平日ダイヤ（參考・這趟用不到）</caption>
+              <tr><th>羅漢 發</th><th>板野駅南 着</th></tr>
+              <tr><td>06:21</td><td>06:27</td></tr><tr><td>06:41</td><td>06:47</td></tr>
+              <tr><td>07:46</td><td>07:52</td></tr><tr><td>10:01</td><td>10:07</td></tr>
+              <tr><td>13:01</td><td>13:07</td></tr><tr><td>15:21</td><td>15:27</td></tr>
+              <tr><td>16:21</td><td>16:27</td></tr><tr><td>17:51</td><td>17:57</td></tr>
+            </table></div>
             <p style="font-size:.8rem;color:var(--muted)">★ 土日祝這段只有 <b>13:21</b> 和 <b>16:21</b> 兩班，中間沒有車。趕不上 13:21 → 叫計程車（羅漢→HOTEL AZ 約15分 ¥1,500）或等 16:21。HOTEL AZ 無門禁、晚餐時間彈性，晚回沒關係。</p>
+            <p style="font-size:.8rem;color:var(--muted)">另一條路：人若還在大日寺附近（不在羅漢），可走回大日寺口站牌搭 <b>47号 上り 15:24</b> → 板野駅南 15:37，比等 16:21 早。</p>
           </div></div></li>
 
         <li><span class="t">13:30</span><div class="sb">
@@ -978,10 +1006,10 @@
           <p class="meta">出發前再確認時間</p></div></li>
 
         <li><span class="t">21:00</span><div class="sb">
-          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 3 走 6→10 番（約16km、切幡寺333階）。07:00 在 HOTEL AZ 吃早餐、退房帶走全部行李、<b>07:50 出發</b>走去板野駅南搭 08:19 公車。</div>
+          <div class="alarm">⏰ <b>設鬧鐘 06:00</b> — 明天 Day 3 走 6→10 番（約13km、切幡寺333階）。07:00 在 HOTEL AZ 吃早餐、退房帶走全部行李、<b>07:50 出發</b>走去板野駅南搭 08:19 公車。</div>
           <div class="shop" style="margin-top:.5rem">
             <b>🌙 宵夜（板野周邊・同 Day1）</b>
-            <p><a href="https://www.google.com/maps/search/?api=1&query=居酒屋+どんぶり+板野町" target="_blank" rel="noopener">居酒屋 どんぶり</a>（炭火烤雞串・至23:00・步行10-12分）｜<a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+板野店" target="_blank" rel="noopener">Hotto Motto 板野店</a>（外帶炸雞・唐揚・至22:00）｜<a href="https://www.google.com/maps/search/?api=1&query=ローソン+板野駅前" target="_blank" rel="noopener">Lawson／7-ELEVEN 板野站前</a>（24H）</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&query=ほっともっと+上板町店" target="_blank" rel="noopener">ほっともっと 上板町店</a>（外帶炸雞・唐揚・至 21:30）｜<a href="https://www.google.com/maps/search/?api=1&query=セブンイレブン+板野インター店" target="_blank" rel="noopener">セブンイレブン 板野インター店</a>（24H）</p>
           </div></div></li>
       </ol>
 
@@ -1000,7 +1028,7 @@
       <span class="daymain">
         <span class="date">11/1 週日</span>
         <span class="dtitle">第6番～第10番・切幡寺333段石階</span>
-        <span class="dmeta">步行約16km ・ 難度 <span class="diff">●●●●○</span></span>
+        <span class="dmeta">步行約13km ・ 難度 <span class="diff">●●●●○</span></span>
       </span>
       <span class="chev" aria-hidden="true">▸</span>
     </summary>
@@ -1060,7 +1088,7 @@
         <h5>3-E　跟宿坊確認明天（燒山寺日）</h5>
         <div class="jpq"><div class="zh">明天想 6:30 出發，早餐可以做成便當嗎？</div><div class="ja">明日は6時半に出発したいです。朝食をお弁当にできますか？</div><div class="ro">Ashita wa rokuji-han ni shuppatsu shitai desu. Choushoku o obentou ni dekimasu ka?</div></div>
         <div class="jpq"><div class="zh">明天早上想叫計程車到藤井寺，可以幫忙打電話嗎？</div><div class="ja">明日の朝、藤井寺までタクシーをお願いしたいです。電話してもらえますか？</div><div class="ro">Ashita no asa, Fujiidera made takushii o onegai shitai desu. Denwa shite moraemasu ka?</div></div>
-        <div class="jpq"><div class="zh">早上 7 點，兩位</div><div class="ja">朝7時、二人です</div><div class="ro">Asa shichiji, futari desu</div></div>
+        <div class="jpq"><div class="zh">早上 6 點半，兩位</div><div class="ja">朝6時半、二人です</div><div class="ro">Asa rokuji-han, futari desu</div></div>
         <h5>3-F　會晚到　打電話給安樂寺宿坊（最終入住 18:00，會遲到務必先打 ☎ 088-694-2046）</h5>
         <div class="jpq"><div class="zh">今晚我有訂宿坊，姓○○。行程延誤，會晚一點到</div><div class="ja">今晩の宿坊を予約した○○です。到着が遅れます</div><div class="ro">Konban no shukubou o yoyaku shita ○○ desu. Touchaku ga okuremasu</div></div>
         <div class="jpq"><div class="zh">大概○點到，這樣可以嗎？</div><div class="ja">○時ごろ着きます。大丈夫でしょうか？</div><div class="ro">○-ji goro tsukimasu. Daijoubu deshou ka?</div></div>
@@ -1094,7 +1122,7 @@
 
         <li><span class="t">07:00</span><div class="sb">
           <p class="act">HOTEL AZ 早餐（朝食サービス）→ 退房</p>
-          <p class="meta">出發前跟櫃檯確認早餐開始時間；若早於供餐時間，前一晚先在 Lawson／7-ELEVEN 板野站前買好隔天早餐。</p>
+          <p class="meta">出發前跟櫃檯確認早餐開始時間；若早於供餐時間，前一晚先在 セブンイレブン 板野インター店買好隔天早餐。</p>
           <p class="fac">⚠ <b>今天不回這間</b>，退房務必帶走所有行李（大行李箱已在高松機場，身上只有背包）。Check-out 10:00 前。</p></div></li>
 
         <li><span class="t">07:50</span><div class="sb">
@@ -1175,14 +1203,14 @@
           <div class="rowpanel car" id="d3-car78">
             <p class="h">計程車　第7番 → 第8番熊谷寺（約12分・約¥1,500）</p>
             <a class="tel" href="tel:+81886548811">☎ 德島第一交通 088-654-8811（通用）</a>
-            <a class="tel" href="tel:+81883242345" style="margin-top:.4rem">☎ 鴨島タクシー 0883-24-2345（近切幡寺・藤井寺）</a>
+            <a class="tel" href="tel:+81883363109" style="margin-top:.4rem">☎ 八幡交通 0883-36-3109／0120-36-3109（市場町切幡・近切幡寺）</a>
             <div class="jarow"><div class="ja">熊谷寺までお願いします。</div><div class="ro">Kumadaniji made onegai shimasu.（請到熊谷寺）</div></div>
             <div class="jarow"><div class="ja">どのくらい待ちますか？</div><div class="ro">Dono kurai machimasu ka?（要等多久）</div></div>
           </div>
           <div class="rowpanel alt" id="d3-rp1">
             <p class="h">不會講日文怎麼叫車</p>
             <p>・<b>先試 Uber／GO App</b>（台灣出發前綁好信用卡）：徳島縣 2025 年起部分區域開通，阿波市／上板町白天有機會叫到，App 直接定位、免講日文、可看車資。<b>山區（神山町、燒山寺）幾乎叫不到</b>，Day 4 不要指望。</p>
-            <p>・App 叫不到 → 打下面車行電話（德島第一 088-654-8811／鴨島 0883-24-2345）；這一帶不是山區，白天臨時叫車約 10–30 分到</p>
+            <p>・App 叫不到 → 打下面車行電話（德島第一 088-654-8811／八幡交通 0883-36-3109）；這一帶不是山區，白天臨時叫車約 10–30 分到</p>
             <p>・請該寺納経所人員幫忙打電話，或用 Google 翻譯語音／給司機看行程表上的日文寺名</p>
             <p>・想更保險：昨晚請 HOTEL AZ 櫃檯代打預約，訂了不搭提早 1–2 小時取消，鄉下遍路計程車不收費</p>
           </div></div></li>
@@ -1221,7 +1249,8 @@
         <li><span class="t">15:15</span><div class="sb">
           <p class="act">第10番 切幡寺・333段石階上山</p>
           <p class="meta">步行上山 石階約25分</p>
-          <p class="fac">護膝・登山杖必須</p></div></li>
+          <p class="fac">護膝・登山杖必須</p>
+          <p class="fac">🚕 想省 333 階：切幡寺有停車場，山下計程車可載到本堂旁（接駁約 ¥650 來回・るるぶ資訊）——膝蓋已很累時值得。</p></div></li>
 
         <li><span class="t">15:45</span><div class="sb">
           <p class="act">切幡寺 參拜</p><p class="meta">約30分</p>
@@ -1236,21 +1265,21 @@
         <li class="warnrow"><span class="t">16:20</span><div class="sb">
           <span class="wtag">⚠ 強烈建議計程車・務必預約</span>
           <p class="act">切幡寺下山 → 安樂寺 宿坊</p>
-          <p class="meta">下山15分 ＋ 計程車約20分</p>
-          <p class="cost">¥1,500</p>
+          <p class="meta">下山15分 ＋ 計程車約20分（約9km）</p>
+          <p class="cost">¥3,500</p>
           <div class="rowbtns">
             <button type="button" class="r-car" data-rp="d3-car10">🚕 車行電話</button>
             <button type="button" class="r-alt" data-rp="d3-rp2">🔀 備案</button>
           </div>
           <div class="rowpanel car" id="d3-car10">
-            <p class="h">計程車　切幡寺 → 安樂寺宿坊（約20分・約¥1,500）</p>
-            <a class="tel" href="tel:+81883242345">☎ 鴨島タクシー 0883-24-2345（就在切幡寺山下・最近）</a>
+            <p class="h">計程車　切幡寺 → 安樂寺宿坊（約9km・約20分・約¥3,000–3,500）</p>
+            <a class="tel" href="tel:+81883363109">☎ 八幡交通 0883-36-3109／0120-36-3109（市場町切幡・最近）</a>
             <a class="tel" href="tel:+81886548811" style="margin-top:.4rem">☎ 德島第一交通 088-654-8811</a>
             <div class="jarow"><div class="ja">安楽寺までタクシーをお願いします。</div><div class="ro">Anrakuji made takushii o onegai shimasu.（請叫車回安樂寺）</div></div>
-            <p style="font-size:.8rem;color:var(--muted)">鴨島タクシー 車庫就在切幡寺山腳，白天 15–30 分內能到；也可先試 Uber／GO App。</p>
+            <p style="font-size:.8rem;color:var(--muted)">八幡交通 就在市場町切幡，白天 15–30 分內能到；也可先試 Uber／GO App。</p>
           </div>
           <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：預約的計程車在等了嗎？</b><br>
-          <span class="lv lv-y">🟡 沒看到車</span>（行程仍走得完）→ 打上面電話確認（切幡寺山下的鴨島タクシー最快）。<b>時間卡到了就直接改預約時間</b>，不用硬趕：例句見 🗣 <b>3-G</b>（「30分ほど遅らせてもらえますか？」）。<br>
+          <span class="lv lv-y">🟡 沒看到車</span>（行程仍走得完）→ 打上面電話確認（市場町切幡的八幡交通最快）。<b>時間卡到了就直接改預約時間</b>，不用硬趕：例句見 🗣 <b>3-G</b>（「30分ほど遅らせてもらえますか？」）。<br>
           <b>不必為了預約時間硬衝下山：</b>切幡寺山下白天叫得到車，預約只是把等待縮短。真的都叫不到 → 見下方🔀備案，晚餐 18:00 前先電話告知宿坊會晚到（例句 3-F）。</div>
           <div class="rowpanel alt" id="d3-rp2">
             <p class="h">預約 vs 現場叫：怎麼抓比較安心</p>
@@ -1268,11 +1297,11 @@
 
         <li><span class="t">20:30</span><div class="sb">
           <div class="alarm">⏰ <b>設鬧鐘 05:00</b> — 明天 Day 4 燒山寺（全程最難）。05:30 起床整裝、06:00 早餐、<b>06:30 出發</b>。</div>
-          <div class="checkpoint">⚠ <b>明天關鍵判斷點</b><br>① 打電話跟四季の里確認入住、約定「16:00沒到就報警」<br>② 11:00 未到柳水庵（中繼庵）→ <b>折返，不硬撐</b><br>③ 14:00 前未登頂燒山寺 → 考慮叫計程車下山到神山溫泉<br>④ <b>睡前查 D4 燒山寺天氣</b>（tenki.jp／房間電視／問櫃檯）：預報中雨以上或強風，<b>今晚就決定改雨天備案</b>，別明早才慌。也先請宿坊幫忙留一台計程車。</div>
+          <div class="checkpoint">⚠ <b>明天關鍵判斷點</b><br>① 打電話跟四季の里確認入住、約定「16:00沒到就報警」<br>② 柳水庵（中繼庵）11:20 前到為正常、12:00 未到 → <b>折返，不硬撐</b><br>③ 14:00 前未登頂燒山寺 → 考慮叫計程車下山到神山溫泉<br>④ <b>睡前查 D4 燒山寺天氣</b>（tenki.jp／房間電視／問櫃檯）：預報中雨以上或強風，<b>今晚就決定改雨天備案</b>，別明早才慌。也先請宿坊幫忙留一台計程車。</div>
           <div class="rowbtns"><button type="button" class="r-alt" data-rp="d3-rain">🌧 燒山寺雨天備案</button></div>
           <div class="rowpanel alt" id="d3-rain">
             <p class="h">Day 4 燒山寺 雨天／惡劣天氣備案</p>
-            <p><b>① 小雨（毛毛雨、無風）：</b>照原計畫走，但全套雨具、背包套、放慢腳程；柳水庵 11:00 折返線更嚴格執行，濕滑路面沒到就折返。</p>
+            <p><b>① 小雨（毛毛雨、無風）：</b>照原計畫走，但全套雨具、背包套、放慢腳程；柳水庵折返線（12:00）更嚴格執行，濕滑路面時 11:20 沒到就折返。</p>
             <p><b>② 中雨以上／強風／雷雨：</b>放棄步行段。改叫計程車走產業道路 藤井寺→燒山寺（約 40 分・¥4,000–5,000，寄井観光 088-676-0345／川又 088-677-0137），只參拜 11＋12 番，省下的時間回四季の里泡湯休息。</p>
             <p><b>③ 豪雨特報／道路封閉／打雷：</b>燒山寺整個跳過。從安樂寺直接叫計程車或搭公車去神山溫泉四季の里，11＋12 番留待日後再訪——<b>遍路本來就可以分次走，不必一次完成，安全第一</b>。</p>
             <p><b>決策時間：</b>Day 3 睡前看預報先做初判＋請宿坊留車；Day 4 早上 06:00 再看一次即時雨勢與風速定案。兩人意見不同時，以「想中止的那個人」為準。</p>
@@ -1294,7 +1323,7 @@
       <span class="daymain">
         <span class="date">11/2 週一</span>
         <span class="dtitle">第11番＋第12番 燒山寺【最難關】</span>
-        <span class="dmeta">步行約12km＋爬升640m ・ 難度 <span class="diff">●●●●●</span></span>
+        <span class="dmeta">步行約12km＋累積爬升約1,110m ・ 難度 <span class="diff">●●●●●</span></span>
       </span>
       <span class="chev" aria-hidden="true">▸</span>
     </summary>
@@ -1377,18 +1406,18 @@
           <b>今天務必離線可用</b><br>
           ・Google Maps →「離線地圖」德島＋香川全區<br>
           ・YAMAP App 另外下載「藤井寺→燒山寺」步道路線（比 Google Maps 精準）<br>
-          ・08:30–14:00 山中完全無訊號，上面連結會全部打不開
+          ・07:30–14:00 山中完全無訊號，上面連結會全部打不開
         </div>
       </div>
 
       <div class="panel sos" id="d4-sos"></div>
 
       <ol class="tl">
-        <li class="warnrow"><span class="t">06:30</span><div class="sb">
+        <li class="warnrow"><span class="t">06:00</span><div class="sb">
           <span class="wtag">⚠ 宿坊配合・前一晚已請櫃檯安排</span>
-          <p class="act">早朝便當・07:00 出發</p></div></li>
+          <p class="act">早朝便當 → 06:30 出發</p></div></li>
 
-        <li class="warnrow"><span class="t">07:00</span><div class="sb">
+        <li class="warnrow"><span class="t">06:30</span><div class="sb">
           <span class="wtag">⚠ 務必前一晚預約</span>
           <p class="act">安樂寺宿坊 → 第11番 藤井寺</p>
           <p class="meta">計程車 約18km・約30分（無路線巴士）</p>
@@ -1402,19 +1431,19 @@
             <a class="tel" href="tel:+81886942106">☎ 松島タクシー 088-694-2106</a>
             <a class="tel" href="tel:+81883242345" style="margin-top:.4rem">☎ 鴨島タクシー 0883-24-2345</a>
             <a class="tel" href="tel:+81886548811" style="margin-top:.4rem">☎ 德島第一交通 088-654-8811</a>
-            <div class="jarow"><div class="ja">明日の朝7時にタクシーを予約したいです。</div><div class="ro">Ashita no asa shichiji ni takushii o yoyaku shitai desu.（想預約明早7點的計程車）</div></div>
+            <div class="jarow"><div class="ja">明日の朝6時半にタクシーを予約したいです。</div><div class="ro">Ashita no asa rokuji-han ni takushii o yoyaku shitai desu.（想預約明早6點半的計程車）</div></div>
             <div class="jarow"><div class="ja">藤井寺の登山口までお願いします。</div><div class="ro">Fujiidera no tozanguchi made onegai shimasu.（請到藤井寺登山口）</div></div>
           </div>
-          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：07:00 計程車到了嗎？</b><br>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：06:30 計程車到了嗎？</b><br>
           <span class="lv lv-y">🟡 還沒到</span>（行程仍走得完）→ 立刻打上面3支電話再確認（見🚕車行電話），前一晚已請宿坊代訂通常會準時<br>
-          <b>影響：</b>越晚出發，11:00柳水庵折返線的緩衝就越少，抓緊腳程</div>
+          <b>影響：</b>越晚出發，柳水庵判斷點（11:20 前到正常／12:00 未到折返）的緩衝就越少，抓緊腳程</div>
           <div class="rowpanel alt" id="d4-rp1">
             <p class="h">★必預約：沒訂到車＝整個燒山寺計畫崩</p>
             <p>・11/1 晚上在宿坊打3家都確認：松島 088-694-2106／鴨島 0883-24-2345／德島第一 088-654-8811</p>
             <p>・請宿坊人員用日語幫訂，這是每天都在做的事</p>
           </div></div></li>
 
-        <li><span class="t">08:00</span><div class="sb">
+        <li><span class="t">07:00</span><div class="sb">
           <p class="act">第11番 藤井寺 參拜（燒山寺登山口）</p>
           <p class="meta">約30分</p>
           <p class="fac">🚻 最後補水點：把水壺補到全滿，山中無水源</p>
@@ -1426,33 +1455,35 @@
             <p><b>特色：</b>境內藤棚規模宏大，本尊藥師如來守護眾生健康。此寺是前往第十二番燒山寺「遍路最大難所」之登山起點，遍路者在此整備身心，準備迎接最艱難的山路考驗。</p>
           </div></div></li>
 
-        <li class="warnrow"><span class="t">08:30</span><div class="sb">
+        <li class="warnrow"><span class="t">07:30</span><div class="sb">
           <span class="wtag">⚠ 護膝・登山杖 2支必須</span>
           <p class="act">藤井寺 → 燒山寺 上山開始</p>
-          <p class="meta">全程步行 12km・爬升640m</p>
-          <div class="alarm">⏰ <b>藤井寺一出發、踏進山路前就設鬧鐘 11:00</b> — 這是評估「有沒有到柳水庵（中繼庵）」的時間點。山中完全無訊號，務必用手機「本機鬧鐘」App，不能靠網路提醒。響時：已過柳水庵 → 繼續；還沒到 → 🔴 立刻折返下山，不追燒山寺。</div>
+          <p class="meta">全程步行 12km・累積爬升約1,110m</p>
+          <div class="alarm">⏰ <b>藤井寺一出發、踏進山路前就設鬧鐘 11:20</b> — 這是評估「有沒有到柳水庵（中繼庵）」的時間點。山中完全無訊號，務必用手機「本機鬧鐘」App，不能靠網路提醒。<b>11:20 前到＝腳程正常，照走；11:20–12:00 到＝偏慢但仍安全，繼續但抓緊、到燒山寺再評估下山叫車時間；12:00 還沒到 → 🔴 立刻折返下山，不追燒山寺。</b></div>
           <div class="rowbtns"><button type="button" class="r-alt" data-rp="d4-rp2">🔀 備案</button></div>
           <div class="rowpanel alt" id="d4-rp2">
             <p class="h">體調不良／天候驟變備案</p>
             <p>・宿坊當晚先查天氣，預報雨或風強就改走：計程車產業道路 藤井寺→燒山寺 約40分 ¥4,000–5,000（寄井観光 088-676-0345／川又 088-677-0137）</p>
-            <p>・折返點：11:00 沒到中繼庵（柳水庵）就折返</p>
+            <p>・折返點：柳水庵（中繼庵）12:00 沒到就折返（11:20 前到為正常腳程）</p>
             <p>・完整雨天分級（小雨／中雨／豪雨怎麼辦）見 Day 3 睡前那格「🌧 燒山寺雨天備案」</p>
           </div></div></li>
 
-        <li class="warnrow"><span class="t">08:30<br>–14:00</span><div class="sb">
+        <li class="warnrow"><span class="t">07:30<br>–14:00</span><div class="sb">
           <span class="wtag">⚠ 手機完全無訊號</span>
           <p class="act">杉木林道・無補給點</p>
-          <p class="meta">全程約5–6小時</p>
+          <p class="meta">全程約5–6小時（走慢是常態）</p>
           <p class="fac">必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</p>
           <p class="fac"><b>安全約定：</b>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」。兩人絕不分開。</p>
-          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：11:00 到柳水庵（中繼庵）了嗎？</b>（上山前先設好鬧鐘）<br>
-          <span class="lv lv-r">🔴 還沒到</span>（這是安全紅線，不是行程延誤問題）→ 立刻折返藤井寺方向下山，不硬撐、不追燒山寺<br>
-          <b>影響：</b>折返代表今天到不了燒山寺，要改聯絡宿坊與四季の里調整；到了柳水庵 → 照原計畫繼續上山</div></div></li>
+          <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>現在判斷：到柳水庵（中繼庵）了嗎？</b>（上山前先設好鬧鐘 11:20）<br>
+          <span class="lv lv-y">🟡 11:20 前到</span> → 腳程正常，照原計畫繼續上山<br>
+          <span class="lv lv-y">🟡 11:20–12:00 到</span>（偏慢但仍在安全範圍）→ 繼續，但抓緊腳程、到燒山寺先借市話把下山計程車時間往後改<br>
+          <span class="lv lv-r">🔴 12:00 還沒到</span>（安全紅線，不是行程延誤問題）→ 立刻折返藤井寺方向下山，不硬撐、不追燒山寺<br>
+          <b>影響：</b>折返代表今天到不了燒山寺，要改聯絡宿坊與四季の里調整</div></div></li>
 
         <li><span class="t">約14:00</span><div class="sb">
           <p class="act">第12番 燒山寺 抵達・參拜（標高700m）</p>
           <p class="meta">約30分</p>
-          <p class="fac" style="color:var(--warn-ink)">⚠ <b>14:00是目標不是Deadline：</b>登山口官方標示「健腳5h／平均6h／腳弱8h」，08:30出發抓的5.5h偏快腳程。走慢一點很正常，只要11:00過了柳水庵checkpoint，燒山寺晚一點到都沒關係，納経截止17:00還有餘裕</p>
+          <p class="fac" style="color:var(--warn-ink)">⚠ <b>14:00是目標不是Deadline：</b>登山口官方標示「健腳5h／平均6h／腳弱8h」，07:30出發、抓 6h 到約 13:30。走慢一點很正常，只要 12:00 前過了柳水庵 checkpoint，燒山寺晚一點到都沒關係，納経截止17:00還有餘裕</p>
           <div class="rowbtns"><button type="button" class="r-lore" data-rp="d4-lore12">🏯 典故</button></div>
           <div class="rowpanel lore" id="d4-lore12">
             <p class="h">第十二番　燒山寺（しょうさんじ）</p>
@@ -1473,7 +1504,6 @@
           <div class="rowpanel car" id="d4-car2">
             <p class="h">計程車　燒山寺 → 神山溫泉四季の里（約25分・約¥3,500）</p>
             <a class="tel" href="tel:+81886760345">☎ 寄井観光タクシー 088-676-0345</a>
-            <a class="tel" href="tel:+81886780224" style="margin-top:.4rem">☎ つばめ観光タクシー 088-678-0224</a>
             <a class="tel" href="tel:+81886770137" style="margin-top:.4rem">☎ 川又タクシー 088-677-0137</a>
             <p style="color:var(--warn-ink)">⚠ <b>預約時間抓保守：15:00–15:30</b>（不要照「約14:00到」訂 14:30）。官方標平均腳程 6hr（≈14:30 到）、腳弱 8hr（≈16:30），走慢很正常。訂太早的話反而要一直打電話延。</p>
             <p><b>跑慢了 → 打電話延後預約：</b>燒山寺山門一帶訊號很弱，先試自己手機，不行就<b>借燒山寺寺務所（納経所）市話</b>打。</p>
@@ -1487,7 +1517,7 @@
           <b>真的都叫不到車：</b>見下方🔀備案（走7km下山480m，不建議但可行），先電話告知四季の里會晚到。</div>
           <div class="rowpanel alt" id="d4-rp3">
             <p class="h">★必預約：沒車就得走7km下山（下降480m）＋天黑，膝蓋受傷風險極高</p>
-            <p>・11/1 晚上在宿坊訂：寄井観光 088-676-0345／つばめ 088-678-0224／川又 088-677-0137</p>
+            <p>・11/1 晚上在宿坊訂：寄井観光 088-676-0345／川又 088-677-0137</p>
             <p>・出寺前可借燒山寺寺務所市話再 call 一次確認</p>
           </div></div></li>
 
@@ -1637,9 +1667,8 @@
           <p class="fac"><b>烏龍麵／拉麵（站前 1–3 分）：</b><br>
           🍜 <a href="https://www.google.com/maps/search/?api=1&query=セルフうどん+やま+徳島駅前店" target="_blank" rel="noopener">セルフうどん やま 徳島駅前店</a>（自助烏龍・約3.5・出餐最快）　🍥 <a href="https://www.google.com/maps/search/?api=1&query=麺王+徳島駅前本店" target="_blank" rel="noopener">麺王 徳島駅前本店</a>（德島拉麵・約3.3）</p>
           <p class="fac"><b>不吃烏龍麵（食べログ約 3.4–3.5，這區駅前上限差不多在這，沒有 4.0＋）：</b><br>
-          🥟 <a href="https://www.google.com/maps/search/?api=1&query=点心バル+やすなが+クレメントプラザ" target="_blank" rel="noopener">点心バル やすなが</a>（JR德島駅直結・クレメントプラザ B1F・點心＋德島拉麵・雨天不用出站）<br>
+          🥟 <a href="https://www.google.com/maps/search/?api=1&query=Bistro+やすなが+クレメントプラザ+徳島" target="_blank" rel="noopener">Bistro やすなが</a>（舊名「点心バル やすなが」・JR德島駅直結・クレメントプラザ B1F・雨天不用出站）<br>
           🍚 <a href="https://www.google.com/maps/search/?api=1&query=クレメントプラザ+レストラン街+徳島" target="_blank" rel="noopener">クレメントプラザ 5F レストラン街</a>（駅直結・とんかつ／洋食／和食多間・想坐下來吃）<br>
-          🐟 <a href="https://www.google.com/maps/search/?api=1&query=町家だいにんぐ+銀乃介+徳島" target="_blank" rel="noopener">町家だいにんぐ 銀乃介</a>（徒歩約5分・阿波尾鶏／生魚片）<br>
           🍜 <a href="https://www.google.com/maps/search/?api=1&query=中華そば+いのたに+本店+徳島" target="_blank" rel="noopener">中華そば いのたに 本店</a>（德島拉麵名店・食べログ 3.68・徒歩約15分・時間夠才去）</p>
           <p class="fac" style="color:var(--warn-ink)">🟡 評分／營業時間出發前用食べログ 再確認；11/3 假日部分店公休。</p></div></li>
 
@@ -1665,16 +1694,27 @@
           <div class="rowbtns"><button type="button" class="r-bus" data-rp="d5-bus2">🚌 時刻表</button></div>
           <div class="rowpanel bus" id="d5-bus2">
             <p class="h">高松駅 3番のりば → 高松空港（官方利木津巴士・資料夾 PDF「高松車站-高松機場時刻表1001-1024」）</p>
-            <div class="bustable-wrap"><table class="bustable">
-              <caption>高松駅発（下午段・🟡 OCR 判讀，出發前官網核對）</caption>
-              <tr><th>高松駅 発</th><th>高松空港 着（約）</th><th>備註</th></tr>
-              <tr><td>13:20 / 13:23 / 13:26 / 13:29</td><td>約14:00–14:14</td><td>この一波</td></tr>
-              <tr class="hl"><td class="use">15:15 / 15:18 / 15:21</td><td class="use">約16:06</td><td>方案A（うずしお16號 14:3x 到）搭這班</td></tr>
-              <tr><td>16:33 / 16:36</td><td>約17:16–17:21</td><td>■ 日火金運行（11/3 週二有開）・搭18號(15:30着)時用</td></tr>
-              <tr><td>17:43 / 17:46 / 17:49</td><td>約18:30</td><td>太晚，趕不上 18:55</td></tr>
-            </table></div>
-            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ <b>15:21 之後跳到 16:33，中間沒有班次。</b>所以方案A要趕上 15:15；若只能搭 うずしお18號（15:30着）就是 16:33 → 約17:20到機場 → 距 18:55 約 95 分（華航約起飛前 60 分關櫃，趕但可行）。</p>
-            <p style="font-size:.8rem;color:var(--muted)">🟡 時刻為 PDF OCR 判讀，出發前務必上 ことでんバス 官網以「台北(CI) 出発」該列核對，並確認是否另有一般空港連絡巴士。</p>
+            <div class="tcards">
+              <div class="tcard">
+                <div class="row1"><span class="dep">13:20</span><span class="arrow">→</span><span class="arr">約14:00 空港</span></div>
+                <div class="note">13:20／13:23／13:26／13:29 一波 4 台，到 14:00–14:14</div>
+              </div>
+              <div class="tcard rec">
+                <div class="row1"><span class="dep">15:15</span><span class="arrow">→</span><span class="arr">約16:06 空港</span><span class="tag">★ 方案A</span></div>
+                <div class="note">15:15／15:18／15:21 一波 3 台・うずしお16號 14:3x 到就搭這班</div>
+                <div class="note warn">⚠ 15:21 之後跳到 16:33，中間沒車</div>
+              </div>
+              <div class="tcard">
+                <div class="row1"><span class="dep">16:33</span><span class="arrow">→</span><span class="arr">約17:20 空港</span><span class="tag sub">搭18號時用</span></div>
+                <div class="note">16:33／16:36・■ 日火金運行（11/3 週二有開）</div>
+                <div class="note warn">距 18:55 約 95 分，一落地直接報到（華航約起飛前 60 分關櫃）</div>
+              </div>
+              <div class="tcard" style="opacity:.55">
+                <div class="row1"><span class="dep">17:43</span><span class="arrow">→</span><span class="arr">約18:30 空港</span><span class="tag sub">太晚</span></div>
+                <div class="note">趕不上 18:55 起飛，不列入考慮</div>
+              </div>
+            </div>
+            <p style="font-size:.8rem;color:var(--warn-ink)">⚠ 時刻為資料夾 PDF「高松車站-高松機場時刻表 1001–1024」OCR 判讀，<b>且該表「台北(CI)出発」對應的是 18:20 起飛的班機；我們搭的 CI179 是 18:55</b>。10/25 以後的冬季班表可能整體往後移約 30–35 分，<b>15:15／16:33 都要用出發前公布的新班表重新核對</b>（上 ことでんバス 官網以「台北(CI) 出発」該列查，並確認是否另有一般空港連絡巴士）。</p>
           </div>
           <div class="checkpoint" style="margin-top:.5rem"><span class="qbadge">❓</span><b>你是搭 うずしお18號（15:30到高松駅）嗎？</b><br>
           <span class="lv lv-y">🟡 是</span> → 只能等 <b>16:33</b> 利木津 → 約17:20到機場。一到高松駅就去 3番のりば排隊、別逛街；巴士沒來或太趕 → 計程車 高松駅→空港 約30分 ¥3,500–4,500。</div></div></li>
@@ -1711,7 +1751,7 @@
         <div class="plan pick">
           <h4>方案 A　<span class="tag-pick">★ 建議（時間最從容）</span></h4>
           <ol>
-            <li>11:16 神山溫泉前 ・ 神山線56號 → 12:12 元町下車，步行5分到德島駅（約12:20）¥1,200</li>
+            <li>11:16 神山溫泉前 ・ 神山線56號 → 約12:20 坐到終點「徳島駅前」（就在 JR 德島駅正門口）¥1,200</li>
             <li>12:20–13:15 德島駅：買特急券＋午餐（約35–45分）</li>
             <li>約13:24 德島駅 ・ うずしお16號 → 約14:35 高松駅　¥2,840（🟡 16號時刻出發前 JR 官網查）</li>
             <li>15:15 高松駅 3番のりば ・ 利木津巴士（Suica可）¥1,300</li>
@@ -1789,7 +1829,7 @@
       <h3>🔋 手機電力</h3>
       <ul>
         <li>導航＋拍照很耗電，每人行動電源 10000mAh 以上</li>
-        <li>燒山寺段（08:30–14:00）可開飛航模式省電，反正也無訊號</li>
+        <li>燒山寺段（07:30–14:00）可開飛航模式省電，反正也無訊號</li>
         <li>頭燈務必帶備用電池</li>
       </ul>
     </div>
@@ -1851,9 +1891,9 @@
         <h3>計程車行電話</h3>
         <div class="sosrow"><span class="sname">德島第一交通<span class="ssub">通用・各天招不到車</span></span><a class="tel" href="tel:+81886548811">088-654-8811</a></div>
         <div class="sosrow"><span class="sname">松島タクシー<span class="ssub">安樂寺→藤井寺</span></span><a class="tel" href="tel:+81886942106">088-694-2106</a></div>
-        <div class="sosrow"><span class="sname">鴨島タクシー<span class="ssub">安樂寺→藤井寺・近切幡寺</span></span><a class="tel" href="tel:+81883242345">0883-24-2345</a></div>
+        <div class="sosrow"><span class="sname">鴨島タクシー<span class="ssub">安樂寺→藤井寺（吉野川市鴨島町）</span></span><a class="tel" href="tel:+81883242345">0883-24-2345</a></div>
+        <div class="sosrow"><span class="sname">八幡交通<span class="ssub">切幡寺周邊・市場町切幡</span></span><a class="tel" href="tel:+81883363109">0883-36-3109</a></div>
         <div class="sosrow"><span class="sname">寄井観光タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886760345">088-676-0345</a></div>
-        <div class="sosrow"><span class="sname">つばめ観光タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886780224">088-678-0224</a></div>
         <div class="sosrow"><span class="sname">川又タクシー<span class="ssub">燒山寺→神山溫泉</span></span><a class="tel" href="tel:+81886770137">088-677-0137</a></div>
       </div>
 
@@ -1861,7 +1901,7 @@
         <h3>燒山寺安全約定（Day 4）</h3>
         <ul class="plain">
           <li>出發前把預定抵達時間告知宿坊＋四季の里，約定「16:00 沒 Check-in 就報警」</li>
-          <li>11:00 未到中繼庵（柳水庵）就折返，不硬撐</li>
+          <li>柳水庵（中繼庵）11:20 前到為正常腳程；12:00 未到就折返，不硬撐</li>
           <li>必帶：哨子・頭燈×2・行動電源・離線地圖（Google+YAMAP）・保暖層・雨衣・保暖毯・行動糧×3・水2L/人</li>
           <li><b>兩人絕不分開</b></li>
         </ul>
@@ -1890,13 +1930,13 @@
         <li><span class="ci">路線巴士 羅漢→板野駅南 <em>Day2</em></span><span class="cv">¥340 ／ ¥680</span><span class="cn">鍛冶屋原線28号</span></li>
         <li><span class="ci">路線巴士 板野駅南→東原 <em>Day3</em></span><span class="cv">¥480 ／ ¥960</span><span class="cn">28號鍛冶屋原線</span></li>
         <li><span class="ci">計程車 第7→8番 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
-        <li><span class="ci">計程車 切幡寺→安樂寺 <em>Day3</em></span><span class="cv">¥750 ／ ¥1,500</span></li>
+        <li><span class="ci">計程車 切幡寺→安樂寺 <em>Day3</em></span><span class="cv">¥1,750 ／ ¥3,500</span><span class="cn">約9km</span></li>
         <li><span class="ci">計程車 安樂寺→藤井寺 <em>Day4</em></span><span class="cv">¥3,000 ／ ¥6,000</span></li>
         <li><span class="ci">計程車 燒山寺→神山温泉 <em>Day4</em></span><span class="cv">¥1,750 ／ ¥3,500</span></li>
         <li><span class="ci">路線巴士 神山温泉前→德島駅 <em>Day5</em></span><span class="cv">¥1,200 ／ ¥2,400</span><span class="cn">佐那河內線62號</span></li>
         <li><span class="ci">JR うずしお 德島→高松駅 自由席 <em>Day5</em></span><span class="cv">¥2,840 ／ ¥5,680</span></li>
         <li><span class="ci">機場巴士 高松駅→空港 <em>Day5</em></span><span class="cv">¥1,300 ／ ¥2,600</span></li>
-        <li class="sub"><span class="ci">交通小計</span><span class="cv">¥16,310–16,720 ／ ¥32,620–33,440</span></li>
+        <li class="sub"><span class="ci">交通小計</span><span class="cv">¥17,310–17,720 ／ ¥34,620–35,440</span></li>
       </ul>
     </div>
 
@@ -1936,7 +1976,7 @@
 
     <div class="total">
       <div>總計（地面費用・不含機票）</div>
-      <div class="big">一人 ¥71,940–80,450 ／ 兩人 ¥143,880–160,900</div>
+      <div class="big">一人 ¥72,940–81,450 ／ 兩人 ¥145,880–162,900</div>
       <div class="sub2">住宿已確定 ¥84,260（2人）・建議現金每人約 ¥80,000（宿坊、納経帳、御朱印、鄉下計程車多半只收現金）</div>
     </div>
 
@@ -2355,8 +2395,8 @@ var EVENTS=[
   [2026,10,31,13,21,10,"巴士 羅漢→板野駅南","鍛冶屋原線28号・趕不上就16:21或計程車",1],
   [2026,11,1,8,19,15,"巴士 板野駅南→東原","鍛冶屋原線28号 土日祝首班・必搭",1],
   [2026,11,1,17,0,0,"Check-in 安樂寺宿坊","最終入住18:00",1],
-  [2026,11,2,7,0,60,"計程車 安樂寺→藤井寺","前晚預約・約¥6,000",1],
-  [2026,11,2,11,0,0,"⚠ 燒山寺折返判斷 11:00","未到柳水庵→折返",1],
+  [2026,11,2,6,30,60,"計程車 安樂寺→藤井寺","前晚預約・約¥6,000",1],
+  [2026,11,2,11,20,0,"⚠ 燒山寺柳水庵判斷 11:20","11:20前到正常；12:00未到→折返",1],
   [2026,11,2,16,0,0,"⚠ 四季の里 Check-in 約定","沒到就報警",1],
   [2026,11,3,9,0,0,"四季の里 退房","退房09:00",1],
   [2026,11,3,12,36,60,"巴士 神山溫泉前→德島駅","佐那河內線62号・12:20前到站牌",1],
