@@ -6,7 +6,7 @@
 */
 "use strict";
 
-var CACHE_VERSION = "henro-v16";
+var CACHE_VERSION = "henro-v18";
 var PRECACHE = [
   "./",
   "./index.html",
@@ -14,7 +14,8 @@ var PRECACHE = [
   "./icon-192.png",
   "./icon-512.png",
   "./icon-512-maskable.png",
-  "./apple-touch-icon.png"
+  "./apple-touch-icon.png",
+  "./airport-locker.webp"
 ];
 
 self.addEventListener("install", function (event) {
